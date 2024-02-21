@@ -72,7 +72,7 @@ const Navbar = () => {
         {[
           { name: "Categories", icon: faList },
           { name: "Brands", icon: faPumpMedical },
-          { name: "Brands", icon: faGift },
+          { name: "Offers", icon: faGift },
           { name: "Products", icon: faMedkit },
         ].map((item) => {
           return (
