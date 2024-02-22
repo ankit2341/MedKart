@@ -23,8 +23,8 @@ import useIsMobile from "@/shared/hooks/use-is-mobile";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
-  const isTablet=useIsTablet();
-  const isMobile=useIsMobile();
+  const isTablet = useIsTablet();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,15 +35,22 @@ const Navbar = () => {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
-    <VStack pos={showNavbar?"fixed":"static"} zIndex={10000} bg="brand.background" top={0} width="100%" spacing={0}>
+    <VStack
+      pos={showNavbar ? "fixed" : "static"}
+      zIndex={10000}
+      bg="brand.background"
+      top={0}
+      width="100%"
+      spacing={0}
+    >
       <motion.div
         style={{ width: "100%" }}
         initial={{ translateY: "-10vh" }}
@@ -55,7 +62,7 @@ const Navbar = () => {
           alignItems="center"
           justifyContent="space-between"
           py={4}
-          px={isMobile?"2":"10"}
+          px={isMobile ? "2" : "10"}
         >
           <HStack spacing={1} fontSize="x-large">
             <Box bg="brand.primary" px={2}>
@@ -63,37 +70,57 @@ const Navbar = () => {
             </Box>{" "}
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
-          { !isMobile&&!isTablet&&showNavbar&&<Flex
-        width="50%"
-        bg="brand.background"
-        alignItems="center"
-        justifyContent="space-between"
-        px={10}
-      >
-        {[
-          { name: "Categories", icon: faList },
-          { name: "Brands", icon: faPumpMedical },
-          { name: "Offers", icon: faGift },
-          { name: "Products", icon: faMedkit },
-        ].map((item) => {
-          return (
-            <HStack cursor="pointer" border="1px solid" borderRadius={"xl"} borderColor="brand.background" _hover={{border:"1px solid",color:"brand.primary",borderColor:"brand.primary"}} key={item.name} p={2}>
-              <FontAwesomeIcon icon={item.icon} />
-              <Text color="brand.font">{item.name}</Text>
-            </HStack>
-          );
-        })}
-      </Flex>}
+          {!isMobile && !isTablet && showNavbar && (
+            <Flex
+              width="50%"
+              bg="brand.background"
+              alignItems="center"
+              justifyContent="space-between"
+              px={10}
+            >
+              {[
+                { name: "Categories", icon: faList },
+                { name: "Brands", icon: faPumpMedical },
+                { name: "Offers", icon: faGift },
+                { name: "Products", icon: faMedkit },
+              ].map((item) => {
+                return (
+                  <HStack
+                    cursor="pointer"
+                    border="1px solid"
+                    borderRadius={"xl"}
+                    borderColor="brand.background"
+                    _hover={{
+                      border: "1px solid",
+                      color: "brand.primary",
+                      borderColor: "brand.primary",
+                    }}
+                    key={item.name}
+                    p={2}
+                  >
+                    <FontAwesomeIcon icon={item.icon} />
+                    <Text color="brand.font">{item.name}</Text>
+                  </HStack>
+                );
+              })}
+            </Flex>
+          )}
           <HStack
-            spacing={isMobile?6:10}
+            spacing={isMobile ? 6 : 10}
             alignItems="center"
             justifyContent="right"
           >
-        
-            <Center p={4} width={10} height={10} border="1px solid" borderRadius="full" borderColor="brand.primary">
+            <Center
+              p={4}
+              width={10}
+              height={10}
+              border="1px solid"
+              borderRadius="full"
+              borderColor="brand.primary"
+            >
               <FontAwesomeIcon icon={faMagnifyingGlass} />
-              </Center>
-       
+            </Center>
+
             <FontAwesomeIcon
               icon={faBagShopping}
               size="xl"
@@ -105,26 +132,41 @@ const Navbar = () => {
           </HStack>
         </Flex>
       </motion.div>
-      { (isMobile||isTablet)&&showNavbar&&<Flex
-        width="100%"
-        bg="brand.background"
-        alignItems="center"
-        justifyContent="space-between"
-        px={isMobile?1:10}
-      >
-        {[
-          { name: "Categories", icon: faList },
-          { name: "Brands", icon: faPumpMedical },
-          { name: "Offers", icon: faGift },
-          { name: "Products", icon: faMedkit },
-        ].map((item) => {
-          return (
-            <HStack cursor="pointer" border="1px solid" borderRadius={"xl"} borderColor="brand.background" _hover={{border:"1px solid",color:"brand.primary",borderColor:"brand.primary"}} key={item.name} p={2}>
-             { !isMobile&&<FontAwesomeIcon icon={item.icon} />}
-              <Text color="brand.font">{item.name}</Text>
-            </HStack>
-          );
-        })}</Flex>}
+      {(isMobile || isTablet) && showNavbar && (
+        <Flex
+          width="100%"
+          bg="brand.background"
+          alignItems="center"
+          justifyContent="space-between"
+          px={isMobile ? 1 : 10}
+        >
+          {[
+            { name: "Categories", icon: faList },
+            { name: "Brands", icon: faPumpMedical },
+            { name: "Offers", icon: faGift },
+            { name: "Products", icon: faMedkit },
+          ].map((item) => {
+            return (
+              <HStack
+                cursor="pointer"
+                border="1px solid"
+                borderRadius={"xl"}
+                borderColor="brand.background"
+                _hover={{
+                  border: "1px solid",
+                  color: "brand.primary",
+                  borderColor: "brand.primary",
+                }}
+                key={item.name}
+                p={2}
+              >
+                {!isMobile && <FontAwesomeIcon icon={item.icon} />}
+                <Text color="brand.font">{item.name}</Text>
+              </HStack>
+            );
+          })}
+        </Flex>
+      )}
     </VStack>
   );
 };

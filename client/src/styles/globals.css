@@ -64,3 +64,21 @@
     transform: scale(0.95) translateX(20px);
   }
 }
+
+#checkedcircleanimated {
+  stroke-dasharray: 750;
+  stroke-dashoffset: 750;
+  animation: checkedcircleanimated 4s ease-in-out infinite forwards;
+}
+
+@keyframes checkedcircleanimated {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: 750;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}

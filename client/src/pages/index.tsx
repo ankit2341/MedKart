@@ -21,8 +21,9 @@ import {
 import { motion } from "framer-motion";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
-import Carousel from 'react-multi-carousel';
-import 'react-multi-carousel/lib/styles.css';
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+import { UnderLineAnimation } from "@/shared/icons";
 
 const Home = () => {
   const icons = [
@@ -38,20 +39,20 @@ const Home = () => {
     superLargeDesktop: {
       // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
-      items: 4
+      items: 4,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
-      items: 5
+      items: 5,
     },
     tablet: {
       breakpoint: { max: 1024, min: 464 },
-      items: 2
+      items: 2,
     },
     mobile: {
       breakpoint: { max: 464, min: 0 },
-      items: 1
-    }
+      items: 1,
+    },
   };
 
   useEffect(() => {
@@ -316,12 +317,17 @@ const Home = () => {
         flexDir={isMobile ? "column" : "row"}
       >
         <Box
-         width={isMobile?"100%":"50%"}
+          width={isMobile ? "100%" : "50%"}
           height="100%"
           bg="brand.primary"
           borderRadius="3xl"
         ></Box>
-        <VStack spacing={10} flexDir="column-reverse" width={isMobile?"100%":"50%"} height="100%">
+        <VStack
+          spacing={10}
+          flexDir="column-reverse"
+          width={isMobile ? "100%" : "50%"}
+          height="100%"
+        >
           <Box
             width="100%"
             height="50%"
@@ -337,19 +343,44 @@ const Home = () => {
           ></Box>
         </VStack>
       </HStack>
-      <Heading width="100%" px="10" size="md" textAlign="left">Popular Products</Heading>
+      <Box width="100%" pos="relative">
+        <Heading width="100%" px="10" size="md" textAlign="left">
+          Popular Products
+        </Heading>
+        <UnderLineAnimation
+          style={{ position: "absolute", top: 1, left: 130 }}
+          id="checkedcircleanimated"
+        />
+      </Box>
+      <Box px={"10"} width="100%" height="50vh" bg="brand.background">
+        <Carousel responsive={responsive} swipeable={true}>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+        </Carousel>
+      </Box>
+      <Box width="100%" pos="relative">
+        <Heading width="100%" px="10" size="md" textAlign="left">
+          Top Sellers
+        </Heading>
+        <UnderLineAnimation
+          style={{ position: "absolute", top: 1, left: 70 }}
+          id="checkedcircleanimated"
+        />
+      </Box>
       <Box px={"10"} width="100%" height="50vh" bg="brand.background" mb={10}>
-        
-      <Carousel responsive={responsive} swipeable={true}>
-     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
-     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
-     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
-     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
-     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
-     <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
-    
-  </Carousel>
-  </Box>
+        <Carousel responsive={responsive} swipeable={true}>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+          <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+        </Carousel>
+      </Box>
     </VStack>
   );
 };
