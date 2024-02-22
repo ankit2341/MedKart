@@ -5,6 +5,7 @@ import {
   Button,
   Center,
   Flex,
+  HStack,
   Heading,
   Image,
   Text,
@@ -19,6 +20,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
+import useIsTablet from "@/shared/hooks/use-is-tablet";
+import Carousel from 'react-multi-carousel';
+import 'react-multi-carousel/lib/styles.css';
 
 const Home = () => {
   const icons = [
@@ -29,6 +33,26 @@ const Home = () => {
   ];
   const [icon, setIcon] = useState(0);
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
+  const responsive = {
+    superLargeDesktop: {
+      // the naming can be any, depends on you.
+      breakpoint: { max: 4000, min: 3000 },
+      items: 4
+    },
+    desktop: {
+      breakpoint: { max: 3000, min: 1024 },
+      items: 5
+    },
+    tablet: {
+      breakpoint: { max: 1024, min: 464 },
+      items: 2
+    },
+    mobile: {
+      breakpoint: { max: 464, min: 0 },
+      items: 1
+    }
+  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -39,11 +63,11 @@ const Home = () => {
   }, [icons.length]);
 
   return (
-    <VStack>
+    <VStack spacing={10}>
       <Flex
         width="100%"
-        height={isMobile ? "100vh" : "80vh"}
-        flexDir={isMobile ? "column-reverse" : "row"}
+        height={isMobile ? "100vh" : isTablet ? "50vh" : "90vh"}
+        flexDir={isMobile ? "column" : "row"}
         bg="brand.background"
         px={isMobile ? 2 : "10"}
       >
@@ -94,72 +118,77 @@ const Home = () => {
               </Button>
             </motion.div>
           </VStack>
-          <Box
-            width="6"
-            height="6"
-            bg="brand.primary"
-            id="scale_infinity_4"
-            borderRadius="full"
-            pos="absolute"
-            top={"20%"}
-            left={"20%"}
-            zIndex={1000}
-          />
-          <Box
-            width="4"
-            height="4"
-            bg="brand.primary"
-            id="scale_infinity_3"
-            borderRadius="full"
-            pos="absolute"
-            top={"50%"}
-            right={"0%"}
-            zIndex={1000}
-          />
-          <Box
-            width="8"
-            height="8"
-            bg="brand.primary"
-            borderRadius="full"
-            id="scale_infinity_2"
-            pos="absolute"
-            top={"10%"}
-            right={"20%"}
-            zIndex={1000}
-          />
-          <Box
-            width="6"
-            height="6"
-            bg="brand.primary"
-            borderRadius="full"
-            id="scale_infinity_1"
-            pos="absolute"
-            bottom={"0%"}
-            left={"50%"}
-            zIndex={1000}
-          />
-          <Box
-            width="6"
-            height="6"
-            bg="brand.primary"
-            borderRadius="full"
-            id="scale_infinity_3"
-            pos="absolute"
-            bottom={"10%"}
-            left={"5%"}
-            zIndex={1000}
-          />
-          <Box
-            width="6"
-            height="6"
-            bg="brand.primary"
-            borderRadius="full"
-            id="scale_infinity_2"
-            pos="absolute"
-            right={"10%"}
-            bottom={"10%"}
-            zIndex={1000}
-          />
+          {!isMobile && !isTablet && (
+            <>
+              {" "}
+              <Box
+                width="6"
+                height="6"
+                bg="brand.primary"
+                id="scale_infinity_4"
+                borderRadius="full"
+                pos="absolute"
+                top={"20%"}
+                left={"20%"}
+                zIndex={1000}
+              />
+              <Box
+                width="4"
+                height="4"
+                bg="brand.primary"
+                id="scale_infinity_3"
+                borderRadius="full"
+                pos="absolute"
+                top={"50%"}
+                right={"0%"}
+                zIndex={1000}
+              />
+              <Box
+                width="8"
+                height="8"
+                bg="brand.primary"
+                borderRadius="full"
+                id="scale_infinity_2"
+                pos="absolute"
+                top={"10%"}
+                right={"20%"}
+                zIndex={1000}
+              />
+              <Box
+                width="6"
+                height="6"
+                bg="brand.primary"
+                borderRadius="full"
+                id="scale_infinity_1"
+                pos="absolute"
+                bottom={"0%"}
+                left={"50%"}
+                zIndex={1000}
+              />
+              <Box
+                width="6"
+                height="6"
+                bg="brand.primary"
+                borderRadius="full"
+                id="scale_infinity_3"
+                pos="absolute"
+                bottom={"10%"}
+                left={"5%"}
+                zIndex={1000}
+              />
+              <Box
+                width="6"
+                height="6"
+                bg="brand.primary"
+                borderRadius="full"
+                id="scale_infinity_2"
+                pos="absolute"
+                right={"10%"}
+                bottom={"10%"}
+                zIndex={1000}
+              />
+            </>
+          )}
         </Box>
         <Box
           pos="relative"
@@ -176,7 +205,7 @@ const Home = () => {
             pos="absolute"
             top={0}
             left={isMobile ? 0 : 10}
-            boxSize={isMobile ? "150px" : "xs"}
+            boxSize={isMobile || isTablet ? "150px" : "xs"}
             src="/assets/med_12.jpg"
             alt="Dan Abramov"
           />
@@ -185,8 +214,8 @@ const Home = () => {
             borderRadius="full"
             pos="absolute"
             right={0}
-            bottom={isMobile ? 10 : 30}
-            boxSize={isMobile ? "150px" : "xs"}
+            bottom={isMobile ? 30 : 30}
+            boxSize={isMobile || isTablet ? "150px" : "xs"}
             src="/assets/med_11.jpg"
             alt="Dan Abramov"
           />
@@ -196,7 +225,7 @@ const Home = () => {
             pos="absolute"
             top={0}
             right={isMobile ? 10 : 30}
-            boxSize={isMobile ? "150px" : "xs"}
+            boxSize={isMobile || isTablet ? "150px" : "xs"}
             src="/assets/med_13.jpg"
             alt="Dan Abramov"
           />
@@ -206,7 +235,7 @@ const Home = () => {
             pos="absolute"
             bottom={0}
             left={10}
-            boxSize={isMobile ? "150px" : "xs"}
+            boxSize={isMobile || isTablet ? "150px" : "xs"}
             src="/assets/med_14.jpg"
             alt="Dan Abramov"
           />
@@ -218,7 +247,7 @@ const Home = () => {
             borderRadius="full"
             pos="absolute"
             top={"50%"}
-            left={"20%"}
+            left={isMobile || isTablet ? "10%" : "20%"}
             zIndex={1000}
           />
           <Box
@@ -229,7 +258,7 @@ const Home = () => {
             borderRadius="full"
             pos="absolute"
             top={"50%"}
-            right={"30%"}
+            right={isMobile || isTablet ? "10%" : "30%"}
             zIndex={1000}
           />
           <Box
@@ -239,7 +268,7 @@ const Home = () => {
             borderRadius="full"
             id="scale_infinity_2"
             pos="absolute"
-            top={"10%"}
+            top={isMobile || isTablet ? "20%" : "10%"}
             left={"50%"}
             zIndex={1000}
           />
@@ -256,8 +285,8 @@ const Home = () => {
           />
           <Center
             id="scale_infinity_5"
-            width="40"
-            height="40"
+            width={isMobile ? "24" : "40"}
+            height={isMobile ? "24" : "40"}
             borderRadius="full"
             bg="brand.primary"
           >
@@ -268,11 +297,59 @@ const Home = () => {
               exit={{ opacity: 0 }}
               transition={{ loop: Infinity, duration: 3 }}
             >
-              <FontAwesomeIcon size="4x" color="white" icon={icons[icon]} />
+              <FontAwesomeIcon
+                size={isMobile ? "xl" : "4x"}
+                color="white"
+                icon={icons[icon]}
+              />
             </motion.div>
           </Center>
         </Box>
       </Flex>
+      <HStack
+        spacing={10}
+        px={10}
+        align="center"
+        justify="center"
+        width="100%"
+        height={isMobile ? "100vh" : isTablet ? "50vh" : "80vh"}
+        flexDir={isMobile ? "column" : "row"}
+      >
+        <Box
+         width={isMobile?"100%":"50%"}
+          height="100%"
+          bg="brand.primary"
+          borderRadius="3xl"
+        ></Box>
+        <VStack spacing={10} flexDir="column-reverse" width={isMobile?"100%":"50%"} height="100%">
+          <Box
+            width="100%"
+            height="50%"
+            filter="drop-shadow(0 0 0.15rem rgb(0, 206, 209))"
+            bg="brand.background"
+            borderRadius="3xl"
+          ></Box>
+          <Box
+            width="100%"
+            height="50%"
+            bg="brand.primary"
+            borderRadius="3xl"
+          ></Box>
+        </VStack>
+      </HStack>
+      <Heading width="100%" px="10" size="md" textAlign="left">Popular Products</Heading>
+      <Box px={"10"} width="100%" height="50vh" bg="brand.background" mb={10}>
+        
+      <Carousel responsive={responsive} swipeable={true}>
+     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
+     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
+     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
+     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
+     <Box  width="90%" height={"50vh"} bg="brand.primary"></Box>
+     <Box width="90%" height={"50vh"} bg="brand.primary"></Box>
+    
+  </Carousel>
+  </Box>
     </VStack>
   );
 };

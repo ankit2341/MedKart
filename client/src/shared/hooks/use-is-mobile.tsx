@@ -4,7 +4,7 @@ const useIsMobile = (): boolean => {
   const isMobile = useBreakpointValue({
     base: true,
     sm: true,
-    md: true,
+    md: false,
     lg: false,
     xl: false,
   });
