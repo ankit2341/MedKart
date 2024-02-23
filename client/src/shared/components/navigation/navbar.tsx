@@ -1,4 +1,12 @@
-import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Center,
+  Flex,
+  HStack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBagShopping,
@@ -19,7 +27,7 @@ const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
-  const router=useRouter();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -106,13 +114,36 @@ const Navbar = () => {
             justifyContent="right"
           >
             <SearchModal />
-
-            <FontAwesomeIcon
-              icon={faBagShopping}
-              size="xl"
-              color="rgb(0, 206, 209)"
-            />
-            <Button onClick={()=>router.push("/sign-in")} py={4} px={8} bg="brand.primary" color={"brand.fontLight"}>
+            <Box pos="relative">
+              <FontAwesomeIcon
+                icon={faBagShopping}
+                size="xl"
+                color="rgb(0, 206, 209)"
+              />
+              <Center
+                fontSize="xx-small"
+                pos="absolute"
+                width={6}
+                height={5}
+                top={-3}
+                right={-3}
+                p={0.5}
+                bg="white"
+                borderWidth="1px"
+                fontWeight="bold"
+                borderColor="brand.primary"
+                borderRadius="full"
+              >
+                10
+              </Center>
+            </Box>
+            <Button
+              onClick={() => router.push("/sign-in")}
+              py={4}
+              px={8}
+              bg="brand.primary"
+              color={"brand.fontLight"}
+            >
               Sign In
             </Button>
           </HStack>

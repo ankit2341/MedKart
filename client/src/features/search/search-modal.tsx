@@ -61,10 +61,7 @@ export default function SearchModal() {
         size="6xl"
         onClose={onClose}
       >
-        <ModalOverlay
-          bg="blackAlpha.300"
-          backdropFilter="blur(10px)"
-        />
+        <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
         <ModalContent mt={"10vh"}>
           <ModalHeader py={12}>
             <FormControl>
