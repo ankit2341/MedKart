@@ -44,7 +44,6 @@ const Home = () => {
   const isTablet = useIsTablet();
   const responsive = {
     superLargeDesktop: {
-      // the naming can be any, depends on you.
       breakpoint: { max: 4000, min: 3000 },
       items: 4,
     },
@@ -77,7 +76,7 @@ const Home = () => {
         height={isMobile ? "100vh" : isTablet ? "50vh" : "90vh"}
         flexDir={isMobile ? "column" : "row"}
         bg="brand.background"
-        px={isMobile ? 2 : "10"}
+        px={isMobile ? "4" : "10"}
       >
         <Box
           pos="relative"
@@ -95,7 +94,11 @@ const Home = () => {
               exit={{ opacity: 0 }}
               transition={{ loop: Infinity, duration: 1 }}
             >
-              <Heading width="100%" fontSize="xxx-large" textAlign="left">
+              <Heading
+                width="100%"
+                fontSize={isMobile ? "xx-large" : "xxx-large"}
+                textAlign="left"
+              >
                 Your Trusted Online Pharmacy
               </Heading>
             </motion.div>
@@ -315,7 +318,12 @@ const Home = () => {
         </Box>
       </Flex>
       <Box width="100%" pos="relative">
-        <Heading width="100%" px="10" size="md" textAlign="left">
+        <Heading
+          width="100%"
+          px={isMobile ? "4" : "10"}
+          size="md"
+          textAlign="left"
+        >
           Top Sellers
         </Heading>
         <UnderLineAnimation
@@ -323,16 +331,23 @@ const Home = () => {
           id="checkedcircleanimated"
         />
       </Box>
-      <Box px={"10"} width="100%" height="50vh" bg="brand.background" mb={10}>
+      <Box
+        px={isMobile ? "4" : "10"}
+        width="100%"
+        height="50vh"
+        bg="brand.background"
+        mb={10}
+      >
         <Carousel
           responsive={responsive}
+          itemClass="carousel-item-padding"
           swipeable={isMobile || isTablet ? true : false}
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
             return (
               <Card
                 key={el}
-                width="90%"
+                width="99%"
                 height={"50vh"}
                 borderWidth="1px"
                 borderStyle="solid"
@@ -428,7 +443,7 @@ const Home = () => {
       </Box>
       <HStack
         spacing={10}
-        px={10}
+        px={isMobile ? "4" : "10"}
         align="center"
         justify="center"
         width="100%"
@@ -463,7 +478,12 @@ const Home = () => {
         </VStack>
       </HStack>
       <Box width="100%" pos="relative">
-        <Heading width="100%" px="10" size="md" textAlign="left">
+        <Heading
+          width="100%"
+          px={isMobile ? "4" : "10"}
+          size="md"
+          textAlign="left"
+        >
           Popular Products
         </Heading>
         <UnderLineAnimation
@@ -471,8 +491,15 @@ const Home = () => {
           id="checkedcircleanimated"
         />
       </Box>
-      <Box px={"10"} width="100%" height="50vh" bg="brand.background" mb={10}>
+      <Box
+        px={isMobile ? "4" : "10"}
+        width="100%"
+        height="50vh"
+        bg="brand.background"
+        mb={10}
+      >
         <Carousel
+          itemClass={"carousel-item-padding"}
           responsive={responsive}
           swipeable={isMobile || isTablet ? true : false}
         >
@@ -480,7 +507,7 @@ const Home = () => {
             return (
               <Card
                 key={el}
-                width="90%"
+                width="100%"
                 height={"50vh"}
                 mb={0.2}
                 borderWidth="1px"
@@ -565,7 +592,7 @@ const Home = () => {
                     bg="brand.primary"
                     color="brand.background"
                     borderRadius="lg"
-                    width="80%"
+                    width="85%"
                     height={10}
                   >
                     Add to Cart

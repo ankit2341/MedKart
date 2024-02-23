@@ -1,19 +1,10 @@
-import {
-  Box,
-  Button,
-  Center,
-  Flex,
-  HStack,
-  Text,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Flex, HStack, Text, VStack } from "@chakra-ui/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBagShopping,
   faGift,
   faList,
   faM,
-  faMagnifyingGlass,
   faMedkit,
   faPumpMedical,
 } from "@fortawesome/free-solid-svg-icons";
@@ -21,6 +12,7 @@ import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
+import SearchModal from "@/features/search/search-modal";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -63,7 +55,7 @@ const Navbar = () => {
           alignItems="center"
           justifyContent="space-between"
           py={4}
-          px={isMobile ? "2" : "10"}
+          px={isMobile ? "4" : "10"}
         >
           <HStack spacing={1} fontSize="x-large">
             <Box bg="brand.primary" color="brand.background" px={2}>
@@ -111,16 +103,7 @@ const Navbar = () => {
             alignItems="center"
             justifyContent="right"
           >
-            <Center
-              p={4}
-              width={10}
-              height={10}
-              border="1px solid"
-              borderRadius="full"
-              borderColor="brand.primary"
-            >
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </Center>
+            <SearchModal />
 
             <FontAwesomeIcon
               icon={faBagShopping}

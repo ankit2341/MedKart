@@ -6,7 +6,7 @@ export const UnderLineAnimation = (props: SVGProps<SVGSVGElement>) => {
       <path
         d="M88.5 27C15.3 27 0.666687 35.3333 2.50002 39.5"
         stroke="#00CED1"
-        stroke-width="3"
+        strokeWidth="3"
       />
       <path
         d="M88.5001 27C50.9001 31.8 45.1667 35 47.0001 36"

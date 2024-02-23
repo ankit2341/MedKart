@@ -82,3 +82,9 @@
     stroke-dashoffset: 0;
   }
 }
+.carousel-item-padding {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
