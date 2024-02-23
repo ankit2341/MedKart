@@ -13,11 +13,13 @@ import { motion } from "framer-motion";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import SearchModal from "@/features/search/search-modal";
+import { useRouter } from "next/router";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
+  const router=useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -110,8 +112,8 @@ const Navbar = () => {
               size="xl"
               color="rgb(0, 206, 209)"
             />
-            <Button py={4} px={8} bg="brand.primary" color={"brand.fontLight"}>
-              Login
+            <Button onClick={()=>router.push("/sign-in")} py={4} px={8} bg="brand.primary" color={"brand.fontLight"}>
+              Sign In
             </Button>
           </HStack>
         </Flex>
