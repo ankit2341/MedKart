@@ -63,7 +63,7 @@ export default function SearchModal() {
       >
         <ModalOverlay
           bg="blackAlpha.300"
-          backdropFilter="blur(10px) hue-rotate(90deg)"
+          backdropFilter="blur(10px)"
         />
         <ModalContent mt={"10vh"}>
           <ModalHeader py={12}>
