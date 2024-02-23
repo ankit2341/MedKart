@@ -1,11 +1,10 @@
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import { isValidEmail } from "@/utils";
 import { Box, Button, Center, Checkbox, Flex, FormControl, FormErrorMessage, FormLabel, HStack, Input, Text, VStack } from "@chakra-ui/react";
-import { faArrowLeft, faCapsules, faHouseMedicalCircleCheck, faM, faMedkit, faPills, faStethoscope, faSuitcaseMedical } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faCapsules, faM, faMedkit, faPills, faStethoscope } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { useState } from "react";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 
 const SignIn = () => {
