@@ -25,3 +25,58 @@ export const UnderLineAnimation = (props: SVGProps<SVGSVGElement>) => {
     </svg>
   );
 };
+
+export const HeartAnimatedIcon = (props: SVGProps<SVGSVGElement>) => {
+  <svg width="95" height="87" viewBox="0 0 95 87" fill="none" {...props}>
+    <rect
+      x="26.7869"
+      y="48"
+      width="30"
+      height="30"
+      transform="rotate(-45 26.7869 48)"
+      fill="#FF0055"
+    />
+    <circle cx="38" cy="38" r="15" fill="#FF0055" />
+    <circle cx="58" cy="38" r="15" fill="#FF0055" />
+    <rect
+      width="10.9185"
+      height="10.9185"
+      transform="matrix(0.69943 -0.714701 0.69943 0.714701 10.3633 18.1965)"
+      fill="#FF0055"
+    />
+    <ellipse cx="14.4" cy="14.5179" rx="5.4" ry="5.5179" fill="#FF0055" />
+    <ellipse cx="21.6" cy="14.5179" rx="5.4" ry="5.5179" fill="#FF0055" />
+    <rect
+      width="9.37599"
+      height="9.37599"
+      transform="matrix(0.678751 -0.734369 0.678751 0.734369 14.136 64.1146)"
+      fill="#FF0055"
+    />
+    <ellipse cx="17.5" cy="60.8687" rx="4.5" ry="4.86874" fill="#FF0055" />
+    <ellipse cx="23.5" cy="60.8687" rx="4.5" ry="4.86874" fill="#FF0055" />
+    <rect
+      width="10.9185"
+      height="10.9185"
+      transform="matrix(0.69943 -0.714701 0.69943 0.714701 65.3633 79.1965)"
+      fill="#FF0055"
+    />
+    <ellipse cx="69.4" cy="75.5179" rx="5.4" ry="5.5179" fill="#FF0055" />
+    <ellipse cx="76.6" cy="75.5179" rx="5.4" ry="5.5179" fill="#FF0055" />
+    <rect
+      width="10.9185"
+      height="10.9185"
+      transform="matrix(0.69943 -0.714701 0.69943 0.714701 69.3633 9.19653)"
+      fill="#FF0055"
+    />
+    <ellipse cx="73.4" cy="5.5179" rx="5.4" ry="5.5179" fill="#FF0055" />
+    <ellipse cx="80.6" cy="5.5179" rx="5.4" ry="5.5179" fill="#FF0055" />
+    <rect
+      width="7.50079"
+      height="7.50079"
+      transform="matrix(0.678751 -0.734369 0.678751 0.734369 77.9089 47.4917)"
+      fill="#FF0055"
+    />
+    <ellipse cx="80.6" cy="44.895" rx="3.6" ry="3.89499" fill="#FF0055" />
+    <ellipse cx="85.4" cy="44.895" rx="3.6" ry="3.89499" fill="#FF0055" />
+  </svg>;
+};

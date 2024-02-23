@@ -12,6 +12,7 @@ import {
   faBagShopping,
   faGift,
   faList,
+  faM,
   faMagnifyingGlass,
   faMedkit,
   faPumpMedical,
@@ -65,9 +66,9 @@ const Navbar = () => {
           px={isMobile ? "2" : "10"}
         >
           <HStack spacing={1} fontSize="x-large">
-            <Box bg="brand.primary" px={2}>
-              M
-            </Box>{" "}
+            <Box bg="brand.primary" color="brand.background" px={2}>
+              <FontAwesomeIcon icon={faM} bounce />
+            </Box>
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
           {!isMobile && !isTablet && showNavbar && (

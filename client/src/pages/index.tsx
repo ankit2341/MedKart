@@ -401,9 +401,10 @@ const Home = () => {
                     height={10}
                     borderRadius="lg"
                     border="1px solid"
+                    color="brand.primary"
                     borderColor="brand.primary"
                   >
-                    <FontAwesomeIcon color="brand.primary" icon={faHeart} />
+                    <FontAwesomeIcon beat icon={faHeart} />
                   </Center>
                   <Button
                     ml={2}
@@ -555,8 +556,9 @@ const Home = () => {
                     borderRadius="lg"
                     border="1px solid"
                     borderColor="brand.primary"
+                    color="brand.primary"
                   >
-                    <FontAwesomeIcon color="brand.primary" icon={faHeart} />
+                    <FontAwesomeIcon beat icon={faHeart} />
                   </Center>
                   <Button
                     ml={2}
