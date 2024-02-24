@@ -7,14 +7,13 @@ const errorMessage = {
 
 const productController = {
   getProducts: async (req, res) => {
-    const { search, sort, page } = req.query
-    const { filter } = req.body
-    // console.log(search,sort)
-    console.log(filter)
+    const { search, sort, page, sortby, price, offer, rating } = req.query
+    const filter = !!(price || offer || rating)
+
     try {
       if (!page || !sort) {
         res.status(400).send({
-          Message: 'Page is missing',
+          Message: 'Page and Sort is missing',
         })
       } else {
         switch (true) {
@@ -22,91 +21,39 @@ const productController = {
             const products = await ProductModel.find({
               $or: [
                 { productName: { $regex: search, $options: 'i' } },
-                { variantPrice: { $regex: search, $options: 'i' } },
-                { variantOldPrice: { $regex: search, $options: 'i' } },
-                { variantOffer: { $regex: search, $options: 'i' } },
-                { rating: { $regex: search, $options: 'i' } },
-                { subtext: { $regex: search, $options: 'i' } },
                 { maker: { $regex: search, $options: 'i' } },
+                { subtext: { $regex: search, $options: 'i' } },
               ],
             })
-              .sort({ productName: sort === 'true' ? 1 : -1 })
+              .sort({ [sort]: sortby === 'asc' ? 1 : -1 })
               .skip((page - 1) * 10)
               .limit(10)
               .collation({ locale: 'en', caseLevel: true })
             return res.status(200).send(products)
 
           case !search && filter:
-            console.log(sort, search, filter, page)
-            const variantPricePipeline = [
-              {
-                $addFields: {
-                  variantPriceNumeric: {
-                    $toInt: { $trim: { input: '$variantPrice', chars: '₹ ' } },
-                  },
-                },
+            const filterCriteria = {
+              variantPrice: {
+                $gte: !isNaN(price) && price ? parseFloat(price) : 0,
               },
-              {
-                $match: {
-                  variantPriceNumeric: {
-                    $gt: filter?.price ? filter.price : 400,
-                  },
-                },
+              variantOffer: {
+                $gte: !isNaN(offer) && offer ? parseFloat(offer) : 0,
               },
-            ]
+              rating: {
+                $gte: !isNaN(rating) && rating ? parseFloat(rating) : 0,
+              },
+            }
 
-            // Pipeline for filtering by variantOffer
-            const variantOfferPipeline = [
-              {
-                $addFields: {
-                  variantOfferNumeric: {
-                    $toInt: {
-                      $trim: { input: '$variantOffer', chars: '% off' },
-                    },
-                  },
-                },
-              },
-              {
-                $match: {
-                  variantOfferNumeric: {
-                    $gt: filter?.offer ? filter.offer : 0,
-                  }, // Example: Filter documents where offer is greater than 30%
-                },
-              },
-            ]
-
-            // Pipeline for filtering by rating
-            const ratingPipeline = [
-              {
-                $addFields: {
-                  ratingNumeric: { $toDouble: '$rating' }, // Convert rating to double
-                },
-              },
-              {
-                $match: {
-                  ratingNumeric: { $gt: filter?.rating ? filter.rating : 0 }, // Example: Filter documents where rating is greater than 4.5
-                },
-              },
-            ]
-
-            // Merge pipelines using $facet
-            const productsFiltered = await ProductModel.aggregate([
-              {
-                $facet: {
-                  variantPriceResults: variantPricePipeline,
-                  variantOfferResults: variantOfferPipeline,
-                  ratingResults: ratingPipeline,
-                },
-              },
-            ])
-              .sort({ productName: sort === 'true' ? 1 : -1 })
+            const productsFiltered = await ProductModel.find(filterCriteria)
+              .sort({ [sort]: sortby === 'asc' ? 1 : -1 })
               .skip((page - 1) * 10)
               .limit(10)
               .collation({ locale: 'en', caseLevel: true })
             return res.status(200).send(productsFiltered)
+
           default:
             const productsPaginated = await ProductModel.find()
-              .sort({ productName: sort === 'true' ? 1 : -1 })
+              .sort({ [sort]: sortby === 'asc' ? 1 : -1 })
               .skip((page - 1) * 10)
               .limit(10)
               .collation({ locale: 'en', caseLevel: true })
