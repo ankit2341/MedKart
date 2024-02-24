@@ -17,7 +17,7 @@ const productController = {
   postProducts: async (req, res) => {
     const body = req.body
     try {
-      const products = new ProductModel(body[i])
+      const products = new ProductModel(body)
       await products.save()
       res.send({ Message: 'Product added successfully' })
     } catch (err) {
