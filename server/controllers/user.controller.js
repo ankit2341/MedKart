@@ -113,7 +113,10 @@ const userController = {
       if (user.length > 0) {
         bcrypt.compare(password, hashed_pass, (err, result) => {
           if (result) {
-            const token = jwt.sign({ role: user[0].role }, process.env.secret)
+            const token = jwt.sign(
+              { role: user[0].role, userId: user[0]._id },
+              process.env.secret,
+            )
             res.status(200).send({
               Message: 'User logged in successfully',
               token: token,
@@ -152,7 +155,10 @@ const userController = {
           },
         )
 
-        const token = jwt.sign({ role: user[0].role }, process.env.secret)
+        const token = jwt.sign(
+          { role: user[0].role, userId: user[0]._id },
+          process.env.secret,
+        )
         res.status(200).send({
           Message: 'User logged in successfully',
           token: token,
@@ -173,7 +179,10 @@ const userController = {
               : 'STANDARD_USER',
         })
         await newuser.save()
-        const token = jwt.sign({ role: user[0].role }, process.env.secret)
+        const token = jwt.sign(
+          { role: user[0].role, userId: user[0]._id },
+          process.env.secret,
+        )
         res.status(200).send({
           Message: 'User logged in successfully',
           token: token,

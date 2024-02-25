@@ -7,7 +7,8 @@ const authenticate = (req, res, next) => {
   if (token) {
     const decoded = jwt.verify(token, SECRET_KEY)
     if (decoded) {
-      req.role = decoded
+      req.role = decoded.role
+      req.userId = decoded.userId
       next()
     } else {
       res.status(401).send({ Message: 'You are not authorized' })
