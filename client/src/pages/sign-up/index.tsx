@@ -1,11 +1,10 @@
+import { AuthMainLayout } from "@/shared/components/auth-layout";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
+import useIsTablet from "@/shared/hooks/use-is-tablet";
 import { isValidEmail } from "@/utils";
 import {
-  AbsoluteCenter,
   Box,
   Button,
-  Checkbox,
-  Divider,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -16,25 +15,15 @@ import {
 } from "@chakra-ui/react";
 import { faM } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
-import useIsTablet from "@/shared/hooks/use-is-tablet";
-import { GoogleLogo } from "@/shared/icons";
-import { AuthMainLayout } from "@/shared/components/auth-layout";
 import Link from "next/link";
+import { ReactElement, useState } from "react";
 import { motion } from "framer-motion";
 
-const SignIn = () => {
+const SignUp = () => {
   const isMobile = useIsMobile();
   const istablet = useIsTablet();
-  const router = useRouter();
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const isError = email !== "" && !isValidEmail(email);
-
-  const handleLogin = () => {
-    router.push("/");
-  };
 
   return (
     <motion.div
@@ -55,29 +44,42 @@ const SignIn = () => {
         width={isMobile || istablet ? "100%" : "80%"}
         border="1px solid"
         borderColor="lightgray"
-        p={isMobile ? 4 : 10}
+        px={isMobile ? 4 : 10}
+        py={10}
       >
-        <HStack>
+        <HStack pb={6}>
           <HStack spacing={1} fontSize="x-large">
             <Box bg="brand.primary" color="brand.background" px={2}>
               <FontAwesomeIcon icon={faM} />
             </Box>
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
-          <Text fontSize="x-large">Sign In</Text>
+          <Text fontSize="x-large">Sign Up</Text>
         </HStack>
-        {/* <HStack spacing={4}>
+        <HStack width="100%" spacing={4}>
           <FormControl>
-  <FormLabel>First Name</FormLabel>
-  <Input   focusBorderColor="brand.primary"
-              padding={6} type='text' />
-</FormControl>
-<FormControl>
-  <FormLabel>Last Name</FormLabel>
-  <Input   focusBorderColor="brand.primary"
-              padding={6} type='text' />
-</FormControl>
-          </HStack> */}
+            <FormLabel>First Name</FormLabel>
+            <Input
+              border="1px solid"
+              borderColor="lightgray"
+              placeholder="Enter first name"
+              focusBorderColor="brand.primary"
+              padding={6}
+              type="text"
+            />
+          </FormControl>
+          <FormControl>
+            <FormLabel>Last Name</FormLabel>
+            <Input
+              border="1px solid"
+              borderColor="lightgray"
+              placeholder="Enter last name"
+              focusBorderColor="brand.primary"
+              padding={6}
+              type="text"
+            />
+          </FormControl>
+        </HStack>
         <FormControl isInvalid={isError}>
           <FormLabel>Email</FormLabel>
           <Input
@@ -94,42 +96,6 @@ const SignIn = () => {
             <FormErrorMessage>Please enter valid email</FormErrorMessage>
           )}
         </FormControl>
-        <FormControl>
-          <FormLabel>Password</FormLabel>
-          <Input
-            focusBorderColor="brand.primary"
-            padding={6}
-            border="1px solid"
-            borderColor="lightgray"
-            placeholder="Enter your password"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </FormControl>
-
-        <Box width="100%">
-          <Checkbox colorScheme="cyan" defaultChecked>
-            I agree to MedKart&apos;s terms and conditions
-          </Checkbox>
-        </Box>
-        <Button
-          width="100%"
-          py={6}
-          px={8}
-          bg="brand.primary"
-          onClick={handleLogin}
-          color={"brand.fontLight"}
-        >
-          Sign In
-        </Button>
-        <Box width="100%" position="relative">
-          {/* <Box width={"100%"} height="4px" border={"1px solid"}></Box> */}
-          <Divider colorScheme="brand" />
-          <AbsoluteCenter bg="white" px="4">
-            or
-          </AbsoluteCenter>
-        </Box>
         <Button
           width="100%"
           py={6}
@@ -137,21 +103,15 @@ const SignIn = () => {
           bg="brand.primary"
           color={"brand.fontLight"}
         >
-          <GoogleLogo
-            width={20}
-            height={20}
-            fill="white"
-            style={{ marginRight: "10px" }}
-          />
-          Sign in with Google
+          Verify Email
         </Button>
         <Text>
-          New user!{" "}
+          Alreary have an account!{" "}
           <Link
             style={{ color: "rgb(0, 206, 209)", fontWeight: "bold" }}
-            href={"/sign-up"}
+            href={"/sign-in"}
           >
-            Sign up
+            Sign in
           </Link>{" "}
           now!
         </Text>
@@ -160,8 +120,8 @@ const SignIn = () => {
   );
 };
 
-SignIn.getLayout = function getLayout(page: ReactElement) {
+SignUp.getLayout = function getLayout(page: ReactElement) {
   return <AuthMainLayout>{page}</AuthMainLayout>;
 };
 
-export default SignIn;
+export default SignUp;
