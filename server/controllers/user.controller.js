@@ -20,7 +20,7 @@ const userController = {
   getUsers: async (req, res) => {
     const { page } = req.query
     try {
-      if (!page) {
+      if (page) {
         const users = await UserModel.find()
           .skip((page - 1) * 10)
           .limit(10)
@@ -78,7 +78,6 @@ const userController = {
 
     try {
       const users = await UserModel.find({ email })
-      console.log(users)
       if (users.length > 0) {
         res.status(200).send({ Message: 'User already registered' })
       } else {
@@ -114,7 +113,7 @@ const userController = {
       if (user.length > 0) {
         bcrypt.compare(password, hashed_pass, (err, result) => {
           if (result) {
-            const token = jwt.sign({ course: 'backend' }, process.env.secret)
+            const token = jwt.sign({ role: user[0].role }, process.env.secret)
             res.status(200).send({
               Message: 'User logged in successfully',
               token: token,
@@ -153,7 +152,7 @@ const userController = {
           },
         )
 
-        const token = jwt.sign({ course: 'backend' }, process.env.secret)
+        const token = jwt.sign({ role: user[0].role }, process.env.secret)
         res.status(200).send({
           Message: 'User logged in successfully',
           token: token,
@@ -174,7 +173,7 @@ const userController = {
               : 'STANDARD_USER',
         })
         await newuser.save()
-        const token = jwt.sign({ course: 'backend' }, process.env.secret)
+        const token = jwt.sign({ role: user[0].role }, process.env.secret)
         res.status(200).send({
           Message: 'User logged in successfully',
           token: token,
