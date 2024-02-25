@@ -7,7 +7,7 @@ const addressSchema = mongoose.Schema({
   city: String,
   pincode: Number,
   phoneNumber: Number,
-  type: { type: String, enum: ['Home', 'Work'] },
+  type: { type: String, enum: ['HOME', 'WORK'] },
 })
 
 const AddressModel = mongoose.model('addresses', addressSchema)

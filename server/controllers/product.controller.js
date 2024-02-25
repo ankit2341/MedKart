@@ -64,7 +64,16 @@ const productController = {
       res.status(404).send(errorMessage)
     }
   },
-  postProducts: async (req, res) => {
+  getProductById: async (req, res) => {
+    const { id } = req.params.id
+    try {
+      const product = await ProductModel.find({ _id: id })
+      res.status(200).send(product)
+    } catch (err) {
+      res.status(404).send(errorMessage)
+    }
+  },
+  postProduct: async (req, res) => {
     const body = req.body
     try {
       const products = new ProductModel(body)
@@ -72,6 +81,26 @@ const productController = {
       res.send({ Message: 'Product added successfully' })
     } catch (err) {
       console.log(err)
+      res.status(404).send(errorMessage)
+    }
+  },
+  patchProductById: async (req, res) => {
+    const id = req.query
+    const payload = req.body
+
+    try {
+      await ProductModel.findByIdAndUpdate({ _id: id }, payload)
+      res.status(200).send({ Message: 'Product updated successfully' })
+    } catch (err) {
+      res.status(404).send({ Message: '404 eror' })
+    }
+  },
+  deleteProductById: async (req, res) => {
+    const id = req.query
+    try {
+      await ProductModel.findByIdAndDelete({ _id: id })
+      res.status(200).send({ Message: 'Product deleted successfully' })
+    } catch (err) {
       res.status(404).send(errorMessage)
     }
   },

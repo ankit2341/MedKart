@@ -4,7 +4,13 @@ const productRouter = express.Router()
 
 productRouter.get('/', productController.getProducts)
 
-productRouter.post('/add', productController.postProducts)
+productRouter.get('/:id', productController.getProductById)
+
+productRouter.post('/add', productController.postProduct)
+
+productRouter.patch('/update', productController.patchProductById)
+
+productRouter.delete('/delete', productController.deleteProductById)
 
 module.exports = {
   productRouter,

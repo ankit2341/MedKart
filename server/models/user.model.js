@@ -5,16 +5,8 @@ const userSchema = mongoose.Schema({
   email: String,
   password: String,
   avatar: String,
-  role: String,
   phoneNumber: Number,
-  addresses: [
-    {
-      addressline1: String,
-      city: String,
-      pincode: Number,
-    },
-  ],
-  mobileNumber: String,
+  role: { type: String, enum: ['STANDARD_USER', 'PLATFORM_ADMIN'] },
 })
 
 const UserModel = mongoose.model('users', userSchema)
