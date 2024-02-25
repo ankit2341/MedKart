@@ -1,4 +1,5 @@
 const { UserModel } = require('../models/user.model')
+const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
 const errorMessage = {
@@ -42,18 +43,29 @@ const userController = {
     }
   },
   patchUser: async (req, res) => {
-    const id = req.query
+    const { id } = req.query
     const payload = req.body
 
     try {
-      await UserModel.findByIdAndUpdate({ _id: id }, payload)
+      const { phoneNumber, username, avatar } = payload
+      const payloadToUpdate = {}
+      if (username) {
+        updateObject.username = username
+      }
+      if (phoneNumber) {
+        updateObject.phoneNumber = phoneNumber
+      }
+      if (avatar) {
+        updateObject.avatar = avatar
+      }
+      await UserModel.findByIdAndUpdate({ _id: id }, payloadToUpdate)
       res.status(200).send({ Message: 'User updated successfully' })
     } catch (err) {
-      res.status(404).send({ Message: '404 eror' })
+      res.status(404).send(errorMessage)
     }
   },
   deleteUser: async (req, res) => {
-    const id = req.query
+    const { id } = req.query
     try {
       await UserModel.findByIdAndDelete({ _id: id })
       res.send({ Message: 'user deleted successfully' })
@@ -66,6 +78,7 @@ const userController = {
 
     try {
       const users = await UserModel.find({ email })
+      console.log(users)
       if (users.length > 0) {
         res.status(200).send({ Message: 'User already registered' })
       } else {

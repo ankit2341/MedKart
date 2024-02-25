@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const addressSchema = mongoose.Schema({
-  userId: { type: Schema.Types.ObjectId },
+  userId: { type: mongoose.Schema.Types.ObjectId },
   name: String,
   addressline1: String,
   city: String,

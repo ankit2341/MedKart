@@ -32,7 +32,7 @@ const addressController = {
     }
   },
   patchAddressById: async (req, res) => {
-    const id = req.query
+    const { id } = req.query
     const payload = req.body
 
     try {
@@ -43,7 +43,7 @@ const addressController = {
     }
   },
   deleteAddressById: async (req, res) => {
-    const id = req.query
+    const { id } = req.query
     try {
       await ProductModel.findByIdAndDelete({ _id: id })
       res.status(200).send({ Message: 'Address deleted successfully' })

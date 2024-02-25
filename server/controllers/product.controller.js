@@ -85,7 +85,7 @@ const productController = {
     }
   },
   patchProductById: async (req, res) => {
-    const id = req.query
+    const { id } = req.query
     const payload = req.body
 
     try {
@@ -96,7 +96,7 @@ const productController = {
     }
   },
   deleteProductById: async (req, res) => {
-    const id = req.query
+    const { id } = req.query
     try {
       await ProductModel.findByIdAndDelete({ _id: id })
       res.status(200).send({ Message: 'Product deleted successfully' })
