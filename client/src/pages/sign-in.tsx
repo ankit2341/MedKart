@@ -4,11 +4,9 @@ import {
   AbsoluteCenter,
   Box,
   Button,
-  Checkbox,
   Divider,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   HStack,
   Input,
   Text,
@@ -51,35 +49,26 @@ const SignIn = () => {
       <VStack
         bg="brand.background"
         borderRadius="xl"
-        spacing={8}
+        spacing={isMobile ? 4 : 8}
         width={isMobile || istablet ? "100%" : "80%"}
         border="1px solid"
         borderColor="lightgray"
         p={isMobile ? 4 : 10}
+        py={10}
       >
-        <HStack>
-          <HStack spacing={1} fontSize="x-large">
+        <HStack pb={4}>
+          <HStack spacing={1} fontSize={isMobile ? "larger" : "x-large"}>
             <Box bg="brand.primary" color="brand.background" px={2}>
               <FontAwesomeIcon icon={faM} />
             </Box>
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
-          <Text fontSize="x-large">Sign In</Text>
+          <Text fontSize={isMobile ? "larger" : "x-large"}>Sign In</Text>
         </HStack>
-        {/* <HStack spacing={4}>
-          <FormControl>
-  <FormLabel>First Name</FormLabel>
-  <Input   focusBorderColor="brand.primary"
-              padding={6} type='text' />
-</FormControl>
-<FormControl>
-  <FormLabel>Last Name</FormLabel>
-  <Input   focusBorderColor="brand.primary"
-              padding={6} type='text' />
-</FormControl>
-          </HStack> */}
+        <Text fontSize={isMobile ? "small" : "medium"}>
+          Sign in with your email
+        </Text>
         <FormControl isInvalid={isError}>
-          <FormLabel>Email</FormLabel>
           <Input
             focusBorderColor="brand.primary"
             padding={6}
@@ -95,7 +84,6 @@ const SignIn = () => {
           )}
         </FormControl>
         <FormControl>
-          <FormLabel>Password</FormLabel>
           <Input
             focusBorderColor="brand.primary"
             padding={6}
@@ -107,12 +95,6 @@ const SignIn = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </FormControl>
-
-        <Box width="100%">
-          <Checkbox colorScheme="cyan" defaultChecked>
-            I agree to MedKart&apos;s terms and conditions
-          </Checkbox>
-        </Box>
         <Button
           width="100%"
           py={6}
@@ -145,7 +127,7 @@ const SignIn = () => {
           />
           Sign in with Google
         </Button>
-        <Text>
+        <Text fontSize={isMobile ? "small" : "medium"}>
           New user!{" "}
           <Link
             style={{ color: "rgb(0, 206, 209)", fontWeight: "bold" }}

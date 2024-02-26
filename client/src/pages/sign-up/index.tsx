@@ -5,9 +5,9 @@ import { isValidEmail } from "@/utils";
 import {
   Box,
   Button,
+  Checkbox,
   FormControl,
   FormErrorMessage,
-  FormLabel,
   HStack,
   Input,
   Text,
@@ -40,7 +40,7 @@ const SignUp = () => {
       <VStack
         bg="brand.background"
         borderRadius="xl"
-        spacing={8}
+        spacing={isMobile ? 4 : 8}
         width={isMobile || istablet ? "100%" : "80%"}
         border="1px solid"
         borderColor="lightgray"
@@ -48,17 +48,16 @@ const SignUp = () => {
         py={10}
       >
         <HStack pb={6}>
-          <HStack spacing={1} fontSize="x-large">
+          <HStack spacing={1} fontSize={isMobile ? "larger" : "x-large"}>
             <Box bg="brand.primary" color="brand.background" px={2}>
               <FontAwesomeIcon icon={faM} />
             </Box>
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
-          <Text fontSize="x-large">Sign Up</Text>
+          <Text fontSize={isMobile ? "larger" : "x-large"}>Sign Up</Text>
         </HStack>
-        <HStack width="100%" spacing={4}>
+        <HStack flexDir={isMobile ? "column" : "row"} width="100%" spacing={4}>
           <FormControl>
-            <FormLabel>First Name</FormLabel>
             <Input
               border="1px solid"
               borderColor="lightgray"
@@ -69,7 +68,6 @@ const SignUp = () => {
             />
           </FormControl>
           <FormControl>
-            <FormLabel>Last Name</FormLabel>
             <Input
               border="1px solid"
               borderColor="lightgray"
@@ -81,7 +79,6 @@ const SignUp = () => {
           </FormControl>
         </HStack>
         <FormControl isInvalid={isError}>
-          <FormLabel>Email</FormLabel>
           <Input
             focusBorderColor="brand.primary"
             padding={6}
@@ -96,6 +93,13 @@ const SignUp = () => {
             <FormErrorMessage>Please enter valid email</FormErrorMessage>
           )}
         </FormControl>
+        <Box width="100%">
+          <Checkbox width={"100%"} colorScheme="cyan" defaultChecked>
+            <Text fontSize={isMobile ? "smaller" : "medium"}>
+              I agree to MedKart&apos;s policy and terms
+            </Text>
+          </Checkbox>
+        </Box>
         <Button
           width="100%"
           py={6}
@@ -105,7 +109,7 @@ const SignUp = () => {
         >
           Verify Email
         </Button>
-        <Text>
+        <Text fontSize={isMobile ? "small" : "medium"}>
           Alreary have an account!{" "}
           <Link
             style={{ color: "rgb(0, 206, 209)", fontWeight: "bold" }}

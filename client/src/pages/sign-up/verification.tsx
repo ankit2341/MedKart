@@ -5,7 +5,6 @@ import {
   Box,
   Button,
   FormControl,
-  FormLabel,
   HStack,
   PinInput,
   PinInputField,
@@ -45,16 +44,16 @@ const Verification = () => {
         py={10}
       >
         <HStack pb={6}>
-          <HStack spacing={1} fontSize="x-large">
+          <HStack spacing={1} fontSize={isMobile ? "larger" : "x-large"}>
             <Box bg="brand.primary" color="brand.background" px={2}>
               <FontAwesomeIcon icon={faM} />
             </Box>
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
-          <Text fontSize="x-large">Sign Up</Text>
+          <Text fontSize={isMobile ? "larger" : "x-large"}>Sign Up</Text>
         </HStack>
+        <Text>Please enter OTP sent to your email</Text>
         <FormControl>
-          <FormLabel>Enter OTP</FormLabel>
           <HStack width="100%" align="center" justify="center">
             <PinInput size="xl" otp focusBorderColor="brand.primary">
               <PinInputField

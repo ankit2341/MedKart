@@ -48,7 +48,7 @@ export const AuthContainer = ({ children }: AppContainerProps) => {
           alignItems="center"
           justifyContent="center"
           py={"10"}
-          height="100vh"
+          height={"100vh"}
           color="brand.background"
           bg="brand.primary"
         >
