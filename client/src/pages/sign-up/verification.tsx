@@ -13,7 +13,6 @@ import {
 } from "@chakra-ui/react";
 import { faM } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Link from "next/link";
 import { ReactElement } from "react";
 import { motion } from "framer-motion";
 
@@ -52,7 +51,9 @@ const Verification = () => {
           </HStack>
           <Text fontSize={isMobile ? "larger" : "x-large"}>Sign Up</Text>
         </HStack>
-        <Text>Please enter OTP sent to your email</Text>
+        <Text fontSize={isMobile ? "small" : "medium"}>
+          Please enter OTP sent to your email
+        </Text>
         <FormControl>
           <HStack width="100%" align="center" justify="center">
             <PinInput size="xl" otp focusBorderColor="brand.primary">
@@ -98,16 +99,6 @@ const Verification = () => {
         >
           Verify OTP
         </Button>
-        <Text>
-          Alreary have an account!{" "}
-          <Link
-            style={{ color: "rgb(0, 206, 209)", fontWeight: "bold" }}
-            href={"/sign-in"}
-          >
-            Sign in
-          </Link>{" "}
-          now!
-        </Text>
       </VStack>
     </motion.div>
   );

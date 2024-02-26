@@ -15,6 +15,7 @@ import {
   faM,
   faMedkit,
   faPumpMedical,
+  faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
@@ -137,15 +138,31 @@ const Navbar = () => {
                 10
               </Center>
             </Box>
-            <Button
-              onClick={() => router.push("/sign-in")}
-              py={4}
-              px={8}
-              bg="brand.primary"
-              color={"brand.fontLight"}
-            >
-              Sign In
-            </Button>
+            {isMobile && (
+              <Center
+                cursor="pointer"
+                p={4}
+                width={10}
+                height={10}
+                border="1px solid"
+                borderRadius="full"
+                onClick={() => router.push("/sign-in")}
+                borderColor="brand.primary"
+              >
+                <FontAwesomeIcon icon={faUser} />
+              </Center>
+            )}
+            {!isMobile && (
+              <Button
+                onClick={() => router.push("/sign-in")}
+                py={4}
+                px={8}
+                bg="brand.primary"
+                color={"brand.fontLight"}
+              >
+                Sign In
+              </Button>
+            )}
           </HStack>
         </Flex>
       </motion.div>

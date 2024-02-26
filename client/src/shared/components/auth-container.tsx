@@ -57,7 +57,7 @@ export const AuthContainer = ({ children }: AppContainerProps) => {
             top={10}
             left={10}
             cursor="pointer"
-            onClick={() => router.back()}
+            onClick={() => router.push("/")}
           >
             <FontAwesomeIcon size="xl" icon={faArrowLeft} />
             <Text>Go Back</Text>

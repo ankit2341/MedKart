@@ -56,6 +56,9 @@ const SignUp = () => {
           </HStack>
           <Text fontSize={isMobile ? "larger" : "x-large"}>Sign Up</Text>
         </HStack>
+        <Text fontSize={isMobile ? "small" : "medium"}>
+          Sign up with your email
+        </Text>
         <HStack flexDir={isMobile ? "column" : "row"} width="100%" spacing={4}>
           <FormControl>
             <Input
