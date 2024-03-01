@@ -1,5 +1,7 @@
+import LogoutModal from "@/features/profile/logut";
 import MyAddresses from "@/features/profile/my-addresses";
 import MyCart from "@/features/profile/my-cart";
+import MyOrders from "@/features/profile/my-orders";
 import MyProfile from "@/features/profile/my-profile";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
@@ -15,19 +17,26 @@ import {
 } from "@chakra-ui/react";
 import { faChevronRight, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactElement, useState } from "react";
+import { useRouter } from "next/router";
+import { ReactElement, useEffect, useState } from "react";
 
 const Profile = () => {
   const isViewMobile = useIsMobile();
   const isTableView = useIsTablet();
   const isMobile = isViewMobile || isTableView;
-  const [selectedState, setSelectedState] = useState<string>("Profile");
+  const router = useRouter();
+  const { isPrifilled } = router.query;
+  const [selectedState, setSelectedState] = useState<string>("");
 
   const handleSelectedState = (el: string) => {
     if (el !== "Logout") {
       setSelectedState(el);
     }
   };
+
+  useEffect(() => {
+    setSelectedState(isPrifilled ? (isPrifilled as string) : "Profile");
+  }, [isPrifilled]);
 
   return (
     <HStack
@@ -90,26 +99,31 @@ const Profile = () => {
               return (
                 <>
                   <Divider />
-                  <Button
-                    onClick={() => {
-                      handleSelectedState(el);
-                    }}
-                    _hover={{
-                      color: "brand.font",
-                      background: "brand.primary",
-                      borderRadius: "md",
-                    }}
-                    display="flex"
-                    borderRadius={"md"}
-                    alignItems="center"
-                    justifyContent="space-between"
-                    width="100%"
-                    p={6}
-                    bg="brand.background"
-                    rightIcon={<FontAwesomeIcon icon={faChevronRight} />}
-                  >
-                    {el !== "Logout" && "My"} {el}
-                  </Button>
+                  {el === "Logout" ? (
+                    <LogoutModal />
+                  ) : (
+                    <Button
+                      color={"brand.font"}
+                      onClick={() => {
+                        handleSelectedState(el);
+                      }}
+                      _hover={{
+                        color: "brand.font",
+                        background: "brand.primary",
+                        borderRadius: "md",
+                      }}
+                      display="flex"
+                      borderRadius={"md"}
+                      alignItems="center"
+                      justifyContent="space-between"
+                      width="100%"
+                      p={6}
+                      bg="brand.background"
+                      rightIcon={<FontAwesomeIcon icon={faChevronRight} />}
+                    >
+                      {el !== "Logout" && "My"} {el}
+                    </Button>
+                  )}
                 </>
               );
             },
@@ -126,6 +140,7 @@ const Profile = () => {
         {selectedState === "Profile" && <MyProfile />}
         {selectedState === "Addresses" && <MyAddresses />}
         {selectedState === "Cart" && <MyCart />}
+        {selectedState === "Orders" && <MyOrders />}
       </HStack>
     </HStack>
   );

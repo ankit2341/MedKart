@@ -108,7 +108,7 @@ const SignIn = () => {
         <Box width="100%" position="relative">
           {/* <Box width={"100%"} height="4px" border={"1px solid"}></Box> */}
           <Divider colorScheme="brand" />
-          <AbsoluteCenter bg="white" px="4">
+          <AbsoluteCenter bg="brand.background" px="4">
             or
           </AbsoluteCenter>
         </Box>

@@ -36,6 +36,8 @@ const MyProfile = () => {
         <Card
           border="1px solid"
           borderColor={"gray.200"}
+          bg="brand.background"
+          color="brand.font"
           width={"100%"}
           display="flex"
           alignItems="center"

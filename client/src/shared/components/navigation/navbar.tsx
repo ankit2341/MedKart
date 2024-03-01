@@ -23,6 +23,7 @@ import useIsTablet from "@/shared/hooks/use-is-tablet";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import SearchModal from "@/features/search/search-modal";
 import { useRouter } from "next/router";
+import ThemeToggle from "@/features/toggle-switch";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -68,7 +69,12 @@ const Navbar = () => {
           py={4}
           px={isMobile ? "4" : "10"}
         >
-          <HStack spacing={1} fontSize="x-large">
+          <HStack
+            spacing={1}
+            fontSize="x-large"
+            onClick={() => router.push("/")}
+            cursor="pointer"
+          >
             <Box bg="brand.primary" color="brand.background" px={2}>
               <FontAwesomeIcon icon={faM} bounce />
             </Box>
@@ -114,8 +120,13 @@ const Navbar = () => {
             alignItems="center"
             justifyContent="right"
           >
+            <ThemeToggle />
             <SearchModal />
-            <Box pos="relative">
+            <Box
+              pos="relative"
+              cursor="pointer"
+              onClick={() => router.push("/profile/23?isPrifilled=Cart")}
+            >
               <FontAwesomeIcon
                 icon={faBagShopping}
                 size="xl"
@@ -129,7 +140,7 @@ const Navbar = () => {
                 top={-3}
                 right={-3}
                 p={0.5}
-                bg="white"
+                bg="brand.background"
                 borderWidth="1px"
                 fontWeight="bold"
                 borderColor="brand.primary"

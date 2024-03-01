@@ -36,8 +36,10 @@ const MyCart = () => {
           border="1px solid"
           borderColor={"gray.200"}
           width={"100%"}
+          bg="brand.background"
           display="flex"
           alignItems="center"
+          color={"brand.font"}
           justifyContent="center"
           boxShadow={"none"}
         >

@@ -63,7 +63,7 @@ export default function SearchModal() {
       >
         <ModalOverlay bg="blackAlpha.300" backdropFilter="blur(10px)" />
         <ModalContent mt={"10vh"}>
-          <ModalHeader py={12}>
+          <ModalHeader py={12} bg={"brand.background"}>
             <FormControl>
               <InputGroup>
                 <InputLeftElement>
@@ -80,7 +80,13 @@ export default function SearchModal() {
             </FormControl>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody width="100%" height="50vh" pt={0} pb={6}>
+          <ModalBody
+            bg="brand.background"
+            width="100%"
+            height="50vh"
+            pt={0}
+            pb={6}
+          >
             {search === "" ? (
               <Center width="100%" height="70vh">
                 <Text>No Data</Text>
