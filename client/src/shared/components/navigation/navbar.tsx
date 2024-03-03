@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBagShopping,
   faGift,
-  faList,
   faM,
   faMedkit,
   faPumpMedical,
@@ -89,10 +88,9 @@ const Navbar = () => {
               px={10}
             >
               {[
-                { name: "Categories", icon: faList },
-                { name: "Brands", icon: faPumpMedical },
+                { name: "Products", icon: faPumpMedical },
                 { name: "Offers", icon: faGift },
-                { name: "Products", icon: faMedkit },
+                { name: "Book Lab Test", icon: faMedkit },
               ].map((item) => {
                 return (
                   <HStack
@@ -120,7 +118,7 @@ const Navbar = () => {
             alignItems="center"
             justifyContent="right"
           >
-            <ThemeToggle />
+            {!isMobile && <ThemeToggle />}
             <SearchModal />
             <Box
               pos="relative"
@@ -182,14 +180,14 @@ const Navbar = () => {
           width="100%"
           bg="brand.background"
           alignItems="center"
-          justifyContent="space-between"
+          justifyContent="space-evenly"
           px={isMobile ? 1 : 10}
         >
+          {!isTablet && <ThemeToggle />}
           {[
-            { name: "Categories", icon: faList },
-            { name: "Brands", icon: faPumpMedical },
+            { name: "Products", icon: faPumpMedical },
             { name: "Offers", icon: faGift },
-            { name: "Products", icon: faMedkit },
+            { name: "Book Lab Test", icon: faMedkit },
           ].map((item) => {
             return (
               <HStack

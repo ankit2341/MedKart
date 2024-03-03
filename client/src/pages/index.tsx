@@ -449,34 +449,140 @@ const Home = () => {
         align="center"
         justify="center"
         width="100%"
-        height={isMobile ? "100vh" : isTablet ? "50vh" : "80vh"}
+        overflow="hidden"
+        height={isMobile ? "100vh" : isTablet ? "50vh" : "60vh"}
         flexDir={isMobile ? "column" : "row"}
       >
-        <Box
+        <VStack
           width={isMobile ? "100%" : "50%"}
           height="100%"
-          bg="brand.primary"
+          pos="relative"
+          p={4}
+          spacing={isMobile || isTablet ? 2 : 6}
+          display="flex"
+          alignItems="left"
+          justifyContent={isMobile || isTablet ? "flex-end" : "center"}
+          background=" linear-gradient(to bottom right, #00CED1 0%, #FFFFFF 100%)"
           borderRadius="3xl"
-        ></Box>
+        >
+          <Heading
+            fontSize={isMobile ? "lg" : "4xl"}
+            zIndex={10}
+            textShadow="rgb(0, 206, 209) 1px 0 10px"
+          >
+            Instant Assistance
+          </Heading>
+          <Text zIndex={10}>Wish to seek advise from doctors?</Text>
+          <Button
+            width="fit-content"
+            bg="brand.background"
+            color="brand.primary"
+            zIndex={10}
+          >
+            Book an appointment
+          </Button>
+          <Image
+            boxSize={"fit-content"}
+            src="https://static1.hkrtcdn.com/hknext/static/media/common/misc/physician.png"
+            alt="doc"
+            pos="absolute"
+            bottom={0}
+            right={0}
+          />
+        </VStack>
         <VStack
           spacing={10}
           flexDir="column-reverse"
           width={isMobile ? "100%" : "50%"}
           height="100%"
         >
-          <Box
+          <VStack
             width="100%"
             height="50%"
-            filter="drop-shadow(0 0 0.15rem rgb(0, 206, 209))"
-            bg="brand.background"
+            filter="drop-shadow(0 0 0rem rgb(0, 206, 209))"
+            bg="linear-gradient(to left, #ffffff 0%, #00CED1 100%)"
+            align="left"
+            justifyContent={isMobile || isTablet ? "flex-end" : "center"}
             borderRadius="3xl"
-          ></Box>
-          <Box
+            p={4}
+          >
+            <Heading
+              fontSize={isMobile ? "lg" : "4xl"}
+              zIndex={10}
+              textShadow="rgb(0, 206, 209) 1px 0 10px"
+            >
+              Refer Now
+            </Heading>
+            <Text width="50%" fontSize="small" zIndex={10} noOfLines={3}>
+              Tell your friends to shop at MedKart. They get Rs.200 off when
+              they shop with us the 1st time & you get Rs. 200 off on your next
+              order.
+            </Text>
+            <Button
+              width="50%"
+              bg="brand.background"
+              color="brand.primary"
+              zIndex={10}
+            >
+              Refer now
+            </Button>
+            <Image
+              boxSize={isMobile ? "150" : "fit-content"}
+              src="https://static1.hkrtcdn.com/hknext/static/media/common/misc/boy-refer.svg"
+              alt="doc"
+              pos="absolute"
+              bottom={0}
+              right={0}
+            />
+          </VStack>
+          <VStack
             width="100%"
             height="50%"
-            bg="brand.primary"
+            background="linear-gradient(to left, #00CED1 0%, #FFFFFF 100%)"
             borderRadius="3xl"
-          ></Box>
+            filter="drop-shadow(0 0 0rem rgb(0, 206, 209))"
+            alignItems="flex-end"
+            justifyContent={isMobile || isTablet ? "flex-end" : "center"}
+            p={4}
+          >
+            <Heading
+              fontSize={isMobile ? "lg" : "4xl"}
+              zIndex={10}
+              textShadow="rgb(0, 206, 209) 1px 0 10px"
+            >
+              Health Assistant
+            </Heading>
+            <Text
+              width="50%"
+              textShadow="rgb(0, 206, 209) 1px 0 10px"
+              fontSize="small"
+              textAlign="right"
+              zIndex={10}
+              noOfLines={3}
+            >
+              Explore the power of our Health Assistant – your trusted companion
+              on the journey to better health.
+            </Text>
+            <Button
+              width="50%"
+              bg="brand.background"
+              color="brand.primary"
+              zIndex={10}
+            >
+              Checkout Now
+            </Button>
+
+            {!isTablet && (
+              <Image
+                boxSize="fit-content"
+                src="https://assets.pharmeasy.in/apothecary/_next/static/media/PlusFamily.22677720.png?dim=1440x0"
+                alt="doc"
+                pos="absolute"
+                left={0}
+                bottom={0}
+              />
+            )}
+          </VStack>
         </VStack>
       </HStack>
       <Box width="100%" pos="relative">
