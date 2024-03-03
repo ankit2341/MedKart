@@ -31,6 +31,7 @@ import useIsTablet from "@/shared/hooks/use-is-tablet";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { UnderLineAnimation } from "@/shared/icons";
+import WhyUs from "@/features/home/why-us";
 
 const Home = () => {
   const icons = [
@@ -317,6 +318,7 @@ const Home = () => {
           </Center>
         </Box>
       </Flex>
+      {!isMobile && <WhyUs />}
       <Box width="100%" pos="relative">
         <Heading
           width="100%"

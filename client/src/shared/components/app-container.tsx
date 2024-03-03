@@ -7,6 +7,7 @@ import {
   faHeadset,
   faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
+import Footer from "./navigation/footer";
 
 interface AppContainerProps {
   children?: ReactNode;
@@ -69,6 +70,7 @@ export const AppContainer = ({ children }: AppContainerProps) => {
       <Navbar />
       <SideNav />
       {children}
+      <Footer />
     </Flex>
   );
 };

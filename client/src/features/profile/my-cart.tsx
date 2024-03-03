@@ -171,6 +171,7 @@ const MyCart = () => {
                     </Button>
                     <Button
                       size="sm"
+                      color={"brand.font"}
                       bg="brand.background"
                       _hover={{ bg: "brand.background" }}
                     >
