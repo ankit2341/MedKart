@@ -1,13 +1,17 @@
 import useIsMobile from "@/shared/hooks/use-is-mobile";
-import { Box, Heading, Image, Text, VStack } from "@chakra-ui/react";
+import useIsTablet from "@/shared/hooks/use-is-tablet";
+import { Box, Heading, Image, VStack } from "@chakra-ui/react";
+import { faTree, faWind } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
 const WhyUs = () => {
   const isMobile = useIsMobile();
+  const isTablet = useIsTablet();
 
   return (
     <VStack overflow="hidden" width="100%" py={10}>
-      <Heading py={10}>Why Us?</Heading>
+      <Heading py={20}>Why Us?</Heading>
       <Box width="100%" height="40" bg={"brand.background"} position="relative">
         <motion.div
           initial={{ translateX: "-20vw" }}
@@ -17,6 +21,7 @@ const WhyUs = () => {
             position: "absolute",
             transform: "translateY(-50%)",
             top: -10,
+            zIndex: 10,
           }}
         >
           <Image
@@ -24,6 +29,15 @@ const WhyUs = () => {
             src="https://assets.pharmeasy.in/apothecary/images/deliveryBoy.svg?dim=96x0"
             alt="Delivery"
           />
+          <Box
+            style={{
+              position: "absolute",
+              bottom: "10%",
+              transform: "rotate(180deg)",
+            }}
+          >
+            <FontAwesomeIcon beatFade icon={faWind} />
+          </Box>
         </motion.div>
         <Box
           width="100%"
@@ -34,12 +48,67 @@ const WhyUs = () => {
           alignItems="center"
           justifyContent="space-evenly"
         >
-          <Heading px={"10"} fontSize={isMobile ? "medium" : "x-large"}>
-            On Time Delivery
-          </Heading>
-          <Heading px={"10"} fontSize={isMobile ? "medium" : "x-large"}>
-            Most Trusted Brand
-          </Heading>
+          <FontAwesomeIcon
+            icon={faTree}
+            color="#2a7e19"
+            size="6x"
+            style={{ position: "absolute", top: -10 }}
+          />
+
+          {!isTablet && (
+            <FontAwesomeIcon
+              icon={faTree}
+              color="#2a7e19"
+              size="8x"
+              style={{ position: "absolute", top: -40, left: 10 }}
+            />
+          )}
+
+          <FontAwesomeIcon
+            icon={faTree}
+            color="#2D5A27"
+            size={isTablet ? "4x" : "7x"}
+            style={{
+              position: "absolute",
+              top: isTablet ? 20 : -30,
+              right: 10,
+            }}
+          />
+          <FontAwesomeIcon
+            icon={faTree}
+            color="green"
+            size="5x"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              right: "30%",
+              zIndex: 100,
+            }}
+          />
+          {!isTablet && (
+            <FontAwesomeIcon
+              icon={faTree}
+              color="#2D5A27"
+              size="7x"
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: "10%",
+                zIndex: 100,
+              }}
+            />
+          )}
+          <FontAwesomeIcon
+            icon={faTree}
+            color="#014421"
+            size="7x"
+            style={{
+              position: "absolute",
+              bottom: 0,
+              left: isTablet ? "-1%" : "40%",
+              zIndex: 100,
+            }}
+          />
         </Box>
         <Box
           width="100%"
@@ -52,8 +121,13 @@ const WhyUs = () => {
           {" "}
           {!isMobile && (
             <>
-              <Text px={10}>10000+ Orders on Medkart till date</Text>{" "}
-              <Text px={10}>Serviced over 10000+ orders</Text>
+              {" "}
+              <Heading px={"10"} fontSize={isMobile ? "medium" : "x-large"}>
+                On Time Delivery
+              </Heading>
+              <Heading px={"10"} fontSize={isMobile ? "medium" : "x-large"}>
+                Most Trusted Brand
+              </Heading>
             </>
           )}
         </Box>
