@@ -1,17 +1,21 @@
+import { useTheme } from "@/context/theme-context";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 import { Box, Heading, Image, VStack } from "@chakra-ui/react";
-import { faTree, faWind } from "@fortawesome/free-solid-svg-icons";
+import { faMoon, faSun, faTree, faWind } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
 const WhyUs = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const {theme}=useTheme();
 
   return (
-    <VStack overflow="hidden" width="100%" py={10}>
+    <VStack overflow="hidden" width="100%" py={10} pos="relative">
       <Heading py={isMobile?10:20}>Why Us?</Heading>
+      {theme==="light"&&<FontAwesomeIcon icon={faSun} spin color="orange" size="4x" style={{position:"absolute", top:isTablet?"30%":"20%",left:isTablet||isMobile?"5%":"10%"}} />}
+      {theme==="dark"&&<FontAwesomeIcon icon={faMoon} fade color="lightgray" size="4x" style={{position:"absolute", top:"20%",right:"10%"}} />}
       <Box width="100%" height="40" bg={"brand.background"} position="relative">
         <motion.div
           initial={{ translateX: "-20vw" }}
