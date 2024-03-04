@@ -318,7 +318,7 @@ const Home = () => {
           </Center>
         </Box>
       </Flex>
-      {!isMobile && <WhyUs />}
+      {<WhyUs />}
       <Box width="100%" pos="relative">
         <Heading
           width="100%"
