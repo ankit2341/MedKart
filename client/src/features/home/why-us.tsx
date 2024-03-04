@@ -34,6 +34,7 @@ const WhyUs = () => {
               position: "absolute",
               bottom: "10%",
               transform: "rotate(180deg)",
+              color:"#f2f3f4"
             }}
           >
             <FontAwesomeIcon beatFade icon={faWind} />
