@@ -52,7 +52,7 @@ const WhyUs = () => {
           {" "}
           {!isMobile && (
             <>
-              <Text px={10}>Orders on Medkart till date</Text>{" "}
+              <Text px={10}>10000+ Orders on Medkart till date</Text>{" "}
               <Text px={10}>Serviced over 10000+ orders</Text>
             </>
           )}
