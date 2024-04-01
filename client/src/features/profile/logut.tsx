@@ -37,8 +37,8 @@ export default function LogoutModal() {
         Logout
       </Button>
       <Modal isCentered onClose={onClose} isOpen={isOpen} motionPreset="scale">
-        <ModalOverlay />
-        <ModalContent>
+        <ModalOverlay backdropFilter="blur(4px)" />
+        <ModalContent bg={"brand.background"}>
           <ModalHeader>Logout</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

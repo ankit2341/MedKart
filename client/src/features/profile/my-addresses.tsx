@@ -59,7 +59,7 @@ const MyAddresses = () => {
             <Text width="100%" textAlign="left" fontSize="small">
               Navi Mumbai - 400709
             </Text>
-            <Badge pos="absolute" right={6} top={6} colorScheme="cyan">
+            <Badge pos="absolute" right={0} top={0} colorScheme="cyan">
               Home
             </Badge>
           </VStack>
@@ -88,7 +88,7 @@ const MyAddresses = () => {
                   <Text width="100%" textAlign="left" fontSize="small">
                     Navi Mumbai - 400709
                   </Text>
-                  <Badge pos="absolute" right={6} top={6} colorScheme="cyan">
+                  <Badge pos="absolute" right={0} top={0} colorScheme="cyan">
                     Home
                   </Badge>
                 </VStack>

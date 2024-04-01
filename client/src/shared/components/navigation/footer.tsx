@@ -12,30 +12,47 @@ const Footer = () => {
       bg="brand.primary"
       align="center"
       justifyContent="space-between"
-      px={10}
+      px={isMobile ? 2 : 10}
       overflow="hidden"
       zIndex={10}
+      pos="absolute"
+      bottom={0}
       spacing={2}
-      flexDir={isMobile ? "column" : "row"}
-      py={4}
+      py={2}
     >
-      <HStack spacing={1} fontSize="large" cursor="pointer">
+      <HStack
+        spacing={1}
+        fontSize={isMobile ? "small" : "large"}
+        cursor="pointer"
+      >
         <Box bg="brand.background" color="brand.primary" px={2}>
           <FontAwesomeIcon icon={faM} bounce />
         </Box>
         <Text color="brand.backgroundDark">edKart</Text>
       </HStack>
-      <HStack spacing={isMobile ? 2 : 10} flexDir={isMobile ? "column" : "row"}>
-        <Text fontSize="small" color="brand.background">
+      <HStack spacing={isMobile ? 2 : 10}>
+        <Text
+          fontSize={isMobile ? "x-small" : "small"}
+          color="brand.background"
+        >
           Support
         </Text>
-        <Text fontSize="small" color="brand.background">
+        <Text
+          fontSize={isMobile ? "x-small" : "small"}
+          color="brand.background"
+        >
           Privacy
         </Text>
-        <Text fontSize="small" color="brand.background">
+        <Text
+          fontSize={isMobile ? "x-small" : "small"}
+          color="brand.background"
+        >
           Terms
         </Text>
-        <Text fontSize="small" color="brand.background">
+        <Text
+          fontSize={isMobile ? "x-small" : "small"}
+          color="brand.background"
+        >
           Copyright © 2024
         </Text>
       </HStack>

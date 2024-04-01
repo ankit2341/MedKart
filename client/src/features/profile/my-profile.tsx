@@ -1,6 +1,7 @@
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 import {
+  Badge,
   Box,
   Button,
   Card,
@@ -19,11 +20,13 @@ import {
 import { faPencil, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
+import { useRouter } from "next/router";
 
 const MyProfile = () => {
   const isViewMobile = useIsMobile();
   const isTableView = useIsTablet();
   const isMobile = isViewMobile || isTableView;
+  const router = useRouter();
 
   return (
     <>
@@ -123,8 +126,12 @@ const MyProfile = () => {
             </Text>
           </Box>
           <Divider />
-          <VStack px={6} pb={4} spacing={10} width="100%">
-            <HStack width="100%" spacing={4}>
+          <VStack px={6} pb={4} spacing={4} width="100%">
+            <HStack
+              flexDir={isMobile ? "column" : "row"}
+              width="100%"
+              spacing={4}
+            >
               <FormControl>
                 <FormLabel>First Name</FormLabel>
                 <Input
@@ -161,29 +168,25 @@ const MyProfile = () => {
             </FormControl>
 
             <FormControl>
-              <HStack
-                spacing={1}
-                width="100%"
-                alignItems="flex-start"
-                justifyContent="flex-start"
-              >
-                <FormLabel>Primary Address</FormLabel>
-                <Center
+              <FormLabel>
+                Primary Address
+                <Badge
                   cursor="pointer"
-                  width={6}
-                  height={6}
-                  borderRadius={"lg"}
-                  bg="lightgray"
+                  onClick={() => router.push("/profile/23?isPrifilled=Cart")}
+                  mx={2}
+                  colorScheme="cyan"
                 >
-                  <FontAwesomeIcon size="xs" color="white" icon={faPencil} />
-                </Center>
-              </HStack>
+                  Edit <FontAwesomeIcon icon={faPencil} size="2xs" />
+                </Badge>
+              </FormLabel>
+
               <VStack
                 p={4}
                 border="1px solid"
                 borderColor="lightgray"
                 borderRadius="md"
                 width="100%"
+                pos="relative"
                 alignItems="center"
                 justifyContent="left"
               >
@@ -193,6 +196,9 @@ const MyProfile = () => {
                 <Text width="100%" textAlign="left" fontSize="small">
                   Navi Mumbai - 400709
                 </Text>
+                <Badge pos="absolute" right={0} top={0} colorScheme="cyan">
+                  Home
+                </Badge>
               </VStack>
             </FormControl>
             <Flex width="100%" alignItems="center" justifyContent="right">

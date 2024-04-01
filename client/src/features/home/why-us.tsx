@@ -2,20 +2,45 @@ import { useTheme } from "@/context/theme-context";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 import { Box, Heading, Image, VStack } from "@chakra-ui/react";
-import { faMoon, faSun, faTree, faWind } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMoon,
+  faSun,
+  faTree,
+  faWind,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 
 const WhyUs = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
-  const {theme}=useTheme();
+  const { theme } = useTheme();
 
   return (
     <VStack overflow="hidden" width="100%" py={10} pos="relative">
-      <Heading py={isMobile?10:20}>Why Us?</Heading>
-      {theme==="light"&&<FontAwesomeIcon icon={faSun} spin color="orange" size="4x" style={{position:"absolute", top:isTablet?"30%":"20%",left:isTablet||isMobile?"5%":"10%"}} />}
-      {theme==="dark"&&<FontAwesomeIcon icon={faMoon} fade color="lightgray" size="4x" style={{position:"absolute", top:"20%",right:"10%"}} />}
+      <Heading py={isMobile ? 10 : 20}>Why Us?</Heading>
+      {theme === "light" && (
+        <FontAwesomeIcon
+          icon={faSun}
+          spin
+          color="orange"
+          size="4x"
+          style={{
+            position: "absolute",
+            top: isTablet ? "30%" : "20%",
+            left: isTablet || isMobile ? "5%" : "10%",
+          }}
+        />
+      )}
+      {theme === "dark" && (
+        <FontAwesomeIcon
+          icon={faMoon}
+          fade
+          color="lightgray"
+          size="4x"
+          style={{ position: "absolute", top: "20%", right: "10%" }}
+        />
+      )}
       <Box width="100%" height="40" bg={"brand.background"} position="relative">
         <motion.div
           initial={{ translateX: "-20vw" }}
@@ -38,7 +63,7 @@ const WhyUs = () => {
               position: "absolute",
               bottom: "10%",
               transform: "rotate(180deg)",
-              color:"#f2f3f4"
+              color: "#f2f3f4",
             }}
           >
             <FontAwesomeIcon beatFade icon={faWind} />
@@ -60,7 +85,7 @@ const WhyUs = () => {
             style={{ position: "absolute", top: -10 }}
           />
 
-          {!(isTablet||isMobile) && (
+          {!(isTablet || isMobile) && (
             <FontAwesomeIcon
               icon={faTree}
               color="#2a7e19"
@@ -90,7 +115,7 @@ const WhyUs = () => {
               zIndex: 100,
             }}
           />
-          {!(isTablet||isMobile) && (
+          {!(isTablet || isMobile) && (
             <FontAwesomeIcon
               icon={faTree}
               color="#2D5A27"
@@ -110,7 +135,7 @@ const WhyUs = () => {
             style={{
               position: "absolute",
               bottom: 0,
-              left: isTablet||isMobile ? "-1%" : "40%",
+              left: isTablet || isMobile ? "-1%" : "40%",
               zIndex: 100,
             }}
           />
@@ -159,15 +184,19 @@ const WhyUs = () => {
         <Heading fontSize={isMobile ? "medium" : "x-large"}>
           10+ Location Served
         </Heading>
-        <Heading  fontSize={isMobile ? "medium" : "x-large"}>
+        <Heading fontSize={isMobile ? "medium" : "x-large"}>
           Book Lab Tests
         </Heading>
-        {isMobile&&<><Heading fontSize={isMobile ? "medium" : "x-large"}>
-                On Time Delivery
-              </Heading>
-              <Heading  fontSize={isMobile ? "medium" : "x-large"}>
-                Most Trusted Brand
-              </Heading></>}
+        {isMobile && (
+          <>
+            <Heading fontSize={isMobile ? "medium" : "x-large"}>
+              On Time Delivery
+            </Heading>
+            <Heading fontSize={isMobile ? "medium" : "x-large"}>
+              Most Trusted Brand
+            </Heading>
+          </>
+        )}
       </Box>
     </VStack>
   );

@@ -66,7 +66,7 @@ const SideNav = () => {
 
 export const AppContainer = ({ children }: AppContainerProps) => {
   return (
-    <Flex direction="column" minH="100vh">
+    <Flex direction="column" minH="100vh" pb={10}>
       <Navbar />
       <SideNav />
       {children}
