@@ -172,7 +172,7 @@ const MyProfile = () => {
                 Primary Address
                 <Badge
                   cursor="pointer"
-                  onClick={() => router.push("/profile/23?isPrifilled=Cart")}
+                  onClick={() => router.push("/profile/23?isPrifilled=Addresses")}
                   mx={2}
                   colorScheme="cyan"
                 >
