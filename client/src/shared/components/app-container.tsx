@@ -8,6 +8,7 @@ import {
   faUserShield,
 } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./navigation/footer";
+import useIsMobile from "../hooks/use-is-mobile";
 
 interface AppContainerProps {
   children?: ReactNode;
@@ -65,10 +66,11 @@ const SideNav = () => {
 };
 
 export const AppContainer = ({ children }: AppContainerProps) => {
+  const isMobile = useIsMobile();
   return (
     <Flex direction="column" minH="100vh" pb={10}>
       <Navbar />
-      <SideNav />
+      {!isMobile && <SideNav />}
       {children}
       <Footer />
     </Flex>

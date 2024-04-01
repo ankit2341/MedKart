@@ -18,13 +18,15 @@ const WhyUs = () => {
 
   return (
     <VStack overflow="hidden" width="100%" py={10} pos="relative">
-      <Heading py={isMobile ? 10 : 20}>Why Us?</Heading>
+      <Heading fontSize="x-large" py={isMobile ? 10 : 20}>
+        Why Us?
+      </Heading>
       {theme === "light" && (
         <FontAwesomeIcon
           icon={faSun}
           spin
           color="orange"
-          size="4x"
+          size={isMobile ? "3x" : "4x"}
           style={{
             position: "absolute",
             top: isTablet ? "30%" : "20%",
@@ -37,7 +39,7 @@ const WhyUs = () => {
           icon={faMoon}
           fade
           color="lightgray"
-          size="4x"
+          size={isMobile ? "3x" : "4x"}
           style={{ position: "absolute", top: "20%", right: "10%" }}
         />
       )}
@@ -181,18 +183,18 @@ const WhyUs = () => {
         justifyContent="space-around"
         textAlign="center"
       >
-        <Heading fontSize={isMobile ? "medium" : "x-large"}>
+        <Heading fontSize={isMobile ? "small" : "x-large"}>
           10+ Location Served
         </Heading>
-        <Heading fontSize={isMobile ? "medium" : "x-large"}>
+        <Heading fontSize={isMobile ? "small" : "x-large"}>
           Book Lab Tests
         </Heading>
         {isMobile && (
           <>
-            <Heading fontSize={isMobile ? "medium" : "x-large"}>
+            <Heading fontSize={isMobile ? "small" : "x-large"}>
               On Time Delivery
             </Heading>
-            <Heading fontSize={isMobile ? "medium" : "x-large"}>
+            <Heading fontSize={isMobile ? "small" : "x-large"}>
               Most Trusted Brand
             </Heading>
           </>
