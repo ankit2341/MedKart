@@ -23,6 +23,7 @@ import useIsMobile from "@/shared/hooks/use-is-mobile";
 import SearchModal from "@/features/search/search-modal";
 import { useRouter } from "next/router";
 import ThemeToggle from "@/features/toggle-switch";
+import { AppStaticPath } from "@/types";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -88,9 +89,9 @@ const Navbar = () => {
               px={10}
             >
               {[
-                { name: "Products", icon: faPumpMedical },
-                { name: "Offers", icon: faGift },
-                { name: "Book Lab Test", icon: faMedkit },
+                { name: "Products", icon: faPumpMedical,route:AppStaticPath.Products },
+                { name: "Offers", icon: faGift,route:AppStaticPath.Offers },
+                { name: "Book Lab Test", icon: faMedkit,route:AppStaticPath.BookLabTest },
               ].map((item) => {
                 return (
                   <HStack
@@ -103,6 +104,7 @@ const Navbar = () => {
                       color: "brand.primary",
                       borderColor: "brand.primary",
                     }}
+                    onClick={()=>router.push(item.route)}
                     key={item.name}
                     p={2}
                   >
