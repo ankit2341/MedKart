@@ -3,10 +3,6 @@ import { AppMainLayout } from "@/shared/components/app-layout";
 import {
   Box,
   Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
   Center,
   Flex,
   HStack,
@@ -18,11 +14,8 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCapsules,
-  faCartPlus,
-  faHeart,
   faHouseMedicalCircleCheck,
   faPills,
-  faStar,
   faSuitcaseMedical,
 } from "@fortawesome/free-solid-svg-icons";
 import { motion } from "framer-motion";
@@ -32,6 +25,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { UnderLineAnimation } from "@/shared/icons";
 import WhyUs from "@/features/home/why-us";
+import ProductCard from "@/shared/components/product-card";
 
 const Home = () => {
   const icons = [
@@ -334,111 +328,20 @@ const Home = () => {
         />
       </Box>
       <Box
-        px={isMobile ? "4" : "10"}
+        px={isMobile ? "4" : "8"}
         width="100%"
-        height="50vh"
+        height="fit-content"
         bg="brand.background"
-        mb={10}
       >
         <Carousel
           responsive={responsive}
+          autoPlay
           itemClass="carousel-item-padding"
           swipeable={isMobile || isTablet ? true : false}
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
             return (
-              <Card
-                key={el}
-                width="99%"
-                height={"50vh"}
-                borderWidth="1px"
-                borderStyle="solid"
-                borderColor="lightgray"
-                borderRadius={"lg"}
-                background="linear-gradient(207deg, rgba(0,206,209,1) 0%, rgba(19,210,212,1) 30%, rgba(255,255,255,1) 30%)"
-              >
-                <CardHeader
-                  pt={8}
-                  pb={2}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Image
-                    boxSize="150px"
-                    borderRadius={"lg"}
-                    objectFit="cover"
-                    src="https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png"
-                    alt="Dan Abramov"
-                  />
-                  <Flex
-                    pos="absolute"
-                    top={2}
-                    right={2}
-                    borderRadius="md"
-                    align="center"
-                    justify="center"
-                    bg="brand.backgroundDark"
-                    color="brand.background"
-                    px={2}
-                  >
-                    <Text pr={1} fontSize="medium">
-                      4.1
-                    </Text>
-
-                    <FontAwesomeIcon icon={faStar} size="xs" />
-                  </Flex>
-                </CardHeader>
-                <CardBody pt={2}>
-                  <VStack>
-                    <Text fontSize="larger" fontWeight="500" noOfLines={3}>
-                      Riddhish Iron Capsule
-                    </Text>
-                    <HStack>
-                      <Text>₹. 100</Text>
-                      <Text textDecoration="line-through">₹. 150</Text>
-                      <Flex
-                        borderRadius="md"
-                        align="center"
-                        justify="center"
-                        bg="brand.backgroundDark"
-                        color="brand.background"
-                        px={2}
-                      >
-                        <Text pr={1} fontSize="small">
-                          50% off
-                        </Text>
-                      </Flex>
-                    </HStack>
-                  </VStack>
-                </CardBody>
-                <CardFooter>
-                  <Center
-                    width="10"
-                    height={10}
-                    borderRadius="lg"
-                    border="1px solid"
-                    color="brand.primary"
-                    borderColor="brand.primary"
-                  >
-                    <FontAwesomeIcon beat icon={faHeart} />
-                  </Center>
-                  <Button
-                    ml={2}
-                    bg="brand.primary"
-                    color="brand.background"
-                    borderRadius="lg"
-                    width="80%"
-                    height={10}
-                  >
-                    Add to Cart
-                    <FontAwesomeIcon
-                      style={{ paddingLeft: "10px" }}
-                      icon={faCartPlus}
-                    />
-                  </Button>
-                </CardFooter>
-              </Card>
+             <ProductCard key={el}/>
             );
           })}
         </Carousel>
@@ -600,9 +503,9 @@ const Home = () => {
         />
       </Box>
       <Box
-        px={isMobile ? "4" : "10"}
+        px={isMobile ? "4" : "8"}
         width="100%"
-        height="50vh"
+        height="fit-content"
         bg="brand.background"
         mb={10}
       >
@@ -611,106 +514,9 @@ const Home = () => {
           responsive={responsive}
           swipeable={isMobile || isTablet ? true : false}
         >
-          {[1, 2, 3, 4, 5, 6].map((el) => {
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
             return (
-              <Card
-                key={el}
-                width="100%"
-                height={"50vh"}
-                mb={0.2}
-                borderWidth="1px"
-                borderStyle="solid"
-                borderColor="lightgray"
-                borderRadius={"lg"}
-                background="linear-gradient(207deg, rgba(0,206,209,1) 0%, rgba(19,210,212,1) 30%, rgba(255,255,255,1) 30%)"
-              >
-                <CardHeader
-                  pt={8}
-                  pb={2}
-                  display="flex"
-                  alignItems="center"
-                  justifyContent="center"
-                >
-                  <Image
-                    boxSize="150px"
-                    borderRadius={"lg"}
-                    objectFit="cover"
-                    src="https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png"
-                    alt="Dan Abramov"
-                  />
-                  <Flex
-                    pos="absolute"
-                    top={2}
-                    right={2}
-                    borderRadius="md"
-                    align="center"
-                    justify="center"
-                    bg="brand.backgroundDark"
-                    color="brand.background"
-                    px={2}
-                  >
-                    <Text pr={1} fontSize="medium">
-                      4.1
-                    </Text>
-
-                    <FontAwesomeIcon icon={faStar} size="xs" />
-                  </Flex>
-                </CardHeader>
-                <CardBody pt={2}>
-                  <VStack>
-                    <Text
-                      fontSize="larger"
-                      textAlign="center"
-                      fontWeight="500"
-                      noOfLines={3}
-                    >
-                      Riddhish Iron Capsule
-                    </Text>
-                    <HStack>
-                      <Text>₹. 100</Text>
-                      <Text textDecoration="line-through">₹. 150</Text>
-                      <Flex
-                        borderRadius="md"
-                        align="center"
-                        justify="center"
-                        bg="brand.backgroundDark"
-                        color="brand.background"
-                        px={2}
-                      >
-                        <Text pr={1} fontSize="small">
-                          50% off
-                        </Text>
-                      </Flex>
-                    </HStack>
-                  </VStack>
-                </CardBody>
-                <CardFooter>
-                  <Center
-                    width="10"
-                    height={10}
-                    borderRadius="lg"
-                    border="1px solid"
-                    borderColor="brand.primary"
-                    color="brand.primary"
-                  >
-                    <FontAwesomeIcon beat icon={faHeart} />
-                  </Center>
-                  <Button
-                    ml={2}
-                    bg="brand.primary"
-                    color="brand.background"
-                    borderRadius="lg"
-                    width="85%"
-                    height={10}
-                  >
-                    Add to Cart
-                    <FontAwesomeIcon
-                      style={{ paddingLeft: "10px" }}
-                      icon={faCartPlus}
-                    />
-                  </Button>
-                </CardFooter>
-              </Card>
+             <ProductCard key={el}/>
             );
           })}
         </Carousel>

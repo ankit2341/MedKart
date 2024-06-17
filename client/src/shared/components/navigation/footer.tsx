@@ -33,25 +33,25 @@ const Footer = () => {
       <HStack spacing={isMobile ? 2 : 10}>
         <Text
           fontSize={isMobile ? "x-small" : "small"}
-          color="brand.background"
+          color="white"
         >
           Support
         </Text>
         <Text
           fontSize={isMobile ? "x-small" : "small"}
-          color="brand.background"
+           color="white"
         >
           Privacy
         </Text>
         <Text
           fontSize={isMobile ? "x-small" : "small"}
-          color="brand.background"
+          color="white"
         >
           Terms
         </Text>
         <Text
           fontSize={isMobile ? "x-small" : "small"}
-          color="brand.background"
+          color="white"
         >
           Copyright © 2024
         </Text>

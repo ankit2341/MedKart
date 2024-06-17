@@ -30,6 +30,7 @@ const Navbar = () => {
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
   const router = useRouter();
+  // const isHomePage=router.basePath==="/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,8 +50,8 @@ const Navbar = () => {
 
   return (
     <VStack
-      pos={showNavbar ? "fixed" : "static"}
-      zIndex={10000}
+      pos={showNavbar ? "sticky" : "static"}
+      zIndex={100}
       bg="brand.background"
       top={0}
       width="100%"

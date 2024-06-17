@@ -86,5 +86,30 @@
   padding-top: 0;
   padding-bottom: 0;
   padding-left: 10px;
-  padding-right: 10px;
+}
+
+.scroll-container {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 100;
+}
+
+.scrolling-image {
+  position: absolute;
+  width: 100%; 
+  top: 0;
+  animation: scroll-vertical 30s linear infinite; /* Adjust the duration as needed */
+}
+
+@keyframes scroll-vertical {
+  0% {
+    top: 0vh;
+  }
+  50% {
+    top: -100vh;
+  }
+  100%{
+    top: 0vh;
+  }
 }
