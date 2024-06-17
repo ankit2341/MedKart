@@ -1,6 +1,7 @@
 import { AppMainLayout } from "@/shared/components/app-layout";
 import { BreadCrumbs } from "@/shared/components/breadcrumbs";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
+import useIsTablet from "@/shared/hooks/use-is-tablet";
 import {
   Badge,
   Box,
@@ -33,6 +34,7 @@ const ProductIndividualPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const isMobile = useIsMobile();
+  const isTablet=useIsTablet();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
@@ -51,7 +53,7 @@ const ProductIndividualPage = () => {
       </Flex>
       <Flex
         w={"100%"}
-        gap={isMobile ? "20px" : undefined}
+        gap={isMobile||isTablet ? "20px" : undefined}
         flex={1}
         direction={{ base: "column", md: "column", lg: "row" }}
       >
