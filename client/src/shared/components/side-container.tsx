@@ -37,14 +37,14 @@ export const SectionPageContainer = ({
       base: isMobileSideContent ? "none" : "flex",
       sm: "flex",
     }),
-    [isMobileSideContent]
+    [isMobileSideContent],
   );
   const mobileSideContentDisplay = useMemo(
     () => ({
       base: isMobileSideContent ? "flex" : "none",
       sm: "none",
     }),
-    [isMobileSideContent]
+    [isMobileSideContent],
   );
   const containerSpacing = useMemo(
     () => ({
@@ -52,7 +52,7 @@ export const SectionPageContainer = ({
       sm: "10",
       md: "6",
     }),
-    [isMobileSideContent]
+    [isMobileSideContent],
   );
 
   const {
@@ -62,7 +62,7 @@ export const SectionPageContainer = ({
   } = useDisclosure();
 
   const shouldWrapChildren = useBreakpointValue({ lg: false, md: true });
-  const ismobile=useIsMobile();
+  const ismobile = useIsMobile();
 
   return (
     <Stack
@@ -86,7 +86,6 @@ export const SectionPageContainer = ({
         // w={{ base: "100%", lg: "fit-content" }}
         display={baseSideContentDisplay}
         bg={"brand.background"}
-     
       >
         {sideContent}
       </Box>
@@ -106,7 +105,7 @@ export const SectionPageContainer = ({
         <IconButton
           aria-label="Open filters drawer"
           icon={<FontAwesomeIcon icon={faFilter} />}
-         onClick={onDrawerOpen}
+          onClick={onDrawerOpen}
         />
         <Drawer isOpen={isDrawerOpen} onClose={onDrawerClose} size="full">
           <DrawerOverlay />
@@ -116,7 +115,12 @@ export const SectionPageContainer = ({
           </DrawerContent>
         </Drawer>
       </Flex>
-      <VStack pl={ismobile?0:4} flex="3" spacing="10" overflowX={{ md: "hidden" }}>
+      <VStack
+        pl={ismobile ? 0 : 4}
+        flex="3"
+        spacing="10"
+        overflowX={{ md: "hidden" }}
+      >
         {mainContent}
       </VStack>
     </Stack>

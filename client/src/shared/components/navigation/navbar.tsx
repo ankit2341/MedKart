@@ -90,9 +90,17 @@ const Navbar = () => {
               px={10}
             >
               {[
-                { name: "Products", icon: faPumpMedical,route:AppStaticPath.Products },
-                { name: "Offers", icon: faGift,route:AppStaticPath.Offers },
-                { name: "Book Lab Test", icon: faMedkit,route:AppStaticPath.BookLabTest },
+                {
+                  name: "Products",
+                  icon: faPumpMedical,
+                  route: AppStaticPath.Products,
+                },
+                { name: "Offers", icon: faGift, route: AppStaticPath.Offers },
+                {
+                  name: "Book Lab Test",
+                  icon: faMedkit,
+                  route: AppStaticPath.BookLabTest,
+                },
               ].map((item) => {
                 return (
                   <HStack
@@ -105,7 +113,7 @@ const Navbar = () => {
                       color: "brand.primary",
                       borderColor: "brand.primary",
                     }}
-                    onClick={()=>router.push(item.route)}
+                    onClick={() => router.push(item.route)}
                     key={item.name}
                     p={2}
                   >

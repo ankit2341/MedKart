@@ -1,11 +1,11 @@
 export enum AppOrganization {
-    Name="MedKart"
+  Name = "MedKart",
 }
 
 export enum AppStaticPath {
-    Home="/",
-    Products="/products",
-    Profile="/profile",
-    Offers="/offers",
-    BookLabTest="/book-lab-test"
+  Home = "/",
+  Products = "/products",
+  Profile = "/profile",
+  Offers = "/offers",
+  BookLabTest = "/book-lab-test",
 }

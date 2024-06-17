@@ -97,7 +97,7 @@
 
 .scrolling-image {
   position: absolute;
-  width: 100%; 
+  width: 100%;
   top: 0;
   animation: scroll-vertical 30s linear infinite; /* Adjust the duration as needed */
 }
@@ -109,7 +109,7 @@
   50% {
     top: -100vh;
   }
-  100%{
+  100% {
     top: 0vh;
   }
 }

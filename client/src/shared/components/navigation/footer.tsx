@@ -31,28 +31,16 @@ const Footer = () => {
         <Text color="brand.backgroundDark">edKart</Text>
       </HStack>
       <HStack spacing={isMobile ? 2 : 10}>
-        <Text
-          fontSize={isMobile ? "x-small" : "small"}
-          color="white"
-        >
+        <Text fontSize={isMobile ? "x-small" : "small"} color="white">
           Support
         </Text>
-        <Text
-          fontSize={isMobile ? "x-small" : "small"}
-           color="white"
-        >
+        <Text fontSize={isMobile ? "x-small" : "small"} color="white">
           Privacy
         </Text>
-        <Text
-          fontSize={isMobile ? "x-small" : "small"}
-          color="white"
-        >
+        <Text fontSize={isMobile ? "x-small" : "small"} color="white">
           Terms
         </Text>
-        <Text
-          fontSize={isMobile ? "x-small" : "small"}
-          color="white"
-        >
+        <Text fontSize={isMobile ? "x-small" : "small"} color="white">
           Copyright © 2024
         </Text>
       </HStack>
