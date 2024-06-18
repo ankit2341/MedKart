@@ -44,6 +44,7 @@ const HappyCustomers = () => {
       width="100%"
       height="fit-content"
       bg="brand.background"
+      py={10}
     >
       <Heading
         fontSize={"larger"}
@@ -54,71 +55,73 @@ const HappyCustomers = () => {
         Happy Customers <FontAwesomeIcon fade icon={faFaceSmileBeam} />
       </Heading>
       <Divider />
-      <Carousel
-        responsive={responsive}
-        autoPlay
-        autoPlaySpeed={1000}
-        shouldResetAutoplay
-        itemClass="carousel-item-padding"
-        swipeable={isMobile || isTablet ? true : false}
-      >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
-          return (
-            <Card key={el} maxW="full" pb={10}>
-              <CardHeader>
-                <Flex
-                  flex="1"
-                  gap="4"
-                  alignItems="center"
-                  justifyContent={"center"}
-                  flexWrap="wrap"
-                >
-                  <Avatar
-                    name="Segun Adebayo"
-                    src="https://i.postimg.cc/sxP83xL8/IMG-20240618-142831.png"
-                  />
-                  <Box>
-                    <Heading size="sm">Vishal Chaudhary</Heading>
-                    <Text>Up Coming Lead</Text>
-                  </Box>
-                  <IconButton
-                    variant="unstyled"
-                    cursor={"default"}
-                    colorScheme="gray"
-                    aria-label="See menu"
-                    icon={<FontAwesomeIcon icon={faBraille} />}
-                  />
-                </Flex>
-              </CardHeader>
-              <CardBody
-                w={"100%"}
-                pt={0}
-                alignItems={"center"}
-                justifyContent={"center"}
-              >
-                <Flex alignItems={"center"} justifyContent={"center"}>
-                  <Text
-                    w={"100%"}
-                    textAlign={"center"}
-                    noOfLines={isMobile ? 5 : undefined}
+      <Box px={isMobile ? "4" : "8"} width="100%" bg="brand.background">
+        <Carousel
+          responsive={responsive}
+          autoPlay
+          autoPlaySpeed={2000}
+          shouldResetAutoplay
+          showDots
+          swipeable={isMobile || isTablet ? true : false}
+        >
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
+            return (
+              <Card key={el} boxShadow={"none"} pb={10}>
+                <CardHeader>
+                  <Flex
+                    flex="1"
+                    gap="4"
+                    alignItems="center"
+                    justifyContent={"center"}
+                    flexWrap="wrap"
                   >
-                    As a busy professional, I never have time to visit a
-                    doctor&apos;s office. Using this medical website has been a
-                    game-changer for me! The convenience of booking
-                    consultations online and getting prescriptions delivered to
-                    my door is incredible. The website is user-friendly, and I
-                    can easily access my medical records and track my health.
-                    The online doctor consultations are thorough, and the
-                    doctors are always attentive and professional. I feel more
-                    in control of my health and appreciate the seamless
-                    experience. Highly recommended!{" "}
-                  </Text>
-                </Flex>
-              </CardBody>
-            </Card>
-          );
-        })}
-      </Carousel>
+                    <Avatar
+                      name="Segun Adebayo"
+                      src="https://i.postimg.cc/sxP83xL8/IMG-20240618-142831.png"
+                    />
+                    <Box>
+                      <Heading size="sm">Vishal Chaudhary</Heading>
+                      <Text>Up Coming Lead</Text>
+                    </Box>
+                    <IconButton
+                      variant="unstyled"
+                      cursor={"default"}
+                      colorScheme="gray"
+                      aria-label="See menu"
+                      icon={<FontAwesomeIcon icon={faBraille} />}
+                    />
+                  </Flex>
+                </CardHeader>
+                <CardBody
+                  w={"100%"}
+                  pt={0}
+                  alignItems={"center"}
+                  justifyContent={"center"}
+                >
+                  <Flex alignItems={"center"} justifyContent={"center"}>
+                    <Text
+                      w={"80%"}
+                      textAlign={"center"}
+                      noOfLines={isMobile ? 5 : undefined}
+                    >
+                      As a busy professional, I never have time to visit a
+                      doctor&apos;s office. Using this medical website has been
+                      a game-changer for me! The convenience of booking
+                      consultations online and getting prescriptions delivered
+                      to my door is incredible. The website is user-friendly,
+                      and I can easily access my medical records and track my
+                      health. The online doctor consultations are thorough, and
+                      the doctors are always attentive and professional. I feel
+                      more in control of my health and appreciate the seamless
+                      experience. Highly recommended!{" "}
+                    </Text>
+                  </Flex>
+                </CardBody>
+              </Card>
+            );
+          })}
+        </Carousel>
+      </Box>
     </Box>
   );
 };

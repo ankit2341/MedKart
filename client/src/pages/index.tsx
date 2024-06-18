@@ -522,7 +522,7 @@ const Home = () => {
 };
 
 Home.getLayout = function getLayout(page: ReactElement) {
-  return <AppMainLayout>{page}</AppMainLayout>;
+  return <AppMainLayout isHappyCustomer={true}>{page}</AppMainLayout>;
 };
 
 export default Home;

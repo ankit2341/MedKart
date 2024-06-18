@@ -51,7 +51,7 @@ const Navbar = () => {
   return (
     <VStack
       pos={showNavbar ? "sticky" : "static"}
-      zIndex={100}
+      zIndex={10000}
       bg="brand.background"
       top={0}
       width="100%"
@@ -81,7 +81,7 @@ const Navbar = () => {
             </Box>
             <Text color="brand.backgroundDark">edKart</Text>
           </HStack>
-          {!isMobile && !isTablet && showNavbar && (
+          {!isMobile && !isTablet && (
             <Flex
               width="50%"
               bg="brand.background"

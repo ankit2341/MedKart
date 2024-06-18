@@ -1,5 +1,14 @@
 import { ReactNode, useEffect, useState } from "react";
-import { Button, Flex, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Divider,
+  Flex,
+  HStack,
+  IconButton,
+  Input,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import Navbar from "./navigation/navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,9 +19,11 @@ import {
 import Footer from "./navigation/footer";
 import useIsMobile from "../hooks/use-is-mobile";
 import HappyCustomers from "./happy-customers";
+import { FacebookLogo, InstagramLogo, XLogo, YoutubeLogo } from "../icons";
 
 interface AppContainerProps {
   children?: ReactNode;
+  isHappyCustomer?: boolean;
 }
 
 const SideNav = () => {
@@ -66,14 +77,89 @@ const SideNav = () => {
   ) : null;
 };
 
-export const AppContainer = ({ children }: AppContainerProps) => {
+export const AppContainer = ({
+  children,
+  isHappyCustomer,
+}: AppContainerProps) => {
   const isMobile = useIsMobile();
   return (
     <Flex direction="column" minH="100vh" pb={10}>
       <Navbar />
       {!isMobile && <SideNav />}
       {children}
-      <HappyCustomers />
+      {isHappyCustomer && <HappyCustomers />}
+      <Divider />
+      <VStack
+        color={"black"}
+        spacing={1}
+        bg={"gray.100"}
+        py={20}
+        w={"100%"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Text fontSize={"large"} fontWeight={"bold"}>
+          Let&apos;s Stay In Touch
+        </Text>
+        <Text fontSize={"md"}>
+          Get the latest tips straight to your inbox. Can’t wait to connect!
+        </Text>
+        <HStack
+          pt={4}
+          spacing={1}
+          w={"100%"}
+          alignItems={"center"}
+          justifyContent={"center"}
+        >
+          <Input
+            bg={"white"}
+            w={isMobile ? "100%" : "30%"}
+            placeholder="Enter email address"
+            focusBorderColor="brand.primary"
+          />
+          <Button bg={"brand.primary"} color={"white"}>
+            Subscribe
+          </Button>
+        </HStack>
+        <HStack pt={3}>
+          <IconButton
+            bg={"white"}
+            borderRadius={"lg"}
+            aria-label="ds"
+            border={"1px solid"}
+            borderColor={"gray.200"}
+          >
+            <XLogo />
+          </IconButton>
+          <IconButton
+            bg={"white"}
+            borderRadius={"lg"}
+            aria-label="ds"
+            border={"1px solid"}
+            borderColor={"gray.200"}
+          >
+            <YoutubeLogo />
+          </IconButton>
+          <IconButton
+            bg={"white"}
+            borderRadius={"lg"}
+            aria-label="ds"
+            border={"1px solid"}
+            borderColor={"gray.200"}
+          >
+            <FacebookLogo />
+          </IconButton>
+          <IconButton
+            bg={"white"}
+            borderRadius={"lg"}
+            aria-label="ds"
+            border={"1px solid"}
+            borderColor={"gray.200"}
+          >
+            <InstagramLogo />
+          </IconButton>
+        </HStack>
+      </VStack>
       <Footer />
     </Flex>
   );
