@@ -28,13 +28,13 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 const ProductIndividualPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const isMobile = useIsMobile();
-  const isTablet=useIsTablet();
+  const isTablet = useIsTablet();
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const images = [
@@ -45,7 +45,8 @@ const ProductIndividualPage = () => {
     "https://bit.ly/prosper-baba",
   ];
 
-  console.log(id);
+  useEffect(() => {}, [id]);
+
   return (
     <VStack w={"100%"} p={isMobile ? 4 : 10} spacing={4}>
       <Flex w={"100%"} align={"center"} justifyContent={"left"}>
@@ -53,7 +54,7 @@ const ProductIndividualPage = () => {
       </Flex>
       <Flex
         w={"100%"}
-        gap={isMobile||isTablet ? "20px" : undefined}
+        gap={isMobile || isTablet ? "20px" : undefined}
         flex={1}
         direction={{ base: "column", md: "column", lg: "row" }}
       >
@@ -87,14 +88,11 @@ const ProductIndividualPage = () => {
                 p={4}
                 onClick={() =>
                   setCurrentIndex((prev) =>
-                    prev === images.length ? 0 : prev + 1,
+                    prev === images.length - 1 ? 0 : prev + 1,
                   )
                 }
               >
-                <FontAwesomeIcon
-                  icon={faChevronRight}
-                  onClick={() => setCurrentIndex((prev) => prev + 1)}
-                />
+                <FontAwesomeIcon icon={faChevronRight} />
               </Box>
             </HStack>
             <HStack spacing={2} wrap={"wrap"} justifyContent={"center"}>
