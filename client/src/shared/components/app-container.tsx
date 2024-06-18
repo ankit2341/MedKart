@@ -9,6 +9,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Footer from "./navigation/footer";
 import useIsMobile from "../hooks/use-is-mobile";
+import HappyCustomers from "./happy-customers";
 
 interface AppContainerProps {
   children?: ReactNode;
@@ -72,6 +73,7 @@ export const AppContainer = ({ children }: AppContainerProps) => {
       <Navbar />
       {!isMobile && <SideNav />}
       {children}
+      <HappyCustomers />
       <Footer />
     </Flex>
   );
