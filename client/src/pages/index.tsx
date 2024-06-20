@@ -338,7 +338,6 @@ const Home = () => {
           autoPlay
           infinite
           autoPlaySpeed={2000}
-      
           itemClass="carousel-item-padding"
           swipeable={isMobile || isTablet ? true : false}
         >

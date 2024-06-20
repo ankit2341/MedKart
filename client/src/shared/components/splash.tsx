@@ -2,7 +2,7 @@ import { Box, HStack, Text } from "@chakra-ui/react";
 import { faM } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-export const SplashView = () => {
+export default function SplashView() {
   return (
     <div>
       <HStack spacing={1} fontSize="x-large">
@@ -13,4 +13,4 @@ export const SplashView = () => {
       </HStack>
     </div>
   );
-};
+}
