@@ -50,6 +50,24 @@ export const DarkTheme = extendTheme({
         bg: "brand.background",
         color: "brand.font",
       },
+      "::-webkit-scrollbar": {
+        width: "12px",
+        height: "12px",
+      },
+      "::-webkit-scrollbar-track": {
+        background: "#2D2D2D",
+      },
+      "::-webkit-scrollbar-thumb": {
+        background: "brand.primary",
+        borderRadius: "12px",
+        border: `3px solid ${"#2D2D2D"}`,
+      },
+      "::-webkit-scrollbar-thumb:hover": {
+        background: "teal",
+      },
+      "::-webkit-scrollbar-thumb:active": {
+        background: "#2D3748",
+      },
     },
   },
 });

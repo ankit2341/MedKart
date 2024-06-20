@@ -1,4 +1,4 @@
-import { useTheme } from "@/context/theme-context";
+// import { useTheme } from "@/context/theme-context";
 import {
   Button,
   Card,
@@ -20,7 +20,6 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ProductCard = ({ product }: { product?: string }) => {
-  const { theme } = useTheme();
   return (
     <Card
       key={product || "1"}
@@ -31,9 +30,7 @@ const ProductCard = ({ product }: { product?: string }) => {
       borderColor="gray.300"
       borderRadius={"lg"}
       background={
-        theme === "dark"
-          ? "linear-gradient(207deg, rgba(0,206,209,1) 0%, rgba(19,210,212,1) 30%, rgba(0,0,0,1) 30%)"
-          : "linear-gradient(207deg, rgba(0,206,209,1) 0%, rgba(19,210,212,1) 30%, rgba(255,255,255,1) 30%)"
+        "linear-gradient(207deg, rgba(0,206,209,1) 0%, rgba(19,210,212,1) 30%, rgba(255,255,255,1) 30%)"
       }
     >
       <CardHeader

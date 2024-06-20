@@ -20,6 +20,7 @@ import Footer from "./navigation/footer";
 import useIsMobile from "../hooks/use-is-mobile";
 import HappyCustomers from "./happy-customers";
 import { FacebookLogo, InstagramLogo, XLogo, YoutubeLogo } from "../icons";
+import { useTheme } from "@/context/theme-context";
 
 interface AppContainerProps {
   children?: ReactNode;
@@ -82,6 +83,8 @@ export const AppContainer = ({
   isHappyCustomer,
 }: AppContainerProps) => {
   const isMobile = useIsMobile();
+  const { theme } = useTheme();
+
   return (
     <Flex direction="column" minH="100vh" pb={10}>
       <Navbar />
@@ -90,9 +93,9 @@ export const AppContainer = ({
       {isHappyCustomer && <HappyCustomers />}
       <Divider />
       <VStack
-        color={"black"}
+        color={"brand.font"}
         spacing={1}
-        bg={"gray.100"}
+        bg={theme === "dark" ? "gray.800" : "gray.100"}
         py={20}
         px={4}
         w={"100%"}
@@ -113,6 +116,7 @@ export const AppContainer = ({
           justifyContent={"center"}
         >
           <Input
+            color={"black"}
             bg={"white"}
             w={isMobile ? "100%" : "30%"}
             placeholder="Enter email address"

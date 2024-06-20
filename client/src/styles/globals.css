@@ -126,3 +126,11 @@
 .react-multiple-carousel__arrow--right {
   right: 0px !important;
 }
+
+.react-multi-carousel-dot--active button {
+  background-color: rgb(0, 206, 209) !important;
+}
+
+.react-multi-carousel-dot button {
+  border-color: rgb(0, 206, 209) !important;
+}

@@ -15,10 +15,12 @@ import useIsTablet from "../hooks/use-is-tablet";
 import Carousel from "react-multi-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBraille, faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "@/context/theme-context";
 
 const HappyCustomers = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const { theme } = useTheme();
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
@@ -67,7 +69,12 @@ const HappyCustomers = () => {
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
             return (
-              <Card key={el} boxShadow={"none"} pb={10}>
+              <Card
+                key={el}
+                boxShadow={"none"}
+                bg={theme === "dark" ? "brand.background" : "white"}
+                pb={10}
+              >
                 <CardHeader>
                   <Flex
                     flex="1"
@@ -81,13 +88,15 @@ const HappyCustomers = () => {
                       src="https://i.postimg.cc/sxP83xL8/IMG-20240618-142831.png"
                     />
                     <Box>
-                      <Heading size="sm">Vishal Chaudhary</Heading>
-                      <Text>Up Coming Lead</Text>
+                      <Heading size="sm" color={"brand.font"}>
+                        Vishal Chaudhary
+                      </Heading>
+                      <Text color={"brand.font"}>Up Coming Lead</Text>
                     </Box>
                     <IconButton
                       variant="unstyled"
                       cursor={"default"}
-                      colorScheme="gray"
+                      color={theme === "dark" ? "brand.fontLight" : "gray"}
                       aria-label="See menu"
                       icon={<FontAwesomeIcon icon={faBraille} />}
                     />
@@ -102,6 +111,7 @@ const HappyCustomers = () => {
                   <Flex alignItems={"center"} justifyContent={"center"}>
                     <Text
                       w={"80%"}
+                      color={"brand.font"}
                       textAlign={"center"}
                       noOfLines={isMobile ? 5 : undefined}
                     >
