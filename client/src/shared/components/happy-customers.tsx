@@ -59,6 +59,7 @@ const HappyCustomers = () => {
         <Carousel
           responsive={responsive}
           autoPlay
+          infinite
           autoPlaySpeed={2000}
           shouldResetAutoplay
           showDots

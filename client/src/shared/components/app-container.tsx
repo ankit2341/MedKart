@@ -94,6 +94,7 @@ export const AppContainer = ({
         spacing={1}
         bg={"gray.100"}
         py={20}
+        px={4}
         w={"100%"}
         alignItems={"center"}
         justifyContent={"center"}
@@ -101,7 +102,7 @@ export const AppContainer = ({
         <Text fontSize={"large"} fontWeight={"bold"}>
           Let&apos;s Stay In Touch
         </Text>
-        <Text fontSize={"md"}>
+        <Text fontSize={"md"} textAlign={"center"}>
           Get the latest tips straight to your inbox. Can’t wait to connect!
         </Text>
         <HStack

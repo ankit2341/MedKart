@@ -40,7 +40,7 @@ const Home = () => {
   const responsive = {
     superLargeDesktop: {
       breakpoint: { max: 4000, min: 3000 },
-      items: 4,
+      items: 5,
     },
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -336,6 +336,9 @@ const Home = () => {
         <Carousel
           responsive={responsive}
           autoPlay
+          infinite
+          autoPlaySpeed={2000}
+      
           itemClass="carousel-item-padding"
           swipeable={isMobile || isTablet ? true : false}
         >
@@ -510,6 +513,9 @@ const Home = () => {
         <Carousel
           itemClass={"carousel-item-padding"}
           responsive={responsive}
+          autoPlay
+          autoPlaySpeed={2000}
+          infinite
           swipeable={isMobile || isTablet ? true : false}
         >
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
