@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SplashView() {
   return (
-    <div>
+    <div style={{width:"100vw",height:"100vh"}}>
       <HStack spacing={1} fontSize="x-large">
         <Box bg="brand.primary" color="brand.background" px={2}>
           <FontAwesomeIcon icon={faM} bounce />

@@ -56,11 +56,9 @@ const WhyUs = () => {
           }}
         >
           <Image
-            // boxSize="40"
-            src="https://i.postimg.cc/FRVqL6Zr/1715139445080.png"
+            boxSize="40"
+            src="https://assets.pharmeasy.in/apothecary/images/deliveryBoy.svg?dim=96x0"
             alt="Delivery"
-            width={"300px"}
-            height={"150px"}
           />
           <Box
             style={{

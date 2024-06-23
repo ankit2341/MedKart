@@ -85,13 +85,13 @@ const HappyCustomers = () => {
                   >
                     <Avatar
                       name="Segun Adebayo"
-                      src="https://i.postimg.cc/sxP83xL8/IMG-20240618-142831.png"
+                      src="https://bit.ly/ryan-florence"
                     />
                     <Box>
                       <Heading size="sm" color={"brand.font"}>
-                        Vishal Chaudhary
+                        Prateek Shukla
                       </Heading>
-                      <Text color={"brand.font"}>Up Coming Lead</Text>
+                      <Text color={"brand.font"}>MedKart Customer</Text>
                     </Box>
                     <IconButton
                       variant="unstyled"
