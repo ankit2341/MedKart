@@ -20,7 +20,10 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ProductCard = ({ product }: { product:ProductProps }) => {
+const ProductCard = ({ product }: { product?:ProductProps }) => {
+  if(!product){
+ return <Card></Card>;
+  }
   return (
     <Card
       key={product?._id}

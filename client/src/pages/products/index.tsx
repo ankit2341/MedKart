@@ -10,6 +10,7 @@ import {
   Card,
   CardBody,
   CardHeader,
+  Center,
   Checkbox,
   CheckboxGroup,
   Flex,
@@ -24,29 +25,22 @@ import {
 } from "@chakra-ui/react";
 import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactElement, useEffect, useRef, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 const Products = () => {
-  const [sortBy, setSortBy] = useState<"ASC" | "DESC">("ASC");
+  const [sortBy, setSortBy] = useState<"asc" | "desc">("asc");
   const [page,setPage]=useState(1);
-  const { data, loading, refetch } = useGet('/products?page=1&sort=asc');
-  const productsContainerRef = useRef<HTMLDivElement | null>(null);
-  
-  useEffect(() => {
-  
-    refetch(`/products?page=${page}&sort=${sortBy}`);
-    if (productsContainerRef.current) {
-      productsContainerRef.current.scrollTop = 0;
-    }
-  }, [page, sortBy, refetch]);
+  const { data, refetch,loading } = useGet('/products?page=1&sort=asc');
 
-  console.log(data);
+  useEffect(() => {
+  refetch(`/products?page=${page}&sort=${sortBy}`);
+  window.scrollTo(0, 0);
+  }, [page, sortBy, refetch]);
 
   return (
     <VStack spacing={0}   h={"fit-content"}>
       <Flex
-        w={"100%"}
-      
+        w={"100%"}     
         alignItems={"center"}
         justifyContent={"space-between"}
         px={10}
@@ -57,13 +51,13 @@ const Products = () => {
         <HStack>
           <Text>Sort By</Text>
           <Button
-            onClick={() => setSortBy(sortBy === "ASC" ? "DESC" : "ASC")}
+            onClick={() => setSortBy(sortBy === "asc" ? "desc" : "asc")}
             bg={"brand.primary"}
             color={"white"}
             fontWeight={"thin"}
             size={"sm"}
           >
-            {sortBy === "ASC" ? "Low to High" : "High to Low"}
+            {sortBy === "asc" ? "Low to High" : "High to Low"}
           </Button>
         </HStack>
       </Flex>
@@ -71,12 +65,10 @@ const Products = () => {
         isMobileSideContent={true}
         mainContent={
           <VStack spacing={4}>
-            <SimpleGrid w={"100%"} columns={[1, 2, 2, 3]} spacing={10}>
-              {loading&&
-              
-                <Spinner/>
-            
-            }
+            {loading&&<Center w={"100%"} h={"sm"}>
+            <Spinner/> 
+            </Center>}
+            <SimpleGrid w={"100%"} columns={[1, 2, 2, 3]} spacing={10}>       
               {!loading&&data&&data.map((el:ProductProps) => {
                 return <ProductCard product={el} key={el._id} />;
               })}
@@ -157,7 +149,8 @@ const Products = () => {
           </Box>
         }
         sidePosition="left"
-      />  <HStack w={"100%"} alignItems={"center"} justifyContent={"center"}>
+      />  
+      <HStack w={"100%"} alignItems={"center"} justifyContent={"center"}>
       <Button isDisabled={page===1} size={"sm"} bg={"brand.primary"} color={"white"} onClick={()=>setPage(prev=>prev-1)}>Prev</Button>
       <Text px={1} color={"brand.font"}>{page}</Text>
       <Button size={"sm"} isDisabled={data&&data.length<10} bg={"brand.primary"} color={"white"} onClick={()=>setPage(prev=>prev+1)}>Next</Button>
