@@ -1,3 +1,5 @@
+export * from "./product";
+
 export enum AppOrganization {
   Name = "MedKart",
 }

@@ -1,7 +1,9 @@
+import useGet from "@/shared/api/hooks/use-get";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import { BreadCrumbs } from "@/shared/components/breadcrumbs";
 import ProductCard from "@/shared/components/product-card";
 import { SectionPageContainer } from "@/shared/components/side-container";
+import { ProductProps } from "@/types";
 import {
   Box,
   Button,
@@ -14,6 +16,7 @@ import {
   HStack,
   Heading,
   SimpleGrid,
+  Spinner,
   Stack,
   StackDivider,
   Text,
@@ -21,15 +24,29 @@ import {
 } from "@chakra-ui/react";
 import { faFilterCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useRef, useState } from "react";
 
 const Products = () => {
   const [sortBy, setSortBy] = useState<"ASC" | "DESC">("ASC");
+  const [page,setPage]=useState(1);
+  const { data, loading, refetch } = useGet('/products?page=1&sort=asc');
+  const productsContainerRef = useRef<HTMLDivElement | null>(null);
+  
+  useEffect(() => {
+  
+    refetch(`/products?page=${page}&sort=${sortBy}`);
+    if (productsContainerRef.current) {
+      productsContainerRef.current.scrollTop = 0;
+    }
+  }, [page, sortBy, refetch]);
+
+  console.log(data);
 
   return (
-    <VStack spacing={0}>
+    <VStack spacing={0}   h={"fit-content"}>
       <Flex
         w={"100%"}
+      
         alignItems={"center"}
         justifyContent={"space-between"}
         px={10}
@@ -53,10 +70,15 @@ const Products = () => {
       <SectionPageContainer
         isMobileSideContent={true}
         mainContent={
-          <VStack>
-            <SimpleGrid columns={[1, 2, 2, 3]} spacing={10}>
-              {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
-                return <ProductCard key={el} />;
+          <VStack spacing={4}>
+            <SimpleGrid w={"100%"} columns={[1, 2, 2, 3]} spacing={10}>
+              {loading&&
+              
+                <Spinner/>
+            
+            }
+              {!loading&&data&&data.map((el:ProductProps) => {
+                return <ProductCard product={el} key={el._id} />;
               })}
             </SimpleGrid>
           </VStack>
@@ -135,7 +157,11 @@ const Products = () => {
           </Box>
         }
         sidePosition="left"
-      />
+      />  <HStack w={"100%"} alignItems={"center"} justifyContent={"center"}>
+      <Button isDisabled={page===1} size={"sm"} bg={"brand.primary"} color={"white"} onClick={()=>setPage(prev=>prev-1)}>Prev</Button>
+      <Text px={1} color={"brand.font"}>{page}</Text>
+      <Button size={"sm"} isDisabled={data&&data.length<10} bg={"brand.primary"} color={"white"} onClick={()=>setPage(prev=>prev+1)}>Next</Button>
+    </HStack>
     </VStack>
   );
 };

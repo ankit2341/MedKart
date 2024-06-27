@@ -1,4 +1,5 @@
 // import { useTheme } from "@/context/theme-context";
+import { ProductProps } from "@/types";
 import {
   Button,
   Card,
@@ -19,12 +20,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const ProductCard = ({ product }: { product?: string }) => {
+const ProductCard = ({ product }: { product:ProductProps }) => {
   return (
     <Card
-      key={product || "1"}
+      key={product?._id}
       width="100%"
-      height={"fit-content"}
+      height={"100%"}
       borderWidth="1px"
       borderStyle="solid"
       borderColor="gray.300"
@@ -41,10 +42,10 @@ const ProductCard = ({ product }: { product?: string }) => {
         justifyContent="center"
       >
         <Image
-          boxSize="fit-content"
+          boxSize="2xs"
           borderRadius={"lg"}
           objectFit="cover"
-          src="https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png"
+          src={product?.image===""||product?.image==="https://static1.hkrtcdn.com/hknext/static/media/common/lazyicon_new.webp"? "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg":product.image}
           alt="Dan Abramov"
         />
         <Flex
@@ -59,20 +60,20 @@ const ProductCard = ({ product }: { product?: string }) => {
           px={2}
         >
           <Text pr={1} fontSize="medium">
-            4.1
+            {product?.rating}
           </Text>
 
           <FontAwesomeIcon icon={faStar} size="xs" />
         </Flex>
       </CardHeader>
       <CardBody pt={2}>
-        <VStack>
-          <Text fontSize="larger" fontWeight="500" noOfLines={3}>
-            Riddhish Iron Capsule
+        <VStack h={"100%"} alignItems={"center"} justifyContent={"space-between"}>
+          <Text fontSize="medium" textAlign={"center"} fontWeight="500" noOfLines={3}>
+            {product.productName}
           </Text>
           <HStack>
-            <Text>₹. 100</Text>
-            <Text textDecoration="line-through">₹. 150</Text>
+            <Text>₹. {product?.variantPrice}</Text>
+            <Text textDecoration="line-through">₹. {product?.variantOldPrice}</Text>
             <Flex
               borderRadius="md"
               align="center"
@@ -82,7 +83,7 @@ const ProductCard = ({ product }: { product?: string }) => {
               px={2}
             >
               <Text pr={1} fontSize="small">
-                50% off
+                {product?.variantOffer}% off
               </Text>
             </Flex>
           </HStack>
