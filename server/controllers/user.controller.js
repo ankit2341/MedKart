@@ -17,6 +17,17 @@ const userController = {
       res.status(404).send(errorMessage)
     }
   },
+  getUserData: async (req, res) => {
+    try {
+      const user = await UserModel.findById(req.userId, "-password"); 
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ message: errorMessage });
+    }
+  },
   getUsers: async (req, res) => {
     const { page } = req.query
     try {

@@ -6,6 +6,8 @@ const {
 } = require('../middlewares/role-based-access-control.middleware')
 const userRouter = express.Router()
 
+userRouter.get('/userdata', authenticate, userController.getUserData)
+
 userRouter.get('/', authenticate, verifyUserRole, userController.getUsers)
 
 userRouter.get('/:id', authenticate, verifyUserRole, userController.getUserById)
