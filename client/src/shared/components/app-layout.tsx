@@ -1,5 +1,7 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { AppContainer } from "./app-container";
+import { useUser } from "../userdata-context";
+import SplashView from "./splash";
 
 export const AppMainLayout = ({
   children,
@@ -8,7 +10,16 @@ export const AppMainLayout = ({
   children: ReactNode;
   isHappyCustomer?: boolean;
 }) => {
-  return (
+  const { loading, refetchUser } = useUser();
+
+  useEffect(() => {
+    refetchUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return loading ? (
+    <SplashView />
+  ) : (
     <AppContainer isHappyCustomer={!!isHappyCustomer}>{children}</AppContainer>
   );
 };

@@ -109,7 +109,7 @@ export const SectionPageContainer = ({
         />
         <Drawer isOpen={isDrawerOpen} onClose={onDrawerClose} size="full">
           <DrawerOverlay />
-          <DrawerContent>
+          <DrawerContent zIndex={100}>
             <DrawerCloseButton />
             <DrawerBody py="12">{sideContent}</DrawerBody>
           </DrawerContent>

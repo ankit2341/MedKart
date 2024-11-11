@@ -21,6 +21,8 @@ import { GoogleLogo } from "@/shared/icons";
 import { AuthMainLayout } from "@/shared/components/auth-layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import usePost from "@/shared/api/hooks/use-post";
+import { showToast } from "@/shared/shared-toast";
 
 const SignIn = () => {
   const isMobile = useIsMobile();
@@ -29,9 +31,22 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const isError = email !== "" && !isValidEmail(email);
-
-  const handleLogin = () => {
-    router.push("/");
+  const { loading, post } = usePost("/users/login");
+  const handleLogin = async () => {
+    const res = await post({ email: email, password: password });
+    if (res?.Message === "User logged in successfully") {
+      showToast("success", res?.Message);
+      localStorage.setItem("token", res?.token);
+      router.push("/");
+    } else if (res?.Message === "Invalid Credentials") {
+      showToast("error", res?.Message);
+    } else if (
+      res?.Message === "User with entered credentials does not exist"
+    ) {
+      showToast("success", res?.Message);
+    } else {
+      showToast("error", "Failed to login! try again later");
+    }
   };
 
   return (
@@ -99,6 +114,8 @@ const SignIn = () => {
           width="100%"
           py={6}
           px={8}
+          isLoading={loading}
+          isDisabled={!(!isError && password !== "")}
           bg="brand.primary"
           onClick={handleLogin}
           color={"brand.fontLight"}

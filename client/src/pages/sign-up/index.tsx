@@ -10,6 +10,8 @@ import {
   FormErrorMessage,
   HStack,
   Input,
+  InputGroup,
+  InputLeftAddon,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -18,12 +20,46 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { ReactElement, useState } from "react";
 import { motion } from "framer-motion";
+import usePost from "@/shared/api/hooks/use-post";
+import { showToast } from "@/shared/shared-toast";
+import { useRouter } from "next/router";
 
 const SignUp = () => {
   const isMobile = useIsMobile();
   const istablet = useIsTablet();
   const [email, setEmail] = useState("");
   const isError = email !== "" && !isValidEmail(email);
+  const [password, setPassword] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const router = useRouter();
+  const { loading, post } = usePost("/users/register");
+  const isSignupDisabled =
+    !isError &&
+    email !== "" &&
+    firstName !== "" &&
+    lastName !== "" &&
+    password !== "" &&
+    phoneNumber !== "";
+
+  const handleRegister = async () => {
+    const res = await post({
+      username: firstName + lastName,
+      email: email,
+      password: password,
+      avatar: "",
+      phoneNumber: phoneNumber,
+    });
+    if (res?.Message === "User already registered") {
+      showToast("error", res?.Message);
+    } else if (res?.Message === "User registered successfully") {
+      showToast("success", res?.Message);
+      router.push("/sign-in");
+    } else {
+      showToast("error", "Failed to register! try again later");
+    }
+  };
 
   return (
     <motion.div
@@ -63,6 +99,8 @@ const SignUp = () => {
           <FormControl>
             <Input
               border="1px solid"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
               borderColor="lightgray"
               placeholder="Enter first name"
               focusBorderColor="brand.primary"
@@ -73,6 +111,8 @@ const SignUp = () => {
           <FormControl>
             <Input
               border="1px solid"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
               borderColor="lightgray"
               placeholder="Enter last name"
               focusBorderColor="brand.primary"
@@ -81,6 +121,27 @@ const SignUp = () => {
             />
           </FormControl>
         </HStack>
+        <FormControl>
+          <InputGroup>
+            <InputLeftAddon
+              p={6}
+              bg={"brand.primary"}
+              color={"brand.fontLight"}
+            >
+              +91
+            </InputLeftAddon>
+            <Input
+              border="1px solid"
+              borderColor="lightgray"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
+              placeholder="Enter phone number"
+              focusBorderColor="brand.primary"
+              padding={6}
+              type="text"
+            />
+          </InputGroup>
+        </FormControl>
         <FormControl isInvalid={isError}>
           <Input
             focusBorderColor="brand.primary"
@@ -96,6 +157,19 @@ const SignUp = () => {
             <FormErrorMessage>Please enter valid email</FormErrorMessage>
           )}
         </FormControl>
+        <FormControl>
+          <Input
+            border="1px solid"
+            borderColor="lightgray"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+            focusBorderColor="brand.primary"
+            padding={6}
+            type="password"
+          />
+        </FormControl>
+
         <Box width="100%">
           <Checkbox width={"100%"} colorScheme="cyan" defaultChecked>
             <Text fontSize={isMobile ? "smaller" : "medium"}>
@@ -105,12 +179,15 @@ const SignUp = () => {
         </Box>
         <Button
           width="100%"
+          onClick={handleRegister}
           py={6}
+          isDisabled={!isSignupDisabled}
           px={8}
           bg="brand.primary"
+          isLoading={loading}
           color={"brand.fontLight"}
         >
-          Verify Email
+          Create Account
         </Button>
         <Text fontSize={isMobile ? "small" : "medium"}>
           Alreary have an account!{" "}

@@ -19,16 +19,21 @@ import {
   faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/router";
 
-const ProductCard = ({ product }: { product?:ProductProps }) => {
-  if(!product){
- return <Card></Card>;
+const ProductCard = ({ product }: { product?: ProductProps }) => {
+  const router = useRouter();
+  if (!product) {
+    return <Card></Card>;
   }
+
   return (
     <Card
       key={product?._id}
       width="100%"
       height={"100%"}
+      cursor={"pointer"}
+      onClick={() => router.push(`products/${product?._id}`)}
       borderWidth="1px"
       borderStyle="solid"
       borderColor="gray.300"
@@ -48,7 +53,13 @@ const ProductCard = ({ product }: { product?:ProductProps }) => {
           boxSize="2xs"
           borderRadius={"lg"}
           objectFit="cover"
-          src={product?.image===""||product?.image==="https://static1.hkrtcdn.com/hknext/static/media/common/lazyicon_new.webp"? "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg":product.image}
+          src={
+            product?.image === "" ||
+            product?.image ===
+              "https://static1.hkrtcdn.com/hknext/static/media/common/lazyicon_new.webp"
+              ? "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg"
+              : product.image
+          }
           alt="Dan Abramov"
         />
         <Flex
@@ -70,13 +81,24 @@ const ProductCard = ({ product }: { product?:ProductProps }) => {
         </Flex>
       </CardHeader>
       <CardBody pt={2}>
-        <VStack h={"100%"} alignItems={"center"} justifyContent={"space-between"}>
-          <Text fontSize="medium" textAlign={"center"} fontWeight="500" noOfLines={3}>
+        <VStack
+          h={"100%"}
+          alignItems={"center"}
+          justifyContent={"space-between"}
+        >
+          <Text
+            fontSize="medium"
+            textAlign={"center"}
+            fontWeight="500"
+            noOfLines={3}
+          >
             {product.productName}
           </Text>
           <HStack>
             <Text>₹. {product?.variantPrice}</Text>
-            <Text textDecoration="line-through">₹. {product?.variantOldPrice}</Text>
+            <Text textDecoration="line-through">
+              ₹. {product?.variantOldPrice}
+            </Text>
             <Flex
               borderRadius="md"
               align="center"

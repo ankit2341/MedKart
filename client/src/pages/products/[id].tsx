@@ -1,3 +1,4 @@
+import useGet from "@/shared/api/hooks/use-get";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import { BreadCrumbs } from "@/shared/components/breadcrumbs";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
@@ -12,7 +13,6 @@ import {
   HStack,
   Heading,
   Image,
-  Input,
   Tag,
   TagLabel,
   Text,
@@ -37,12 +37,16 @@ const ProductIndividualPage = () => {
   const isTablet = useIsTablet();
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const { data, loading } = useGet(`/products/${id}`);
+
+  console.log(data, loading);
+
   const images = [
-    "https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png",
-    "https://bit.ly/kent-c-dodds",
-    "https://bit.ly/dan-abramov",
-    "https://bit.ly/ryan-florence",
-    "https://bit.ly/prosper-baba",
+    `${data?.image !== "" ? data?.image : "https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png"}`,
+    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
+    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
+    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
+    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
   ];
 
   useEffect(() => {}, [id]);
@@ -127,23 +131,25 @@ const ProductIndividualPage = () => {
             align={"flex-start"}
             justifyContent={"space-between"}
           >
-            <Heading fontSize={"large"}>Riddhish Iron Capsule</Heading>
+            <Heading fontSize={"large"}>{data?.productName}</Heading>
             <Tag size={"sm"} variant="subtle" colorScheme="teal">
-              <TagLabel>Save 20% Now</TagLabel>
+              <TagLabel>Save {data?.variantOffer}% Now</TagLabel>
             </Tag>
           </Flex>
 
           <HStack>
-            <Text>MRP. ₹. 100</Text>
-            <Text textDecoration="line-through">₹. 150</Text>
+            <Text>MRP. ₹. {data?.variantPrice}</Text>
+            <Text textDecoration="line-through">
+              ₹. {data?.variantOldPrice}
+            </Text>
           </HStack>
           <Tag size={"md"} variant="subtle" colorScheme="teal">
             <TagLabel>
-              4.1 <FontAwesomeIcon icon={faStar} />
+              {data?.rating} <FontAwesomeIcon icon={faStar} />
             </TagLabel>
           </Tag>
           <Badge px={2} size={"xs"} variant="subtle" colorScheme="green">
-            In stock
+            {data?.isAvailable ? "In stock" : "Unavailable"}
           </Badge>
 
           <Divider />
@@ -177,19 +183,21 @@ const ProductIndividualPage = () => {
           <Divider />
 
           <Text w={"100%"} textAlign={"justify"}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur
-            minima cupiditate, aliquam, exercitationem magni officia totam ad
-            ullam, quidem quia unde reprehenderit iste eos minus molestias quae
-            cum suscipit quibusdam?
+            {data?.subtext
+              ? data?.subtext
+              : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "}
           </Text>
           <Divider />
           <Text w={"100%"} textAlign={"justify"}>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit.{" "}
+            {data?.maker
+              ? data?.maker
+              : "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
           </Text>
           <Divider />
           <Text w={"100%"} textAlign={"justify"}>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aspernatur
-            minima cupiditate
+            {
+              "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+            }
           </Text>
           <Divider />
           <HStack
@@ -216,36 +224,12 @@ const ProductIndividualPage = () => {
               border={"1px solid"}
               borderColor={"brand.primary"}
               variant={"outline"}
+              onClick={() => router.push("/offers")}
               fontWeight={"thin"}
               color={"brand.font"}
               size={"sm"}
             >
               Check now
-            </Button>
-          </HStack>
-
-          <HStack
-            w={"100%"}
-            p={2}
-            border={"2px dashed"}
-            borderColor={"gray.300"}
-            borderRadius={"md"}
-            bg={"brand.background"}
-          >
-            <Input
-              size={"sm"}
-              focusBorderColor="brand.primary"
-              placeholder="Apply Promo Code"
-            />
-            <Button
-              border={"1px solid"}
-              borderColor={"brand.primary"}
-              variant={"outline"}
-              fontWeight={"thin"}
-              color={"brand.font"}
-              size={"sm"}
-            >
-              Apply
             </Button>
           </HStack>
         </VStack>

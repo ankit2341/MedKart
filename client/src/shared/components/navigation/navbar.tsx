@@ -51,7 +51,7 @@ const Navbar = () => {
   return (
     <VStack
       pos={showNavbar ? "sticky" : "static"}
-      zIndex={10000}
+      zIndex={10}
       bg="brand.background"
       top={0}
       width="100%"
