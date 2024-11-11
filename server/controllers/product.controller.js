@@ -65,10 +65,10 @@ const productController = {
     }
   },
   getProductById: async (req, res) => {
-    const { id } = req.params.id
+    const id = req.params.id;
     try {
       const product = await ProductModel.find({ _id: id })
-      res.status(200).send(product)
+      res.status(200).send(product.length>0?product[0]:{})
     } catch (err) {
       res.status(404).send(errorMessage)
     }
