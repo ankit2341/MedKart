@@ -18,6 +18,7 @@ interface UserContextType {
   error: string | null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   refetchUser: any;
+  reset: () => void;
 }
 
 // Create a context with the default value set to null (or a suitable default)
@@ -39,10 +40,13 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     loading,
     error,
     refetch: refetchUser,
+    reset,
   } = useGet("/users/userdata"); // Assuming the endpoint is '/api/user'
 
   return (
-    <UserContext.Provider value={{ userData, loading, error, refetchUser }}>
+    <UserContext.Provider
+      value={{ userData, loading, error, refetchUser, reset }}
+    >
       {children}
     </UserContext.Provider>
   );

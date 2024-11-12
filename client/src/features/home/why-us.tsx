@@ -52,7 +52,7 @@ const WhyUs = () => {
             position: "absolute",
             transform: "translateY(-50%)",
             top: -10,
-            zIndex: 10,
+            zIndex: 8,
           }}
         >
           <Image
@@ -114,7 +114,7 @@ const WhyUs = () => {
               position: "absolute",
               bottom: 0,
               right: "30%",
-              zIndex: 100,
+              zIndex: 9,
             }}
           />
           {!(isTablet || isMobile) && (
@@ -126,7 +126,7 @@ const WhyUs = () => {
                 position: "absolute",
                 bottom: 0,
                 left: "10%",
-                zIndex: 100,
+                zIndex: 9,
               }}
             />
           )}
@@ -138,7 +138,7 @@ const WhyUs = () => {
               position: "absolute",
               bottom: 0,
               left: isTablet || isMobile ? "-1%" : "40%",
-              zIndex: 100,
+              zIndex: 9,
             }}
           />
         </Box>

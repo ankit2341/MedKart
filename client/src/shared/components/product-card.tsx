@@ -6,22 +6,23 @@ import {
   CardBody,
   CardFooter,
   CardHeader,
-  Center,
   Flex,
   HStack,
   Image,
   Text,
   VStack,
 } from "@chakra-ui/react";
-import {
-  faCartPlus,
-  faHeartCirclePlus,
-  faStar,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 
-const ProductCard = ({ product }: { product?: ProductProps }) => {
+const ProductCard = ({
+  product,
+  onClose,
+}: {
+  product?: ProductProps;
+  onClose?: () => void;
+}) => {
   const router = useRouter();
   if (!product) {
     return <Card></Card>;
@@ -33,7 +34,12 @@ const ProductCard = ({ product }: { product?: ProductProps }) => {
       width="100%"
       height={"100%"}
       cursor={"pointer"}
-      onClick={() => router.push(`products/${product?._id}`)}
+      onClick={() => {
+        router.push(`/products/${product?._id}`);
+        if (onClose) {
+          onClose();
+        }
+      }}
       borderWidth="1px"
       borderStyle="solid"
       borderColor="gray.300"
@@ -115,22 +121,12 @@ const ProductCard = ({ product }: { product?: ProductProps }) => {
         </VStack>
       </CardBody>
       <CardFooter>
-        <Center
-          width="10"
-          height={10}
-          borderRadius="lg"
-          border="1px solid"
-          color="brand.primary"
-          borderColor="brand.primary"
-        >
-          <FontAwesomeIcon beat icon={faHeartCirclePlus} />
-        </Center>
         <Button
           ml={2}
           bg="brand.primary"
           color="white"
           borderRadius="lg"
-          width="80%"
+          width="100%"
           height={10}
         >
           Add to Cart

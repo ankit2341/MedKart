@@ -1,9 +1,15 @@
 import {
+  Avatar,
   Box,
   Button,
   Center,
+  Divider,
   Flex,
   HStack,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
   Text,
   VStack,
 } from "@chakra-ui/react";
@@ -12,7 +18,7 @@ import {
   faBagShopping,
   faGift,
   faM,
-  faMedkit,
+  // faMedkit,
   faPumpMedical,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
@@ -24,12 +30,14 @@ import SearchModal from "@/features/search/search-modal";
 import { useRouter } from "next/router";
 import ThemeToggle from "@/features/toggle-switch";
 import { AppStaticPath } from "@/types";
+import { useUser } from "@/shared/userdata-context";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
   const router = useRouter();
+  const { userData, refetchUser, reset } = useUser();
   // const isHomePage=router.basePath==="/";
 
   useEffect(() => {
@@ -53,6 +61,11 @@ const Navbar = () => {
       pos={showNavbar ? "sticky" : "static"}
       zIndex={10}
       bg="brand.background"
+      boxShadow={
+        !showNavbar && router.pathname === "/"
+          ? "none"
+          : "rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;"
+      }
       top={0}
       width="100%"
       spacing={0}
@@ -86,7 +99,7 @@ const Navbar = () => {
               width="50%"
               bg="brand.background"
               alignItems="center"
-              justifyContent="space-between"
+              justifyContent="space-evenly"
               px={10}
             >
               {[
@@ -96,11 +109,11 @@ const Navbar = () => {
                   route: AppStaticPath.Products,
                 },
                 { name: "Offers", icon: faGift, route: AppStaticPath.Offers },
-                {
-                  name: "Book Lab Test",
-                  icon: faMedkit,
-                  route: AppStaticPath.BookLabTest,
-                },
+                // {
+                //   name: "Book Lab Test",
+                //   icon: faMedkit,
+                //   route: AppStaticPath.BookLabTest,
+                // },
               ].map((item) => {
                 return (
                   <HStack
@@ -158,7 +171,7 @@ const Navbar = () => {
                 10
               </Center>
             </Box>
-            {isMobile && (
+            {isMobile && !userData?._id && (
               <Center
                 cursor="pointer"
                 p={4}
@@ -172,7 +185,7 @@ const Navbar = () => {
                 <FontAwesomeIcon icon={faUser} />
               </Center>
             )}
-            {!isMobile && (
+            {!isMobile && !userData?._id && (
               <Button
                 onClick={() => router.push("/sign-in")}
                 py={4}
@@ -182,6 +195,59 @@ const Navbar = () => {
               >
                 Sign In
               </Button>
+            )}
+            {userData?._id && (
+              <Menu>
+                <MenuButton bg={"brand.background"} p={0} as={Button}>
+                  <Center
+                    cursor="pointer"
+                    p={4}
+                    bg={"brand.background"}
+                    width={10}
+                    height={10}
+                    border="1px solid"
+                    borderRadius="full"
+                    borderColor="brand.primary"
+                  >
+                    <Avatar
+                      src={userData?.avatar}
+                      name={userData?.username}
+                      size={"sm"}
+                      bg={"brand.primary"}
+                    />
+                  </Center>
+                </MenuButton>
+
+                <MenuList>
+                  <HStack px={3} py={4}>
+                    <Avatar
+                      src={userData?.avatar}
+                      name={userData?.username}
+                      size={"sm"}
+                      bg={"brand.primary"}
+                    />
+                    <Text>Welcome {userData?.username},</Text>
+                  </HStack>
+
+                  <Divider />
+                  <MenuItem
+                    onClick={() => router.push(`/profile/${userData?._id}`)}
+                  >
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={async () => {
+                      localStorage.clear();
+                      await reset();
+                      await refetchUser();
+                      console.log("inside");
+                      router.replace("/sign-in");
+                    }}
+                  >
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
             )}
           </HStack>
         </Flex>
@@ -198,7 +264,7 @@ const Navbar = () => {
           {[
             { name: "Products", icon: faPumpMedical },
             { name: "Offers", icon: faGift },
-            { name: "Book Lab Test", icon: faMedkit },
+            // { name: "Book Lab Test", icon: faMedkit },
           ].map((item) => {
             return (
               <HStack

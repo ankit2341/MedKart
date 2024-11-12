@@ -4,7 +4,6 @@ import {
   Card,
   CardBody,
   CardHeader,
-  Divider,
   Flex,
   Heading,
   IconButton,
@@ -14,7 +13,7 @@ import useIsMobile from "../hooks/use-is-mobile";
 import useIsTablet from "../hooks/use-is-tablet";
 import Carousel from "react-multi-carousel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBraille, faFaceSmileBeam } from "@fortawesome/free-solid-svg-icons";
+import { faBraille, faQuoteLeft } from "@fortawesome/free-solid-svg-icons";
 import { useTheme } from "@/context/theme-context";
 
 const HappyCustomers = () => {
@@ -46,17 +45,8 @@ const HappyCustomers = () => {
       width="100%"
       height="fit-content"
       bg="brand.background"
-      py={10}
+      py={16}
     >
-      <Heading
-        fontSize={"larger"}
-        color="brand.primary"
-        p={4}
-        textAlign={"center"}
-      >
-        Happy Customers <FontAwesomeIcon fade icon={faFaceSmileBeam} />
-      </Heading>
-      <Divider />
       <Box px={isMobile ? "4" : "8"} width="100%" bg="brand.background">
         <Carousel
           responsive={responsive}
@@ -67,7 +57,7 @@ const HappyCustomers = () => {
           showDots
           swipeable={isMobile || isTablet ? true : false}
         >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
+          {[1, 2].map((el) => {
             return (
               <Card
                 key={el}
@@ -84,12 +74,12 @@ const HappyCustomers = () => {
                     flexWrap="wrap"
                   >
                     <Avatar
-                      name="Segun Adebayo"
-                      src="https://bit.ly/ryan-florence"
+                      name={el === 1 ? "Prateek Patil" : "Ramesh Gupta"}
+                      bg={"brand.primary"}
                     />
                     <Box>
                       <Heading size="sm" color={"brand.font"}>
-                        Prateek Shukla
+                        {el === 1 ? "Prateek Patil" : "Ramesh Gupta"}
                       </Heading>
                       <Text color={"brand.font"}>MedKart Customer</Text>
                     </Box>
@@ -108,15 +98,24 @@ const HappyCustomers = () => {
                   alignItems={"center"}
                   justifyContent={"center"}
                 >
-                  <Flex alignItems={"center"} justifyContent={"center"}>
+                  <Flex
+                    flexDir={isMobile ? "column" : "row"}
+                    alignItems={isMobile ? "center" : "flex-start"}
+                    justifyContent={"center"}
+                  >
+                    <Box px={4}>
+                      <FontAwesomeIcon icon={faQuoteLeft} />
+                    </Box>
+
                     <Text
-                      w={"80%"}
+                      w={isMobile ? "70%" : "80%"}
                       color={"brand.font"}
-                      textAlign={"center"}
-                      noOfLines={isMobile ? 5 : undefined}
+                      textAlign={isMobile ? "center" : "justify"}
+                      noOfLines={undefined}
                     >
-                      As a busy professional, I never have time to visit a
-                      doctor&apos;s office. Using this medical website has been
+                      {el === 1
+                        ? ` As a busy professional, I never have time to visit a
+                      doctor's office. Using this medical website has been
                       a game-changer for me! The convenience of booking
                       consultations online and getting prescriptions delivered
                       to my door is incredible. The website is user-friendly,
@@ -124,7 +123,8 @@ const HappyCustomers = () => {
                       health. The online doctor consultations are thorough, and
                       the doctors are always attentive and professional. I feel
                       more in control of my health and appreciate the seamless
-                      experience. Highly recommended!{" "}
+                      experience. Highly recommended!`
+                        : `Using this platform has been a game-changer! Ordering my medicines online is now quick, easy, and stress-free. The delivery is always prompt, and the platform offers a wide range of genuine medicines at competitive prices. Their customer service is outstanding, answering my questions quickly and ensuring I get exactly what I need. Highly recommend for anyone looking for convenience, reliability, and top-notch service right to their doorstep!`}
                     </Text>
                   </Flex>
                 </CardBody>

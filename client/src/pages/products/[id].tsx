@@ -22,7 +22,6 @@ import {
   faCartPlus,
   faChevronLeft,
   faChevronRight,
-  faHeartCirclePlus,
   faStar,
   faTags,
 } from "@fortawesome/free-solid-svg-icons";
@@ -37,19 +36,20 @@ const ProductIndividualPage = () => {
   const isTablet = useIsTablet();
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const { data, loading } = useGet(`/products/${id}`);
-
-  console.log(data, loading);
+  const { data, refetch } = useGet(`/products/${id}`);
 
   const images = [
     `${data?.image !== "" ? data?.image : "https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png"}`,
-    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
-    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
-    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
-    "https://png.pngtree.com/background/20210710/original/pngtree-minimalist-gradient-medical-background-picture-image_966366.jpg",
+    "https://picsum.photos/id/55/400?random=1",
+    "https://picsum.photos/id/80/400?random=1",
+    "https://picsum.photos/id/81/400?random=1",
+    "https://picsum.photos/id/82/400?random=1",
   ];
 
-  useEffect(() => {}, [id]);
+  useEffect(() => {
+    refetch(`/products/${id}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
 
   return (
     <VStack w={"100%"} p={isMobile ? 4 : 10} spacing={4}>
@@ -154,22 +154,12 @@ const ProductIndividualPage = () => {
 
           <Divider />
           <HStack>
-            <Center
-              width="10"
-              height={10}
-              borderRadius="lg"
-              border="1px solid"
-              color="brand.primary"
-              borderColor="brand.primary"
-            >
-              <FontAwesomeIcon beat icon={faHeartCirclePlus} />
-            </Center>
             <Button
               ml={2}
               bg="brand.primary"
               color="white"
               borderRadius="lg"
-              width="80%"
+              width="100%"
               height={10}
             >
               Add to Cart

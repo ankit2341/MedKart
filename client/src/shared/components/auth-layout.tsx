@@ -14,6 +14,7 @@ export const AuthMainLayout = ({ children }: { children: ReactNode }) => {
   }, []);
 
   if (userData?._id) {
+    console.log("inside authl", userData);
     router.replace("/");
   }
 

@@ -21,11 +21,10 @@ import {
 import { motion } from "framer-motion";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
-import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { UnderLineAnimation } from "@/shared/icons";
 import WhyUs from "@/features/home/why-us";
-import ProductCard from "@/shared/components/product-card";
+import TopSellers from "@/features/home/top-sellers";
+import PopularProducts from "@/features/home/popular-products";
 
 const Home = () => {
   const icons = [
@@ -37,24 +36,6 @@ const Home = () => {
   const [icon, setIcon] = useState(0);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
-  const responsive = {
-    superLargeDesktop: {
-      breakpoint: { max: 4000, min: 3000 },
-      items: 5,
-    },
-    desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 5,
-    },
-    tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-    },
-    mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-    },
-  };
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -136,7 +117,7 @@ const Home = () => {
                 pos="absolute"
                 top={"20%"}
                 left={"20%"}
-                zIndex={1000}
+                zIndex={9}
               />
               <Box
                 width="4"
@@ -147,7 +128,7 @@ const Home = () => {
                 pos="absolute"
                 top={"50%"}
                 right={"0%"}
-                zIndex={1000}
+                zIndex={9}
               />
               <Box
                 width="8"
@@ -158,7 +139,7 @@ const Home = () => {
                 pos="absolute"
                 top={"10%"}
                 right={"20%"}
-                zIndex={1000}
+                zIndex={9}
               />
               <Box
                 width="6"
@@ -169,7 +150,7 @@ const Home = () => {
                 pos="absolute"
                 bottom={"0%"}
                 left={"50%"}
-                zIndex={1000}
+                zIndex={9}
               />
               <Box
                 width="6"
@@ -180,7 +161,7 @@ const Home = () => {
                 pos="absolute"
                 bottom={"10%"}
                 left={"5%"}
-                zIndex={1000}
+                zIndex={9}
               />
               <Box
                 width="6"
@@ -191,7 +172,7 @@ const Home = () => {
                 pos="absolute"
                 right={"10%"}
                 bottom={"10%"}
-                zIndex={1000}
+                zIndex={9}
               />
             </>
           )}
@@ -254,7 +235,7 @@ const Home = () => {
             pos="absolute"
             top={"50%"}
             left={isMobile || isTablet ? "10%" : "20%"}
-            zIndex={1000}
+            zIndex={9}
           />
           <Box
             width="4"
@@ -265,7 +246,7 @@ const Home = () => {
             pos="absolute"
             top={"50%"}
             right={isMobile || isTablet ? "10%" : "30%"}
-            zIndex={1000}
+            zIndex={9}
           />
           <Box
             width="8"
@@ -276,7 +257,7 @@ const Home = () => {
             pos="absolute"
             top={isMobile || isTablet ? "20%" : "10%"}
             left={"50%"}
-            zIndex={1000}
+            zIndex={9}
           />
           <Box
             width="6"
@@ -287,7 +268,7 @@ const Home = () => {
             pos="absolute"
             bottom={"20%"}
             left={"50%"}
-            zIndex={1000}
+            zIndex={9}
           />
           <Center
             id="scale_infinity_5"
@@ -313,39 +294,7 @@ const Home = () => {
         </Box>
       </Flex>
       {<WhyUs />}
-      <Box width="100%" pos="relative">
-        <Heading
-          width="100%"
-          px={isMobile ? "4" : "10"}
-          size="md"
-          textAlign="left"
-        >
-          Top Sellers
-        </Heading>
-        <UnderLineAnimation
-          style={{ position: "absolute", top: 1, left: 70 }}
-          id="checkedcircleanimated"
-        />
-      </Box>
-      <Box
-        px={isMobile ? "4" : "8"}
-        width="100%"
-        height="fit-content"
-        bg="brand.background"
-      >
-        <Carousel
-          responsive={responsive}
-          autoPlay
-          infinite
-          autoPlaySpeed={2000}
-          itemClass="carousel-item-padding"
-          swipeable={isMobile || isTablet ? true : false}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
-            return <ProductCard key={el} />;
-          })}
-        </Carousel>
-      </Box>
+      <TopSellers />
       <HStack
         spacing={10}
         px={isMobile ? "4" : "10"}
@@ -370,17 +319,17 @@ const Home = () => {
         >
           <Heading
             fontSize={isMobile ? "lg" : "4xl"}
-            zIndex={10}
+            zIndex={9}
             textShadow="rgb(0, 206, 209) 1px 0 10px"
           >
             Instant Assistance
           </Heading>
-          <Text zIndex={10}>Wish to seek advise from doctors?</Text>
+          <Text zIndex={9}>Wish to seek advise from doctors?</Text>
           <Button
             width="fit-content"
             bg="brand.background"
             color="brand.primary"
-            zIndex={10}
+            zIndex={9}
           >
             Book an appointment
           </Button>
@@ -488,40 +437,7 @@ const Home = () => {
           </VStack>
         </VStack>
       </HStack>
-      <Box width="100%" pos="relative">
-        <Heading
-          width="100%"
-          px={isMobile ? "4" : "10"}
-          size="md"
-          textAlign="left"
-        >
-          Popular Products
-        </Heading>
-        <UnderLineAnimation
-          style={{ position: "absolute", top: 1, left: 130 }}
-          id="checkedcircleanimated"
-        />
-      </Box>
-      <Box
-        px={isMobile ? "4" : "8"}
-        width="100%"
-        height="fit-content"
-        bg="brand.background"
-        mb={10}
-      >
-        <Carousel
-          itemClass={"carousel-item-padding"}
-          responsive={responsive}
-          autoPlay
-          autoPlaySpeed={2000}
-          infinite
-          swipeable={isMobile || isTablet ? true : false}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
-            return <ProductCard key={el} />;
-          })}
-        </Carousel>
-      </Box>
+      <PopularProducts />
     </VStack>
   );
 };

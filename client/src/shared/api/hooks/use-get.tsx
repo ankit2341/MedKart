@@ -56,7 +56,13 @@ const useGet = (initialEndpoint: string, immediate: boolean = true) => {
     [fetchData],
   );
 
-  return { data, error, loading, refetch };
+  const reset = useCallback(() => {
+    setData(null);
+    setError(null);
+    setLoading(false);
+  }, []);
+
+  return { data, error, loading, refetch, reset };
 };
 
 export default useGet;

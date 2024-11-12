@@ -118,6 +118,7 @@
 .react-multiple-carousel__arrow {
   background-color: rgb(0, 206, 209) !important;
   border-radius: 10px !important;
+  z-index: 9 !important;
 }
 
 .react-multiple-carousel__arrow--left {
