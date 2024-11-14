@@ -8,7 +8,7 @@ const errorMessage = {
 const addressController = {
   getAddressesByUserId: async (req, res) => {
     try {
-      const address = await AddressModel.findById(req.userId); 
+      const address = await AddressModel.findById({userId : req.userId});
       if (!address) {
         return res.status(404).json({ message: "User not found" });
       }
