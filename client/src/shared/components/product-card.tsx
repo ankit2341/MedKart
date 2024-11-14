@@ -15,6 +15,8 @@ import {
 import { faCartPlus, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
+import usePost from "../api/hooks/use-post";
+import { showToast } from "../shared-toast";
 
 const ProductCard = ({
   product,
@@ -24,6 +26,7 @@ const ProductCard = ({
   onClose?: () => void;
 }) => {
   const router = useRouter();
+  const { post, loading } = usePost("/cart/post");
   if (!product) {
     return <Card></Card>;
   }
@@ -35,7 +38,6 @@ const ProductCard = ({
       height={"100%"}
       cursor={"pointer"}
       onClick={() => {
-        router.push(`/products/${product?._id}`);
         if (onClose) {
           onClose();
         }
@@ -53,6 +55,7 @@ const ProductCard = ({
         pb={2}
         display="flex"
         alignItems="center"
+        onClick={() => router.push(`/products/${product?._id}`)}
         justifyContent="center"
       >
         <Image
@@ -86,7 +89,7 @@ const ProductCard = ({
           <FontAwesomeIcon icon={faStar} size="xs" />
         </Flex>
       </CardHeader>
-      <CardBody pt={2}>
+      <CardBody pt={2} onClick={() => router.push(`/products/${product?._id}`)}>
         <VStack
           h={"100%"}
           alignItems={"center"}
@@ -127,6 +130,19 @@ const ProductCard = ({
           color="white"
           borderRadius="lg"
           width="100%"
+          isLoading={loading}
+          zIndex={1}
+          onClick={async () => {
+            const res = await post({
+              productId: product?._id,
+              image: product?.image,
+              productName: product?.productName,
+              variantPrice: product?.variantPrice,
+              isAvailable: product?.isAvailable,
+              quantity: 1,
+            });
+            showToast("info", res?.Messsage);
+          }}
           height={10}
         >
           Add to Cart

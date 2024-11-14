@@ -1,8 +1,10 @@
 import useGet from "@/shared/api/hooks/use-get";
+import usePost from "@/shared/api/hooks/use-post";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import { BreadCrumbs } from "@/shared/components/breadcrumbs";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
+import { showToast } from "@/shared/shared-toast";
 import {
   Badge,
   Box,
@@ -37,6 +39,7 @@ const ProductIndividualPage = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { data, refetch } = useGet(`/products/${id}`);
+  const { post, loading } = usePost("/cart/post");
 
   const images = [
     `${data?.image !== "" ? data?.image : "https://d1s24u4ln0wd0i.cloudfront.net/1688202688649fedc050fd2.png"}`,
@@ -158,6 +161,18 @@ const ProductIndividualPage = () => {
               ml={2}
               bg="brand.primary"
               color="white"
+              isLoading={loading}
+              onClick={async () => {
+                const res = await post({
+                  productId: data?._id,
+                  image: data?.image,
+                  productName: data?.productName,
+                  variantPrice: data?.variantPrice,
+                  isAvailable: data?.isAvailable,
+                  quantity: 1,
+                });
+                showToast("info", res?.Messsage);
+              }}
               borderRadius="lg"
               width="100%"
               height={10}

@@ -133,7 +133,7 @@ const MyCart = ({
                   justifyContent="space-between"
                 >
                   <Text>Subtotal</Text>
-                  <Text>₹. {variantTotal}.00</Text>
+                  <Text>₹. {variantTotal?.toFixed(2)}</Text>
                 </HStack>
                 <HStack
                   w="100%"
@@ -141,7 +141,7 @@ const MyCart = ({
                   justifyContent="space-between"
                 >
                   <Text>Discount</Text>
-                  <Text color={"red"}>-₹. {discount?.toFixed(0)}.00</Text>
+                  <Text color={"red"}>-₹. {discount?.toFixed(0)}</Text>
                 </HStack>
                 <Divider />
                 <HStack
@@ -150,7 +150,7 @@ const MyCart = ({
                   justifyContent="space-between"
                 >
                   <Text>Estimated total</Text>
-                  <Text>₹. {total}.00</Text>
+                  <Text>₹. {total?.toFixed(2)}</Text>
                 </HStack>
                 <Divider />
               </VStack>
