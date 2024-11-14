@@ -34,6 +34,8 @@ const cartController = {
         quantity,
       } = req.body
 
+      console.log(req.body, id)
+
       if (
         !productId ||
         !productName ||
@@ -47,7 +49,7 @@ const cartController = {
       }
 
       const cart = new CartModel({
-        userId,
+        userId: id,
         productId,
         image,
         productName,
