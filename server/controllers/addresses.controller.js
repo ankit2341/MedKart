@@ -7,12 +7,14 @@ const errorMessage = {
 
 const addressController = {
   getAddressesByUserId: async (req, res) => {
-    const { id } = req.query
     try {
-      const product = await AddressModel.find({ userId: id })
-      res.status(200).send(product)
-    } catch (err) {
-      res.status(404).send(errorMessage)
+      const address = await AddressModel.findById(req.userId); 
+      if (!address) {
+        return res.status(404).json({ message: "User not found" });
+      }
+      res.status(200).json(address);
+    } catch (error) {
+      res.status(500).json({ message: errorMessage });
     }
   },
   postAddressByUserId: async (req, res) => {

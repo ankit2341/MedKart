@@ -3,7 +3,7 @@ const { addressController } = require('../controllers/addresses.controller')
 const { authenticate } = require('../middlewares/authenticate.middleware')
 const addressRouter = express.Router()
 
-addressRouter.get('/', addressController.getAddressesByUserId)
+addressRouter.get('/', authenticate, addressController.getAddressesByUserId)
 
 addressRouter.post('/post', authenticate, addressController.postAddressByUserId)
 
