@@ -3,9 +3,12 @@ import MyAddresses from "@/features/profile/my-addresses";
 import MyCart from "@/features/profile/my-cart";
 import MyOrders from "@/features/profile/my-orders";
 import MyProfile from "@/features/profile/my-profile";
+import useGet from "@/shared/api/hooks/use-get";
+// import useGet from "@/shared/api/hooks/use-get";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
+import { useUser } from "@/shared/userdata-context";
 import {
   Box,
   Button,
@@ -27,6 +30,11 @@ const Profile = () => {
   const router = useRouter();
   const { isPrifilled } = router.query;
   const [selectedState, setSelectedState] = useState<string>("");
+  const { userData } = useUser();
+  const { data: cartData, loading: cartLoading } = useGet("/cart/");
+  console.log(cartData, cartLoading);
+  const { data: addressData, loading: addressLoading } = useGet("/address/");
+  console.log(addressData, addressLoading, "sdfgb");
 
   const handleSelectedState = (el: string) => {
     if (el !== "Logout") {
@@ -85,12 +93,18 @@ const Profile = () => {
                 fontWeight="bold"
                 textAlign="left"
                 width="100%"
+                noOfLines={1}
                 fontSize="medium"
               >
-                Ankit Patil
+                {userData?.username}
               </Text>
-              <Text width="100%" textAlign="left" fontSize="smaller">
-                ankit@gmail.com
+              <Text
+                width="100%"
+                noOfLines={1}
+                textAlign="left"
+                fontSize="smaller"
+              >
+                {userData?.email}
               </Text>
             </VStack>
           </HStack>
@@ -137,9 +151,23 @@ const Profile = () => {
         alignItems="flex-start"
         flexDir={isMobile ? "column" : "row"}
       >
-        {selectedState === "Profile" && <MyProfile />}
-        {selectedState === "Addresses" && <MyAddresses />}
-        {selectedState === "Cart" && <MyCart />}
+        {selectedState === "Profile" && (
+          <MyProfile
+            orderSize={0}
+            addressData={addressData}
+            cartSize={cartData?.length || 0}
+            userData={userData}
+          />
+        )}
+        {selectedState === "Addresses" && (
+          <MyAddresses
+            addressData={addressData}
+            addressLoading={addressLoading}
+          />
+        )}
+        {selectedState === "Cart" && (
+          <MyCart cartData={cartData} cartLoading={cartLoading} />
+        )}
         {selectedState === "Orders" && <MyOrders />}
       </HStack>
     </HStack>

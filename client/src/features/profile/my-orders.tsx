@@ -15,7 +15,7 @@ const MyOrders = () => {
 
   return (
     <motion.div
-      style={{ width: "100%", zIndex: 10 }}
+      style={{ width: "100%", zIndex: 9 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}

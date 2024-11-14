@@ -3,7 +3,7 @@ import { createContext, useContext, ReactNode } from "react";
 import useGet from "./api/hooks/use-get";
 
 // Define the structure of the user data (this is optional, but good practice for TypeScript)
-interface UserData {
+export interface UserData {
   username: string;
   email: string;
   avatar: string;

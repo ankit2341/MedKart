@@ -1,15 +1,15 @@
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
+import { UserData } from "@/shared/userdata-context";
+import { UserAddress } from "@/types";
 import {
+  Avatar,
   Badge,
   Box,
-  Button,
   Card,
   CardFooter,
   CardHeader,
-  Center,
   Divider,
-  Flex,
   FormControl,
   FormLabel,
   HStack,
@@ -17,21 +17,38 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { faPencil, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useRouter } from "next/router";
 
-const MyProfile = () => {
+const MyProfile = ({
+  userData,
+  addressData,
+  cartSize,
+  orderSize,
+}: {
+  userData: UserData | null;
+  addressData: UserAddress[] | null;
+  cartSize: number;
+  orderSize: number;
+}) => {
   const isViewMobile = useIsMobile();
   const isTableView = useIsTablet();
   const isMobile = isViewMobile || isTableView;
   const router = useRouter();
+  const primaryAddress = addressData?.filter(
+    (address: UserAddress) => address.type === "HOME",
+  );
+
+  if (userData === null || addressData === null) {
+    return null;
+  }
 
   return (
     <>
       <motion.div
-        style={{ width: isMobile ? "100%" : "30%", zIndex: 10 }}
+        style={{ width: isMobile ? "100%" : "30%", zIndex: 9 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -48,26 +65,25 @@ const MyProfile = () => {
           boxShadow={"none"}
         >
           <CardHeader>
-            <Center
-              width={28}
-              height={28}
-              borderRadius="full"
-              bg={"brand.primary"}
-              color="brand.background"
-            >
-              <FontAwesomeIcon size="4x" icon={faUser} />
-            </Center>
             <VStack spacing={0} pt={2}>
+              <Avatar
+                boxShadow={"sm"}
+                mb={4}
+                size={"lg"}
+                src={userData?.avatar}
+                name={userData?.username}
+              />
+
               <Text
                 fontWeight="bold"
                 textAlign="center"
                 width="100%"
                 fontSize="medium"
               >
-                Ankit Patil
+                {userData?.username}
               </Text>
               <Text width="100%" textAlign="center" fontSize="smaller">
-                ankit@gmail.com
+                {userData?.email}
               </Text>
             </VStack>
           </CardHeader>
@@ -77,7 +93,7 @@ const MyProfile = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Text>22</Text>
+              <Text>{orderSize}</Text>
               <Text
                 fontWeight="bold"
                 textAlign="center"
@@ -92,7 +108,7 @@ const MyProfile = () => {
               alignItems="center"
               justifyContent="space-between"
             >
-              <Text>32</Text>
+              <Text>{cartSize}</Text>
               <Text
                 fontWeight="bold"
                 textAlign="center"
@@ -106,7 +122,7 @@ const MyProfile = () => {
         </Card>
       </motion.div>
       <motion.div
-        style={{ width: isMobile ? "100%" : "70%", zIndex: 10 }}
+        style={{ width: isMobile ? "100%" : "70%", zIndex: 9 }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
@@ -137,6 +153,7 @@ const MyProfile = () => {
                 <Input
                   border="1px solid"
                   borderColor="lightgray"
+                  value={userData?.username?.split(" ")?.[0]}
                   placeholder="Enter first name"
                   focusBorderColor="brand.primary"
                   padding={6}
@@ -147,6 +164,7 @@ const MyProfile = () => {
                 <FormLabel>Last Name</FormLabel>
                 <Input
                   border="1px solid"
+                  value={userData?.username?.split(" ")?.[1]}
                   borderColor="lightgray"
                   placeholder="Enter last name"
                   focusBorderColor="brand.primary"
@@ -161,6 +179,7 @@ const MyProfile = () => {
                 focusBorderColor="brand.primary"
                 padding={6}
                 border="1px solid"
+                value={userData?.phoneNumber}
                 borderColor="lightgray"
                 type="email"
                 placeholder="Enter your phone number"
@@ -170,44 +189,58 @@ const MyProfile = () => {
             <FormControl>
               <FormLabel>
                 Primary Address
-                <Badge
-                  cursor="pointer"
-                  onClick={() =>
-                    router.push("/profile/23?isPrifilled=Addresses")
-                  }
-                  mx={2}
-                  colorScheme="cyan"
-                >
-                  Edit <FontAwesomeIcon icon={faPencil} size="2xs" />
-                </Badge>
+                {addressData?.length !== 0 && (
+                  <Badge
+                    cursor="pointer"
+                    onClick={() =>
+                      router.push("/profile/23?isPrifilled=Addresses")
+                    }
+                    mx={2}
+                    colorScheme="cyan"
+                  >
+                    Edit <FontAwesomeIcon icon={faPencil} size="2xs" />
+                  </Badge>
+                )}
               </FormLabel>
-
-              <VStack
-                p={4}
-                border="1px solid"
-                borderColor="lightgray"
-                borderRadius="md"
-                width="100%"
-                pos="relative"
-                alignItems="center"
-                justifyContent="left"
-              >
-                <Text width="100%" textAlign="left" fontSize="medium">
-                  Apartment, B-wing, Flat- 106
+              {addressData?.length === 0 && (
+                <Text
+                  w={"100%"}
+                  px={2}
+                  border={"1px dashed"}
+                  borderColor={"gray.400"}
+                  py={2}
+                >
+                  No Address Saved
                 </Text>
-                <Text width="100%" textAlign="left" fontSize="small">
-                  Navi Mumbai - 400709
-                </Text>
-                <Badge pos="absolute" right={0} top={0} colorScheme="cyan">
-                  Home
-                </Badge>
-              </VStack>
+              )}
+              {addressData?.length !== 0 && (
+                <VStack
+                  p={4}
+                  border="1px solid"
+                  borderColor="lightgray"
+                  borderRadius="md"
+                  width="100%"
+                  pos="relative"
+                  alignItems="center"
+                  justifyContent="left"
+                >
+                  <Text width="100%" textAlign="left" fontSize="medium">
+                    {primaryAddress?.[0]?.addressline1}
+                  </Text>
+                  <Text width="100%" textAlign="left" fontSize="small">
+                    {primaryAddress?.[0]?.city} - {primaryAddress?.[0]?.pincode}
+                  </Text>
+                  <Badge pos="absolute" right={0} top={0} colorScheme="cyan">
+                    {primaryAddress?.[0]?.type}
+                  </Badge>
+                </VStack>
+              )}
             </FormControl>
-            <Flex width="100%" alignItems="center" justifyContent="right">
+            {/* <Flex width="100%" alignItems="center" justifyContent="right">
               <Button bg="brand.primary" color="brand.background">
                 Update Profile
               </Button>
-            </Flex>
+            </Flex> */}
           </VStack>
         </VStack>
       </motion.div>

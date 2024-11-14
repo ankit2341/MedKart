@@ -17,12 +17,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import { ReactElement, useState } from "react";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
-import { GoogleLogo } from "@/shared/icons";
 import { AuthMainLayout } from "@/shared/components/auth-layout";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import usePost from "@/shared/api/hooks/use-post";
 import { showToast } from "@/shared/shared-toast";
+import { GoogleLogin } from "@react-oauth/google";
+import { LoginResponseMessages } from "@/types";
 
 const SignIn = () => {
   const isMobile = useIsMobile();
@@ -31,22 +32,41 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const isError = email !== "" && !isValidEmail(email);
+
   const { loading, post } = usePost("/users/login");
-  const handleLogin = async () => {
-    const res = await post({ email: email, password: password });
-    if (res?.Message === "User logged in successfully") {
-      showToast("success", res?.Message);
-      localStorage.setItem("token", res?.token);
-      router.push("/");
-    } else if (res?.Message === "Invalid Credentials") {
-      showToast("error", res?.Message);
-    } else if (
-      res?.Message === "User with entered credentials does not exist"
-    ) {
-      showToast("success", res?.Message);
-    } else {
-      showToast("error", "Failed to login! try again later");
+  const { post: googleLoginPost } = usePost("/users/googlelogin");
+
+  const handleLoginResponse = (res: { Message: string; token?: string }) => {
+    switch (res?.Message) {
+      case LoginResponseMessages.SUCCESS:
+        showToast("success", res.Message);
+        if (res.token) localStorage.setItem("token", res.token);
+        router.push("/");
+        break;
+
+      case LoginResponseMessages.INVALID_CREDENTIALS:
+      case LoginResponseMessages.TOKEN_MISSING:
+        showToast("error", res.Message);
+        break;
+
+      case LoginResponseMessages.USER_NOT_FOUND:
+        showToast("success", res.Message);
+        break;
+
+      default:
+        showToast("error", LoginResponseMessages.LOGIN_FAILED);
+        break;
     }
+  };
+
+  const handleLogin = async () => {
+    const res = await post({ email, password });
+    handleLoginResponse(res);
+  };
+
+  const handleLoginWithGoogle = async (token: string) => {
+    const res = await googleLoginPost({ googletoken: token });
+    handleLoginResponse(res);
   };
 
   return (
@@ -129,21 +149,15 @@ const SignIn = () => {
             or
           </AbsoluteCenter>
         </Box>
-        <Button
-          width="100%"
-          py={6}
-          px={8}
-          bg="brand.primary"
-          color={"brand.fontLight"}
-        >
-          <GoogleLogo
-            width={20}
-            height={20}
-            fill="white"
-            style={{ marginRight: "10px" }}
-          />
-          Sign in with Google
-        </Button>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            handleLoginWithGoogle(credentialResponse.credential || "");
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
+        ;
         <Text fontSize={isMobile ? "small" : "medium"}>
           New user!{" "}
           <Link

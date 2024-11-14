@@ -25,7 +25,36 @@ const cartController = {
       if (!id) {
         return res.status(401).send({ Messsage: 'userId is missing' })
       }
-      const cart = new CartModel(data)
+      const {
+        productId,
+        image,
+        productName,
+        variantPrice,
+        isAvailable,
+        quantity,
+      } = req.body
+
+      if (
+        !productId ||
+        !productName ||
+        !variantPrice ||
+        quantity == null ||
+        isAvailable == null
+      ) {
+        return res
+          .status(400)
+          .send({ message: 'Missing required fields in the request body' })
+      }
+
+      const cart = new CartModel({
+        userId,
+        productId,
+        image,
+        productName,
+        variantPrice,
+        isAvailable,
+        quantity,
+      })
       await cart.save()
 
       res.send({ Messsage: 'Item added to cart successfully' })

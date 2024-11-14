@@ -31,14 +31,16 @@ import { useRouter } from "next/router";
 import ThemeToggle from "@/features/toggle-switch";
 import { AppStaticPath } from "@/types";
 import { useUser } from "@/shared/userdata-context";
+import LogoutModal from "@/features/profile/logut";
+import useGet from "@/shared/api/hooks/use-get";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
   const isTablet = useIsTablet();
   const isMobile = useIsMobile();
   const router = useRouter();
-  const { userData, refetchUser, reset } = useUser();
-  // const isHomePage=router.basePath==="/";
+  const { userData } = useUser();
+  const { data: cartData } = useGet("/cart");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -168,7 +170,7 @@ const Navbar = () => {
                 borderColor="brand.primary"
                 borderRadius="full"
               >
-                10
+                {cartData?.length || 0}
               </Center>
             </Box>
             {isMobile && !userData?._id && (
@@ -226,7 +228,7 @@ const Navbar = () => {
                       size={"sm"}
                       bg={"brand.primary"}
                     />
-                    <Text>Welcome {userData?.username},</Text>
+                    <Text>Welcome {userData?.username?.split(" ")?.[0]},</Text>
                   </HStack>
 
                   <Divider />
@@ -235,17 +237,7 @@ const Navbar = () => {
                   >
                     Profile
                   </MenuItem>
-                  <MenuItem
-                    onClick={async () => {
-                      localStorage.clear();
-                      await reset();
-                      await refetchUser();
-                      console.log("inside");
-                      router.replace("/sign-in");
-                    }}
-                  >
-                    Logout
-                  </MenuItem>
+                  <LogoutModal isMenu={true} />
                 </MenuList>
               </Menu>
             )}
