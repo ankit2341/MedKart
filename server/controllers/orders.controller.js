@@ -1,24 +1,24 @@
-const { CartModel } = require('../models/cart.model')
+const { OrderModel } = require('../models/orders.model')
 require('dotenv').config()
 const errorMessage = {
   Response: 'false',
   Messsage: 'Error connecting Api',
 }
 
-const cartController = {
-  getCartByUserId: async (req, res) => {
+const orderController = {
+  getOrderByUserId: async (req, res) => {
     const id = req.userId
     try {
       if (!id) {
         return res.status(401).send({ Messsage: 'userId is missing' })
       }
-      const cart = await CartModel.find({ userId: id })
+      const cart = await OrderModel.find({ userId: id })
       res.status(200).send(cart)
     } catch (err) {
       res.status(404).send(errorMessage)
     }
   },
-  postCartByUserId: async (req, res) => {
+  postOrderByUserId: async (req, res) => {
     try {
       const data = req.body
       const id = req.userId
@@ -46,7 +46,7 @@ const cartController = {
           .send({ message: 'Missing required fields in the request body' })
       }
 
-      const cart = new CartModel({
+      const cart = new OrderModel({
         userId: id,
         productId,
         image,
@@ -57,33 +57,13 @@ const cartController = {
       })
       await cart.save()
 
-      res.send({ Messsage: 'Item added to cart successfully' })
+      res.send({ Messsage: 'Item ordered successfully' })
     } catch (err) {
-      res.send({ Messsage: 'Failed to add item to cart' })
-    }
-  },
-  patchCartItemById: async (req, res) => {
-    const id = req.params.id
-    const payload = req.body
-
-    try {
-      await CartModel.findByIdAndUpdate({ _id: id }, payload)
-      res.status(200).send({ Messsage: 'Cart updated successfully' })
-    } catch (err) {
-      res.status(404).send({ Messsage: 'Failed to updated cart' })
-    }
-  },
-  deleteCartItemById: async (req, res) => {
-    const id = req.params.id
-    try {
-      await CartModel.findByIdAndDelete({ _id: id })
-      res.status(200).send({ Messsage: 'item removed from cart successfully' })
-    } catch (err) {
-      res.status(404).send({ Messsage: 'Failed to remove item from cart' })
+      res.send({ Messsage: 'Failed to order the item' })
     }
   },
 }
 
 module.exports = {
-  cartController,
+  orderController,
 }
