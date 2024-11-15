@@ -1,6 +1,7 @@
 import LogoutModal from "@/features/profile/logut";
 import MyAddresses from "@/features/profile/my-addresses";
 import MyCart from "@/features/profile/my-cart";
+import MyLabTests from "@/features/profile/my-lab-tests";
 import MyOrders from "@/features/profile/my-orders";
 import MyProfile from "@/features/profile/my-profile";
 import useGet from "@/shared/api/hooks/use-get";
@@ -107,40 +108,45 @@ const Profile = () => {
               </Text>
             </VStack>
           </HStack>
-          {["Profile", "Addresses", "Cart", "Orders", "Logout"].map(
-            (el: string) => {
-              return (
-                <>
-                  <Divider />
-                  {el === "Logout" ? (
-                    <LogoutModal />
-                  ) : (
-                    <Button
-                      color={"brand.font"}
-                      onClick={() => {
-                        handleSelectedState(el);
-                      }}
-                      _hover={{
-                        color: "brand.font",
-                        background: "brand.primary",
-                        borderRadius: "md",
-                      }}
-                      display="flex"
-                      borderRadius={"md"}
-                      alignItems="center"
-                      justifyContent="space-between"
-                      width="100%"
-                      p={6}
-                      bg="brand.background"
-                      rightIcon={<FontAwesomeIcon icon={faChevronRight} />}
-                    >
-                      {el !== "Logout" && "My"} {el}
-                    </Button>
-                  )}
-                </>
-              );
-            },
-          )}
+          {[
+            "Profile",
+            "Addresses",
+            "Cart",
+            "Orders",
+            "Lab Tests",
+            "Logout",
+          ].map((el: string) => {
+            return (
+              <>
+                <Divider />
+                {el === "Logout" ? (
+                  <LogoutModal />
+                ) : (
+                  <Button
+                    color={"brand.font"}
+                    onClick={() => {
+                      handleSelectedState(el);
+                    }}
+                    _hover={{
+                      color: "brand.font",
+                      background: "brand.primary",
+                      borderRadius: "md",
+                    }}
+                    display="flex"
+                    borderRadius={"md"}
+                    alignItems="center"
+                    justifyContent="space-between"
+                    width="100%"
+                    p={6}
+                    bg="brand.background"
+                    rightIcon={<FontAwesomeIcon icon={faChevronRight} />}
+                  >
+                    {el !== "Logout" && "My"} {el}
+                  </Button>
+                )}
+              </>
+            );
+          })}
         </VStack>
       </Box>
       {!isMobile && <Divider orientation="vertical" minH={"xl"} zIndex={1} />}
@@ -168,6 +174,7 @@ const Profile = () => {
           <MyCart cartData={cartData} cartLoading={cartLoading} />
         )}
         {selectedState === "Orders" && <MyOrders />}
+        {selectedState === "Lab Tests" && <MyLabTests />}
       </HStack>
     </HStack>
   );

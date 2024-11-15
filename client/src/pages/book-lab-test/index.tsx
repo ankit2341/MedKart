@@ -1,7 +1,9 @@
 import useGet from "@/shared/api/hooks/use-get";
+import usePost from "@/shared/api/hooks/use-post";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
+import { showToast } from "@/shared/shared-toast";
 import {
   Box,
   Button,
@@ -28,11 +30,11 @@ import {
   faVirusCovid,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ReactElement } from "react";
+import { ReactElement, useState } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
-interface LabTestData {
+export interface LabTestData {
   _id: string;
   name: string;
   icon: string;
@@ -45,6 +47,8 @@ const BookLabTest = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
   const { data: labtests } = useGet("/labtest/getall");
+  const { post, loading } = usePost("/labtest/post");
+  const [loadingId, setLoadingId] = useState<string | null>(null);
 
   const responsive = {
     superLargeDesktop: {
@@ -229,6 +233,19 @@ const BookLabTest = () => {
                         borderRadius="lg"
                         width="100%"
                         height={10}
+                        isLoading={loading && loadingId === el?._id}
+                        onClick={async () => {
+                          setLoadingId(el._id);
+                          const res = await post({
+                            name: el?.name,
+                            icon: el?.icon,
+                            price: el?.price,
+                            originalPrice: el?.originalPrice,
+                            features: el?.features,
+                          });
+
+                          showToast("info", res?.message);
+                        }}
                       >
                         Book Now
                       </Button>

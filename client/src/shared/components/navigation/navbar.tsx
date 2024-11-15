@@ -255,15 +255,24 @@ const Navbar = () => {
         >
           {!isTablet && <ThemeToggle />}
           {[
-            { name: "Products", icon: faPumpMedical },
-            { name: "Offers", icon: faGift },
-            { name: "Book Lab Test", icon: faMedkit },
+            {
+              name: "Products",
+              icon: faPumpMedical,
+              route: AppStaticPath.Products,
+            },
+            { name: "Offers", icon: faGift, route: AppStaticPath.Offers },
+            {
+              name: "Book Lab Test",
+              icon: faMedkit,
+              route: AppStaticPath.BookLabTest,
+            },
           ].map((item) => {
             return (
               <HStack
                 cursor="pointer"
                 border="1px solid"
                 borderRadius={"xl"}
+                onClick={() => router.push(item.route)}
                 borderColor="brand.background"
                 _hover={{
                   border: "1px solid",
