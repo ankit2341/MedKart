@@ -1,5 +1,6 @@
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import {
+  Box,
   Button,
   Divider,
   Flex,
@@ -10,73 +11,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Navbar from "./navigation/navbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBug,
-  faHeadset,
-  faUserShield,
-} from "@fortawesome/free-solid-svg-icons";
 import Footer from "./navigation/footer";
 import useIsMobile from "../hooks/use-is-mobile";
 import HappyCustomers from "./happy-customers";
 import { FacebookLogo, InstagramLogo, XLogo, YoutubeLogo } from "../icons";
 import { useTheme } from "@/context/theme-context";
+import Chatbot from "@/features/chatbot";
 
 interface AppContainerProps {
   children?: ReactNode;
   isHappyCustomer?: boolean;
 }
-
-const SideNav = () => {
-  const [showNavbar, setShowNavbar] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        setShowNavbar(true);
-      } else {
-        setShowNavbar(false);
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  return showNavbar ? (
-    <VStack
-      zIndex={10000}
-      pos="fixed"
-      bg="brand.background"
-      borderRadius="full"
-      right={0}
-      top={"40vh"}
-      boxShadow={"lg"}
-      border="1px solid"
-      borderColor="brand.primary"
-      spacing={1}
-      px={0}
-      py={4}
-    >
-      <Button title="Contact us" bg="brand.background" color="brand.primary">
-        <FontAwesomeIcon icon={faHeadset} />
-      </Button>
-      <Button title="Report a bug" bg="brand.background" color="brand.primary">
-        <FontAwesomeIcon icon={faBug} />
-      </Button>
-      <Button
-        title="Report complaint"
-        bg="brand.background"
-        color="brand.primary"
-      >
-        <FontAwesomeIcon icon={faUserShield} />
-      </Button>
-    </VStack>
-  ) : null;
-};
 
 export const AppContainer = ({
   children,
@@ -88,7 +33,6 @@ export const AppContainer = ({
   return (
     <Flex direction="column" minH="100vh" pb={10}>
       <Navbar />
-      {!isMobile && <SideNav />}
       {children}
       {isHappyCustomer && <HappyCustomers />}
       <Divider />
@@ -166,6 +110,9 @@ export const AppContainer = ({
         </HStack>
       </VStack>
       <Footer />
+      <Box pos={"fixed"} zIndex={11} bottom={10} right={isMobile?2:10}>
+     <Chatbot/>
+      </Box>
     </Flex>
   );
 };
