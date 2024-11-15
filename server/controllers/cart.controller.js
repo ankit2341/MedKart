@@ -22,9 +22,11 @@ const cartController = {
     try {
       const data = req.body
       const id = req.userId
+
       if (!id) {
-        return res.status(401).send({ Messsage: 'userId is missing' })
+        return res.status(401).send({ Message: 'userId is missing' })
       }
+
       const {
         productId,
         image,
@@ -46,6 +48,14 @@ const cartController = {
           .send({ message: 'Missing required fields in the request body' })
       }
 
+      const existingItem = await CartModel.findOne({ userId: id, productId })
+
+      if (existingItem) {
+        return res
+          .status(400)
+          .send({ Message: 'Item already exists in the cart' })
+      }
+
       const cart = new CartModel({
         userId: id,
         productId,
@@ -57,9 +67,11 @@ const cartController = {
       })
       await cart.save()
 
-      res.send({ Messsage: 'Item added to cart successfully' })
+      res.send({ Message: 'Item added to cart successfully' })
     } catch (err) {
-      res.send({ Messsage: 'Failed to add item to cart' })
+      res
+        .status(500)
+        .send({ Message: 'Failed to add item to cart', error: err })
     }
   },
   patchCartItemById: async (req, res) => {

@@ -6,6 +6,7 @@ const { userRouter } = require('./routes/user.route')
 const { addressRouter } = require('./routes/address.route')
 const { cartRouter } = require('./routes/cart.route')
 const { orderRouter } = require('./routes/orders.route')
+const { labtestRouter } = require('./routes/labtest.route')
 
 const app = express()
 app.use(express.json())
@@ -15,6 +16,7 @@ app.use('/users', userRouter)
 app.use('/address', addressRouter)
 app.use('/cart', cartRouter)
 app.use('/order', orderRouter)
+app.use('/labtest', labtestRouter)
 
 app.get('/', async (req, res) => {
   try {
