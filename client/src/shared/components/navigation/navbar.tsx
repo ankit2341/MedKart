@@ -18,6 +18,7 @@ import {
   faBagShopping,
   faGift,
   faM,
+  faMedkit,
   // faMedkit,
   faPumpMedical,
   faUser,
@@ -111,11 +112,11 @@ const Navbar = () => {
                   route: AppStaticPath.Products,
                 },
                 { name: "Offers", icon: faGift, route: AppStaticPath.Offers },
-                // {
-                //   name: "Book Lab Test",
-                //   icon: faMedkit,
-                //   route: AppStaticPath.BookLabTest,
-                // },
+                {
+                  name: "Book Lab Test",
+                  icon: faMedkit,
+                  route: AppStaticPath.BookLabTest,
+                },
               ].map((item) => {
                 return (
                   <HStack
@@ -256,7 +257,7 @@ const Navbar = () => {
           {[
             { name: "Products", icon: faPumpMedical },
             { name: "Offers", icon: faGift },
-            // { name: "Book Lab Test", icon: faMedkit },
+            { name: "Book Lab Test", icon: faMedkit },
           ].map((item) => {
             return (
               <HStack

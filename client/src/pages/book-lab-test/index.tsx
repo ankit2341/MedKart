@@ -1,3 +1,4 @@
+import useGet from "@/shared/api/hooks/use-get";
 import { AppMainLayout } from "@/shared/components/app-layout";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
@@ -19,7 +20,6 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import {
-  faCartPlus,
   faDesktop,
   faPhoneVolume,
   faShieldVirus,
@@ -32,9 +32,19 @@ import { ReactElement } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
+interface LabTestData {
+  _id: string;
+  name: string;
+  icon: string;
+  price: number;
+  originalPrice: number;
+  features: string[];
+}
+
 const BookLabTest = () => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const { data: labtests } = useGet("/labtest/getall");
 
   const responsive = {
     superLargeDesktop: {
@@ -157,80 +167,77 @@ const BookLabTest = () => {
                 </VStack>
               </VStack>
             </HStack>
-
-            <Button
-              w={!isMobile ? undefined : "100%"}
-              variant={"solid"}
-              bg={"brand.primary"}
-              color={"white"}
-            >
-              View Popular Packages
-            </Button>
           </VStack>
         </HStack>
       </VStack>
       <Box px={isMobile ? "4" : "8"} width="100%" bg="brand.background">
-        <Carousel
-          responsive={responsive}
-          autoPlay
-          itemClass="carousel-item-padding"
-          swipeable={isMobile || isTablet ? true : false}
-        >
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((el) => {
-            return (
-              <Card key={el} boxShadow={"lg"} w={"100%"} h={"fit-content"}>
-                <CardHeader>
-                  <VStack w={"100%"} align={"center"} justify={"center"}>
-                    <Center
-                      boxSize={"10"}
-                      color={"brand.primary"}
-                      border={"1px solid"}
-                      borderRadius={"full"}
-                    >
-                      <FontAwesomeIcon icon={faVirusCovid} />
-                    </Center>
-                    <Heading
-                      w={"100%"}
-                      textAlign={"center"}
-                      fontSize={"medium"}
-                    >
-                      Covid 19 Test
-                    </Heading>
-                    <HStack fontSize={"small"}>
-                      <Text>MRP. ₹. 100</Text>
-                      <Text textDecoration="line-through">₹. 150</Text>
-                    </HStack>
-                  </VStack>
-                </CardHeader>
-                <CardBody>
-                  <VStack spacing={0}>
-                    <UnorderedList fontSize={"small"}>
-                      <ListItem>Sample Collection</ListItem>
-                      <ListItem>Extraction</ListItem>
-                      <ListItem>PCR</ListItem>
-                    </UnorderedList>
-                  </VStack>
-                </CardBody>
-                <CardFooter>
-                  <Button
-                    ml={2}
-                    bg="brand.primary"
-                    color="white"
-                    borderRadius="lg"
-                    width="100%"
-                    height={10}
+        {labtests && labtests?.length && (
+          <Carousel
+            responsive={responsive}
+            autoPlay
+            itemClass="carousel-item-padding"
+            swipeable={isMobile || isTablet ? true : false}
+          >
+            {labtests &&
+              labtests?.map((el: LabTestData) => {
+                return (
+                  <Card
+                    key={el._id}
+                    boxShadow={"lg"}
+                    w={"100%"}
+                    h={"fit-content"}
                   >
-                    Add to Cart
-                    <FontAwesomeIcon
-                      style={{ paddingLeft: "10px" }}
-                      icon={faCartPlus}
-                    />
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
-        </Carousel>
+                    <CardHeader>
+                      <VStack w={"100%"} align={"center"} justify={"center"}>
+                        <Center
+                          boxSize={"10"}
+                          color={"brand.primary"}
+                          border={"1px solid"}
+                          borderRadius={"full"}
+                        >
+                          <FontAwesomeIcon icon={faVirusCovid} />
+                        </Center>
+                        <Heading
+                          w={"100%"}
+                          textAlign={"center"}
+                          fontSize={"medium"}
+                        >
+                          {el?.name}
+                        </Heading>
+                        <HStack fontSize={"small"}>
+                          <Text>MRP. ₹. {el?.price}</Text>
+                          <Text textDecoration="line-through">
+                            ₹. {el?.originalPrice}
+                          </Text>
+                        </HStack>
+                      </VStack>
+                    </CardHeader>
+                    <CardBody>
+                      <VStack spacing={0}>
+                        <UnorderedList fontSize={"small"}>
+                          {el?.features?.map((feature: string) => {
+                            return <ListItem key={feature}>{feature}</ListItem>;
+                          })}
+                        </UnorderedList>
+                      </VStack>
+                    </CardBody>
+                    <CardFooter>
+                      <Button
+                        ml={2}
+                        bg="brand.primary"
+                        color="white"
+                        borderRadius="lg"
+                        width="100%"
+                        height={10}
+                      >
+                        Book Now
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                );
+              })}
+          </Carousel>
+        )}
       </Box>
       <VStack
         spacing={4}

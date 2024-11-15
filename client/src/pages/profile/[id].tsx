@@ -32,9 +32,8 @@ const Profile = () => {
   const [selectedState, setSelectedState] = useState<string>("");
   const { userData } = useUser();
   const { data: cartData, loading: cartLoading } = useGet("/cart/");
-  console.log(cartData, cartLoading);
   const { data: addressData, loading: addressLoading } = useGet("/address/");
-  console.log(addressData, addressLoading, "sdfgb");
+  const { data: orders } = useGet("/order");
 
   const handleSelectedState = (el: string) => {
     if (el !== "Logout") {
@@ -153,7 +152,7 @@ const Profile = () => {
       >
         {selectedState === "Profile" && (
           <MyProfile
-            orderSize={0}
+            orderSize={orders?.length || 0}
             addressData={addressData}
             cartSize={cartData?.length || 0}
             userData={userData}

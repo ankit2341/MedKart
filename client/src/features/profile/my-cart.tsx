@@ -25,7 +25,7 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 interface cartData {
-  id: string;
+  _id: string;
   userId: string;
   productId: string;
   image: string;
@@ -203,7 +203,7 @@ const MyCart = ({
                 return (
                   <HStack
                     flexDir={isMobile ? "column" : "row"}
-                    key={el.id}
+                    key={el._id}
                     border="1px solid"
                     borderColor="gray.200"
                     borderRadius="md"
