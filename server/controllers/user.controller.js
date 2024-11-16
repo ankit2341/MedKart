@@ -19,13 +19,13 @@ const userController = {
   },
   getUserData: async (req, res) => {
     try {
-      const user = await UserModel.findById(req.userId, "-password"); 
+      const user = await UserModel.findById(req.userId, '-password')
       if (!user) {
-        return res.status(404).json({ message: "User not found" });
+        return res.status(404).json({ message: 'User not found' })
       }
-      res.status(200).json(user);
+      res.status(200).json(user)
     } catch (error) {
-      res.status(500).json({ message: errorMessage });
+      res.status(500).json({ message: errorMessage })
     }
   },
   getUsers: async (req, res) => {
@@ -55,20 +55,16 @@ const userController = {
   },
   patchUser: async (req, res) => {
     const { id } = req.query
-    const payload = req.body
+    const { phoneNumber, username, email, role } = req.body
 
     try {
-      const { phoneNumber, username, avatar } = payload
-      const payloadToUpdate = {}
-      if (username) {
-        updateObject.username = username
+      const payloadToUpdate = {
+        username: username,
+        email: email,
+        phoneNumber: phoneNumber,
+        role: role,
       }
-      if (phoneNumber) {
-        updateObject.phoneNumber = phoneNumber
-      }
-      if (avatar) {
-        updateObject.avatar = avatar
-      }
+
       await UserModel.findByIdAndUpdate({ _id: id }, payloadToUpdate)
       res.status(200).send({ Message: 'User updated successfully' })
     } catch (err) {
