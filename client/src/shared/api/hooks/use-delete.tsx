@@ -24,6 +24,7 @@ const useDelete = (endpoint: string) => {
         throw new Error(result.message || "Something went wrong");
       }
       setData(result);
+      return result;
     } catch (err) {
       if (err instanceof Error) {
         setError(err.message);

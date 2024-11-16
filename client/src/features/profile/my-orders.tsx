@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 
-interface OrderData {
+export interface OrderData {
   _id: string;
   userId: string;
   productId: string;

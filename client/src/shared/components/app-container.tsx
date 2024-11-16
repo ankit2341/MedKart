@@ -110,8 +110,8 @@ export const AppContainer = ({
         </HStack>
       </VStack>
       <Footer />
-      <Box pos={"fixed"} zIndex={11} bottom={10} right={isMobile?2:10}>
-     <Chatbot/>
+      <Box pos={"fixed"} zIndex={11} bottom={10} right={isMobile ? 2 : 10}>
+        <Chatbot />
       </Box>
     </Flex>
   );

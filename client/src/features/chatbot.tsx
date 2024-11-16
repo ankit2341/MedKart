@@ -1,5 +1,4 @@
-
-import  { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -11,26 +10,44 @@ import {
   Divider,
   Center,
   SimpleGrid,
-} from '@chakra-ui/react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeadphonesSimple, faM, faX } from '@fortawesome/free-solid-svg-icons';
+} from "@chakra-ui/react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHeadphonesSimple,
+  faM,
+  faX,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Chatbot = () => {
-  const [conversation, setConversation] = useState<{ user?: string; bot?: string; options?: boolean }[]>([]);
-  const [userInput, setUserInput] = useState('');
+  const [conversation, setConversation] = useState<
+    { user?: string; bot?: string; options?: boolean }[]
+  >([]);
+  const [userInput, setUserInput] = useState("");
   const [show, setShow] = useState(false);
 
   const options = [
-    { prompt: 'Your Orders', answer: 'Go to your profile and click on My orders to view your orders' },
-    { prompt: 'Your Profile', answer: 'Go to your profile and view your profile info' },
-    { prompt: 'Your Lab Tests', answer: 'Go to your profile and click on My lab tests to view your tests' },
-    { prompt: 'Contact Us', answer: 'Reach me at ankitpatil2341@gmail.com ( made with ♥ by Ankit )' },
+    {
+      prompt: "Your Orders",
+      answer: "Go to your profile and click on My orders to view your orders",
+    },
+    {
+      prompt: "Your Profile",
+      answer: "Go to your profile and view your profile info",
+    },
+    {
+      prompt: "Your Lab Tests",
+      answer: "Go to your profile and click on My lab tests to view your tests",
+    },
+    {
+      prompt: "Contact Us",
+      answer: "Reach me at ankitpatil2341@gmail.com ( made with ♥ by Ankit )",
+    },
   ];
-  
+
   const addOptions = () => {
     setConversation((prev) => [
       ...prev,
-      { bot: 'What can I help you with?', options: true },
+      { bot: "What can I help you with?", options: true },
     ]);
   };
 
@@ -53,10 +70,10 @@ const Chatbot = () => {
     setConversation((prev) => [
       ...prev,
       { user: userMessage },
-      { bot: 'I didn’t quite catch that. Let me know how I can assist you!' },
+      { bot: "I didn’t quite catch that. Let me know how I can assist you!" },
     ]);
 
-    setUserInput('');
+    setUserInput("");
 
     setTimeout(() => {
       addOptions();
@@ -88,11 +105,24 @@ const Chatbot = () => {
               Chat with us
             </Heading>
             <Divider my={4} />
-            <VStack spacing={4} align="start" maxHeight="350px" overflowY="auto">
+            <VStack
+              spacing={4}
+              align="start"
+              maxHeight="350px"
+              overflowY="auto"
+            >
               {conversation.map((message, index) => (
-                <Box key={index} w="100%" display={index===0?"none":"block"}>
+                <Box
+                  key={index}
+                  w="100%"
+                  display={index === 0 ? "none" : "block"}
+                >
                   {message.user && (
-                    <HStack alignItems="center" justifyContent="right" spacing={2}>
+                    <HStack
+                      alignItems="center"
+                      justifyContent="right"
+                      spacing={2}
+                    >
                       <Text
                         px={4}
                         maxW="100%"
@@ -143,7 +173,7 @@ const Chatbot = () => {
                           boxShadow="none"
                           fontSize={"sm"}
                           cursor="pointer"
-                          _hover={{ bg: 'gray.200' }}
+                          _hover={{ bg: "gray.200" }}
                           onClick={() => handleOptionClick(option)}
                         >
                           <Text fontWeight="bold">{option.prompt}</Text>
@@ -166,7 +196,12 @@ const Chatbot = () => {
                 onChange={(e) => setUserInput(e.target.value)}
                 isRequired
               />
-              <Button type="submit" bg="brand.primary" color="white" isLoading={false}>
+              <Button
+                type="submit"
+                bg="brand.primary"
+                color="white"
+                isLoading={false}
+              >
                 Send
               </Button>
             </HStack>
