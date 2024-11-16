@@ -18,6 +18,21 @@ const orderController = {
       res.status(404).send(errorMessage)
     }
   },
+  getOrders: async (req, res) => {
+    const { page } = req.query
+    try {
+      if (page) {
+        const orders = await OrderModel.find()
+          .skip((page - 1) * 10)
+          .limit(10)
+        res.status(200).send(orders)
+      } else {
+        res.status(200).send({ Message: 'Page is mising' })
+      }
+    } catch (err) {
+      res.status(404).send(errorMessage)
+    }
+  },
   postOrderByUserId: async (req, res) => {
     try {
       const data = req.body
