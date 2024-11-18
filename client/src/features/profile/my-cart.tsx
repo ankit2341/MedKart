@@ -9,12 +9,14 @@ import {
   CardFooter,
   CardHeader,
   Divider,
+  Flex,
   FormControl,
   FormLabel,
   HStack,
   Image,
   Input,
   Skeleton,
+  Spinner,
   Stack,
   Text,
   VStack,
@@ -68,7 +70,7 @@ const MyCart = ({
     return null;
   }
 
-  return (
+  return cartLoading?<Flex w={"full"} alignItems={"center"} justify={"center"}><Spinner/></Flex>:
     <>
       <motion.div
         style={{ width: isMobile || isTablet ? "100%" : "30%", zIndex: 9 }}
@@ -278,8 +280,8 @@ const MyCart = ({
           </VStack>
         </VStack>
       </motion.div>
-    </>
-  );
+    </>;
+  
 };
 
 export default MyCart;

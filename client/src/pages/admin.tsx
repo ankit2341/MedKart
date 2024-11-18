@@ -17,16 +17,16 @@ const Admin = () => {
   const [selectedData, setSelectedData] = useState("users");
   const { userData } = useUser();
 
-  if (typeof window === undefined) {
-    return null;
-  }
-
   useEffect(() => {
     if (userData !== null && userData?.role !== "PLATFORM_ADMIN") {
       router.push("/");
       showToast("error", "Not Authorized");
     }
   }, [userData, router]);
+
+  if (typeof window === "undefined") {
+    return null;
+  }
 
   if (userData?.role !== "PLATFORM_ADMIN") {
     return <Splash />;

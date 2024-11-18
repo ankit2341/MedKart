@@ -138,7 +138,7 @@ const MyProfile = ({
         >
           <Box width="100%" px={6} pt={6}>
             <Text w="100%" textAlign="left" fontWeight="bold">
-              Edit Profile
+              Your Profile
             </Text>
           </Box>
           <Divider />
@@ -152,6 +152,7 @@ const MyProfile = ({
                 <FormLabel>First Name</FormLabel>
                 <Input
                   border="1px solid"
+                  isReadOnly
                   borderColor="lightgray"
                   value={userData?.username?.split(" ")?.[0]}
                   placeholder="Enter first name"
@@ -164,6 +165,7 @@ const MyProfile = ({
                 <FormLabel>Last Name</FormLabel>
                 <Input
                   border="1px solid"
+                  isReadOnly
                   value={userData?.username?.split(" ")?.[1]}
                   borderColor="lightgray"
                   placeholder="Enter last name"
@@ -179,6 +181,7 @@ const MyProfile = ({
                 focusBorderColor="brand.primary"
                 padding={6}
                 border="1px solid"
+                isReadOnly
                 value={userData?.phoneNumber}
                 borderColor="lightgray"
                 type="email"

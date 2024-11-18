@@ -27,7 +27,6 @@ export interface OrderData {
 const MyOrders = () => {
   const isMobile = useIsMobile();
   const { data: orders, loading: ordersLoading } = useGet("/order");
-  console.log(orders);
 
   return (
     <motion.div

@@ -18,10 +18,9 @@ import {
   Radio,
   RadioGroup,
   Stack,
-  Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type UserState = {
   username: string | undefined;
@@ -40,7 +39,6 @@ const AdminEdit = ({
   UserData,
   ProductData,
   refetch,
-  setPage,
 }: {
   UserData?: UserData;
   ProductData?: ProductProps;
@@ -61,6 +59,7 @@ const AdminEdit = ({
     "__v" | "_id" | "make" | "subtext" | "image"
   > | null>(
     ProductData
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       ? (({ __v, _id, make, subtext, image, ...rest }) => rest)(ProductData)
       : null,
   );
@@ -95,7 +94,7 @@ const AdminEdit = ({
     showToast("info", res?.Message);
   };
 
-  if (typeof window === undefined) {
+  if (typeof window === "undefined") {
     return null;
   }
 
