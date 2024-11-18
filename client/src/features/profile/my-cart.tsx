@@ -70,7 +70,11 @@ const MyCart = ({
     return null;
   }
 
-  return cartLoading?<Flex w={"full"} alignItems={"center"} justify={"center"}><Spinner/></Flex>:
+  return cartLoading ? (
+    <Flex w={"full"} alignItems={"center"} justify={"center"}>
+      <Spinner />
+    </Flex>
+  ) : (
     <>
       <motion.div
         style={{ width: isMobile || isTablet ? "100%" : "30%", zIndex: 9 }}
@@ -280,8 +284,8 @@ const MyCart = ({
           </VStack>
         </VStack>
       </motion.div>
-    </>;
-  
+    </>
+  );
 };
 
 export default MyCart;

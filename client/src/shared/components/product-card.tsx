@@ -141,7 +141,6 @@ const ProductCard = ({
               isAvailable: product?.isAvailable,
               quantity: 1,
             });
-            console.log(res,"sdfxdvcb");
             showToast("info", res?.Message);
           }}
           height={10}

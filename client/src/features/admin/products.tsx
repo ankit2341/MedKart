@@ -1,5 +1,4 @@
 import useGet from "@/shared/api/hooks/use-get";
-import { UserData } from "@/shared/userdata-context";
 import { ProductProps } from "@/types";
 import {
   Badge,

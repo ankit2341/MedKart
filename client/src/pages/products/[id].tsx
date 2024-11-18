@@ -171,7 +171,7 @@ const ProductIndividualPage = () => {
                   isAvailable: data?.isAvailable,
                   quantity: 1,
                 });
-                showToast("info", res?.Messsage);
+                showToast("info", res?.Message);
               }}
               borderRadius="lg"
               width="100%"

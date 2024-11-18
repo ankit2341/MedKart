@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import {
   Box,
   Button,
@@ -17,6 +17,7 @@ import HappyCustomers from "./happy-customers";
 import { FacebookLogo, InstagramLogo, XLogo, YoutubeLogo } from "../icons";
 import { useTheme } from "@/context/theme-context";
 import Chatbot from "@/features/chatbot";
+import { showToast } from "../shared-toast";
 
 interface AppContainerProps {
   children?: ReactNode;
@@ -29,6 +30,7 @@ export const AppContainer = ({
 }: AppContainerProps) => {
   const isMobile = useIsMobile();
   const { theme } = useTheme();
+  const [email,setEmail]=useState("");
 
   return (
     <Flex direction="column" minH="100vh" pb={10}>
@@ -63,10 +65,12 @@ export const AppContainer = ({
             color={"black"}
             bg={"white"}
             w={isMobile ? "100%" : "30%"}
+            value={email}
+            onChange={(e)=>setEmail(e.target.value)}
             placeholder="Enter email address"
             focusBorderColor="brand.primary"
           />
-          <Button bg={"brand.primary"} color={"white"}>
+          <Button bg={"brand.primary"} isDisabled={email===""} onClick={()=>{setEmail("");showToast("info","Thanks for subscribing! we will catch up later");}} color={"white"}>
             Subscribe
           </Button>
         </HStack>

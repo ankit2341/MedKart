@@ -1,12 +1,8 @@
 import { LabTestData } from "@/pages/book-lab-test";
 import useGet from "@/shared/api/hooks/use-get";
 import {
-  Badge,
-  Button,
   Center,
   Divider,
-  HStack,
-  Image,
   ListItem,
   Skeleton,
   Table,
@@ -22,7 +18,6 @@ import {
 } from "@chakra-ui/react";
 import { faVirusCovid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
 
 interface AdminTableHeader {
   label: string;

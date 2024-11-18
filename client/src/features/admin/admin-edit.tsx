@@ -59,8 +59,8 @@ const AdminEdit = ({
     "__v" | "_id" | "make" | "subtext" | "image"
   > | null>(
     ProductData
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      ? (({ __v, _id, make, subtext, image, ...rest }) => rest)(ProductData)
+      ? // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        (({ __v, _id, make, subtext, image, ...rest }) => rest)(ProductData)
       : null,
   );
 

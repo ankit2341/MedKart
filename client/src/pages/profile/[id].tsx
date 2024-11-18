@@ -33,7 +33,11 @@ const Profile = () => {
   const [selectedState, setSelectedState] = useState<string>("");
   const { userData } = useUser();
   const { data: cartData, loading: cartLoading } = useGet("/cart/");
-  const { data: addressData, loading: addressLoading } = useGet("/address/");
+  const {
+    data: addressData,
+    refetch: addressRefetch,
+    loading: addressLoading,
+  } = useGet("/address/");
   const { data: orders } = useGet("/order");
 
   const handleSelectedState = (el: string) => {
@@ -166,6 +170,7 @@ const Profile = () => {
         )}
         {selectedState === "Addresses" && (
           <MyAddresses
+            addressRefetch={addressRefetch}
             addressData={addressData}
             addressLoading={addressLoading}
           />

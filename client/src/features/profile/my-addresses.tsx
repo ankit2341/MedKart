@@ -3,7 +3,6 @@ import useIsTablet from "@/shared/hooks/use-is-tablet";
 import { motion } from "framer-motion";
 import {
   Badge,
-  Button,
   Flex,
   SimpleGrid,
   Skeleton,
@@ -12,13 +11,16 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { UserAddress } from "@/types";
+import AddNewAddress from "./add-new-address";
 
 const MyAddresses = ({
   addressData,
   addressLoading,
+  addressRefetch,
 }: {
   addressData: UserAddress[];
   addressLoading: boolean;
+  addressRefetch: () => void;
 }) => {
   const isViewMobile = useIsMobile();
   const isTableView = useIsTablet();
@@ -90,9 +92,7 @@ const MyAddresses = ({
           </SimpleGrid>
         </VStack>
         <Flex width="100%" alignItems="center" justifyContent="right">
-          <Button bg="brand.primary" color="brand.background">
-            Add New Address
-          </Button>
+          <AddNewAddress addressRefetch={addressRefetch} />
         </Flex>
       </VStack>
     </motion.div>
