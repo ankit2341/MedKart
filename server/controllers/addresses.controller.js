@@ -19,16 +19,25 @@ const addressController = {
     }
   },
   postAddressByUserId: async (req, res) => {
-    const body = req.body
+    const { name, addressline1, city, pincode, phoneNumber, type } = req.body
+    const userId = req.userId
     try {
-      if (!body?.userId) {
+      if (!userId) {
         return res.status(401).send({
           Message: 'User Id is missing',
         })
       }
-      const addresses = new AddressModel(body)
+      const addresses = new AddressModel({
+        userId: userId,
+        name: name,
+        addressline1: addressline1,
+        city: city,
+        pincode: pincode,
+        phoneNumber: phoneNumber,
+        type,
+      })
       await addresses.save()
-      res.send({ Message: 'Product added successfully' })
+      res.send({ Message: 'Address saved successfully' })
     } catch (err) {
       console.log(err)
       res.status(404).send(errorMessage)
