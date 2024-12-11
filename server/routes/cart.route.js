@@ -15,6 +15,8 @@ cartRouter.delete(
   cartController.deleteCartItemById,
 )
 
+cartRouter.delete('/clear', authenticate, cartController.resetCartByUserId)
+
 module.exports = {
   cartRouter,
 }

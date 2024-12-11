@@ -94,6 +94,28 @@ const cartController = {
       res.status(404).send({ Messsage: 'Failed to remove item from cart' })
     }
   },
+  resetCartByUserId: async (req, res) => {
+    try {
+      const id = req.userId
+
+      if (!id) {
+        return res.status(401).send({ message: 'userId is missing' })
+      }
+
+      const result = await OrderModel.deleteMany({ userId: id })
+
+      if (result.deletedCount === 0) {
+        return res
+          .status(404)
+          .send({ message: 'No items found in the cart to delete' })
+      }
+
+      res.send({ message: 'Cart has been emptied successfully' })
+    } catch (err) {
+      console.error(err)
+      res.status(500).send({ message: 'Failed to empty the cart' })
+    }
+  },
 }
 
 module.exports = {
