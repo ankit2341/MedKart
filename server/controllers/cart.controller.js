@@ -102,8 +102,8 @@ const cartController = {
         return res.status(401).send({ message: 'userId is missing' })
       }
 
-      const result = await OrderModel.deleteMany({ userId: id })
-
+      const result = await CartModel.deleteMany({ userId: id })
+      console.log(result)
       if (result.deletedCount === 0) {
         return res
           .status(404)
