@@ -38,43 +38,53 @@ const orderController = {
       const data = req.body
       const id = req.userId
       if (!id) {
-        return res.status(401).send({ Messsage: 'userId is missing' })
-      }
-      const {
-        productId,
-        image,
-        productName,
-        variantPrice,
-        isAvailable,
-        quantity,
-      } = req.body
-
-      if (
-        !productId ||
-        !productName ||
-        !variantPrice ||
-        quantity == null ||
-        isAvailable == null
-      ) {
-        return res
-          .status(400)
-          .send({ message: 'Missing required fields in the request body' })
+        return res.status(401).send({ message: 'userId is missing' })
       }
 
-      const cart = new OrderModel({
-        userId: id,
-        productId,
-        image,
-        productName,
-        variantPrice,
-        isAvailable,
-        quantity,
-      })
-      await cart.save()
+      const items = data.items
+      if (!Array.isArray(items) || items.length === 0) {
+        return res.status(400).send({ message: 'Cart is Empty' })
+      }
 
-      res.send({ Messsage: 'Item ordered successfully' })
+      for (const item of items) {
+        const {
+          productId,
+          image,
+          productName,
+          variantPrice,
+          isAvailable,
+          quantity,
+        } = item
+
+        if (
+          !productId ||
+          !productName ||
+          !variantPrice ||
+          quantity == null ||
+          isAvailable == null
+        ) {
+          return res
+            .status(400)
+            .send({ message: 'Missing required fields in one or more items' })
+        }
+
+        const cart = new OrderModel({
+          userId: id,
+          productId,
+          image,
+          productName,
+          variantPrice,
+          isAvailable,
+          quantity,
+        })
+
+        await cart.save()
+      }
+
+      res.send({ message: 'Items ordered successfully' })
     } catch (err) {
-      res.send({ Messsage: 'Failed to order the item' })
+      console.error(err)
+      res.status(500).send({ message: 'Failed to order the items' })
     }
   },
 }
