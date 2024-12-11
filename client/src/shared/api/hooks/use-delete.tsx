@@ -6,32 +6,36 @@ const useDelete = (endpoint: string) => {
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  const deleteData = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `${localStorage.getItem("token") || ""}`,
+  const deleteData = useCallback(
+    async (body: any, endpoint: any) => {
+      setLoading(true);
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+          {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `${localStorage.getItem("token") || ""}`,
+            },
+            body: JSON.stringify(body),
           },
-        },
-      );
-      const result = await response.json();
-      setData(result);
-      return result;
-    } catch (err) {
-      if (err instanceof Error) {
-        setError(err.message);
-      } else {
-        setError("An unknown error occurred");
+        );
+        const result = await response.json();
+        setData(result);
+        return result;
+      } catch (err) {
+        if (err instanceof Error) {
+          setError(err.message);
+        } else {
+          setError("An unknown error occurred");
+        }
+      } finally {
+        setLoading(false);
       }
-    } finally {
-      setLoading(false);
-    }
-  }, [endpoint]);
+    },
+    [endpoint],
+  );
 
   return { data, error, loading, remove: deleteData };
 };

@@ -76,7 +76,12 @@ const MyAddresses = ({
                     pos="relative"
                     justifyContent="left"
                   >
-                     <Text width="100%" fontWeight={"semibold"} textAlign="left" fontSize="medium">
+                    <Text
+                      width="100%"
+                      fontWeight={"semibold"}
+                      textAlign="left"
+                      fontSize="medium"
+                    >
                       {address?.name}
                     </Text>
                     <Text width="100%" textAlign="left" fontSize="medium">

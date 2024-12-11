@@ -25,6 +25,7 @@ import "react-multi-carousel/lib/styles.css";
 import WhyUs from "@/features/home/why-us";
 import TopSellers from "@/features/home/top-sellers";
 import PopularProducts from "@/features/home/popular-products";
+import { useRouter } from "next/router";
 
 const Home = () => {
   const icons = [
@@ -36,6 +37,7 @@ const Home = () => {
   const [icon, setIcon] = useState(0);
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
+  const router = useRouter();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -330,8 +332,9 @@ const Home = () => {
             bg="brand.background"
             color="brand.primary"
             zIndex={9}
+            onClick={() => router.push("/book-lab-test")}
           >
-            Book an appointment
+            Book an lab test
           </Button>
           <Image
             boxSize={"fit-content"}
@@ -366,17 +369,17 @@ const Home = () => {
               Refer Now
             </Heading>
             <Text width="50%" fontSize="small" zIndex={10} noOfLines={3}>
-              Tell your friends to shop at MedKart. They get Rs.200 off when
-              they shop with us the 1st time & you get Rs. 200 off on your next
-              order.
+              Tell your friends to shop at MedKart. They get different discounts
+              as per available coupons
             </Text>
             <Button
               width="50%"
               bg="brand.background"
               color="brand.primary"
               zIndex={10}
+              onClick={() => router.push("/offers")}
             >
-              Refer now
+              Offers
             </Button>
             <Image
               boxSize={isMobile ? "150" : "fit-content"}
@@ -420,6 +423,7 @@ const Home = () => {
               bg="brand.background"
               color="brand.primary"
               zIndex={10}
+              onClick={() => router.push("/profile/user")}
             >
               Checkout Now
             </Button>

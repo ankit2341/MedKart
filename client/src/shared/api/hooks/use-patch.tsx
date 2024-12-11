@@ -7,11 +7,11 @@ const usePatch = (endpoint: string) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const patchData = useCallback(
-    async (body: any) => {
+    async (body: any, newEndPoint?: any) => {
       setLoading(true);
       try {
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL}${endpoint}`,
+          `${process.env.NEXT_PUBLIC_API_URL}${newEndPoint ? newEndPoint : endpoint}`,
           {
             method: "PATCH",
             headers: {

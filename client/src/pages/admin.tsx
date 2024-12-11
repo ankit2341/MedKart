@@ -16,6 +16,11 @@ const Admin = () => {
   const router = useRouter();
   const [selectedData, setSelectedData] = useState("users");
   const { userData } = useUser();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (userData !== null && userData?.role !== "PLATFORM_ADMIN") {
@@ -24,8 +29,8 @@ const Admin = () => {
     }
   }, [userData, router]);
 
-  if (typeof window === "undefined") {
-    return null;
+  if (!isClient) {
+    return null; // This prevents rendering on the server
   }
 
   if (userData?.role !== "PLATFORM_ADMIN") {

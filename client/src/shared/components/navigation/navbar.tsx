@@ -33,7 +33,7 @@ import ThemeToggle from "@/features/toggle-switch";
 import { AppStaticPath } from "@/types";
 import { useUser } from "@/shared/userdata-context";
 import LogoutModal from "@/features/profile/logut";
-import useGet from "@/shared/api/hooks/use-get";
+// import useGet from "@/shared/api/hooks/use-get";
 
 const Navbar = () => {
   const [showNavbar, setShowNavbar] = useState(false);
@@ -41,7 +41,7 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
   const { userData } = useUser();
-  const { data: cartData } = useGet("/cart");
+  // const { data: cartData } = useGet("/cart");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -157,7 +157,7 @@ const Navbar = () => {
                 size="xl"
                 color="rgb(0, 206, 209)"
               />
-              <Center
+              {/* <Center
                 fontSize="xx-small"
                 pos="absolute"
                 width={6}
@@ -172,7 +172,7 @@ const Navbar = () => {
                 borderRadius="full"
               >
                 {cartData?.length || 0}
-              </Center>
+              </Center> */}
             </Box>
             {isMobile && !userData?._id && (
               <Center

@@ -1,6 +1,8 @@
 import { couponData } from "@/pages/offers";
+import useDelete from "@/shared/api/hooks/use-delete";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
+import { showToast } from "@/shared/shared-toast";
 import {
   Box,
   Button,
@@ -25,6 +27,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import CheckoutFormModal from "./checkout-form";
 
 interface cartData {
   _id: string;
@@ -40,9 +43,11 @@ interface cartData {
 const MyCart = ({
   cartData,
   cartLoading,
+  cartRefetch,
 }: {
   cartData: cartData[] | null;
   cartLoading: boolean;
+  cartRefetch: () => void;
 }) => {
   const isMobile = useIsMobile();
   const isTablet = useIsTablet();
@@ -51,6 +56,7 @@ const MyCart = ({
   const [variantTotal, setVariantTotal] = useState<number>(0);
   const [discount, setDiscount] = useState<number>(0);
   const [coupon, setCoupon] = useState("");
+  const { remove: cartItemRemove, loading: cartDeleteLoading } = useDelete(``);
 
   useEffect(() => {
     if (discount === null || isNaN(discount)) {
@@ -65,6 +71,17 @@ const MyCart = ({
     const discountedTotal = totalPrice - discount;
     setTotal(Math.floor(discountedTotal));
   }, [cartData, discount]);
+
+  async function deleteCartItem(id: string) {
+    const res = await cartItemRemove(
+      {
+        id: id,
+      },
+      `/cart/delete/${id}`,
+    );
+    showToast("info", res?.Messsage);
+    await cartRefetch();
+  }
 
   if (cartData === null) {
     return null;
@@ -163,9 +180,7 @@ const MyCart = ({
             </FormControl>
           </CardBody>
           <CardFooter width="100%">
-            <Button width="100%" bg="brand.primary" color="brand.background">
-              Checkout
-            </Button>
+            <CheckoutFormModal orders={cartData} cartRefetch={cartRefetch} />
           </CardFooter>
         </Card>
       </motion.div>
@@ -247,13 +262,7 @@ const MyCart = ({
                       </VStack>
                     </HStack>
                     <HStack spacing={0}>
-                      <Button
-                        size="sm"
-                        bg="brand.primary"
-                        color="brand.background"
-                      >
-                        -
-                      </Button>
+                      <Text>Quantity</Text>
                       <Button
                         size="sm"
                         color={"brand.font"}
@@ -262,16 +271,11 @@ const MyCart = ({
                       >
                         {el?.quantity}
                       </Button>
-                      <Button
-                        size="sm"
-                        bg="brand.primary"
-                        color="brand.background"
-                      >
-                        +
-                      </Button>
                     </HStack>
                     <Button
                       size="sm"
+                      onClick={() => deleteCartItem(el._id)}
+                      isLoading={cartDeleteLoading}
                       bg="brand.background"
                       color="brand.primary"
                     >

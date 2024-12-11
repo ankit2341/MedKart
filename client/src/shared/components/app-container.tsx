@@ -30,7 +30,7 @@ export const AppContainer = ({
 }: AppContainerProps) => {
   const isMobile = useIsMobile();
   const { theme } = useTheme();
-  const [email,setEmail]=useState("");
+  const [email, setEmail] = useState("");
 
   return (
     <Flex direction="column" minH="100vh" pb={10}>
@@ -66,11 +66,22 @@ export const AppContainer = ({
             bg={"white"}
             w={isMobile ? "100%" : "30%"}
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email address"
             focusBorderColor="brand.primary"
           />
-          <Button bg={"brand.primary"} isDisabled={email===""} onClick={()=>{setEmail("");showToast("info","Thanks for subscribing! we will catch up later");}} color={"white"}>
+          <Button
+            bg={"brand.primary"}
+            isDisabled={email === ""}
+            onClick={() => {
+              setEmail("");
+              showToast(
+                "info",
+                "Thanks for subscribing! we will catch up later",
+              );
+            }}
+            color={"white"}
+          >
             Subscribe
           </Button>
         </HStack>

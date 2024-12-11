@@ -32,7 +32,11 @@ const Profile = () => {
   const { isPrifilled } = router.query;
   const [selectedState, setSelectedState] = useState<string>("");
   const { userData } = useUser();
-  const { data: cartData, loading: cartLoading } = useGet("/cart/");
+  const {
+    data: cartData,
+    loading: cartLoading,
+    refetch: cartRefetch,
+  } = useGet("/cart/");
   const {
     data: addressData,
     refetch: addressRefetch,
@@ -176,7 +180,11 @@ const Profile = () => {
           />
         )}
         {selectedState === "Cart" && (
-          <MyCart cartData={cartData} cartLoading={cartLoading} />
+          <MyCart
+            cartData={cartData}
+            cartRefetch={cartRefetch}
+            cartLoading={cartLoading}
+          />
         )}
         {selectedState === "Orders" && <MyOrders />}
         {selectedState === "Lab Tests" && <MyLabTests />}
