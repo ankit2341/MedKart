@@ -5,7 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <link rel="icon" type="image/png" href="/assets/medkart.png" />
-        </Head>
+      </Head>
       <body>
         <Main />
         <NextScript />

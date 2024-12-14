@@ -100,7 +100,7 @@ const Home = () => {
                 borderRadius="full"
                 py={6}
                 px={6}
-                onClick={()=>router.push("/products")}
+                onClick={() => router.push("/products")}
                 bg="brand.primary"
                 color={"brand.fontLight"}
               >

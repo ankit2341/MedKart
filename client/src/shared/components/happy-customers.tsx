@@ -52,7 +52,7 @@ const HappyCustomers = () => {
           responsive={responsive}
           autoPlay={!isMobile}
           infinite
-          autoPlaySpeed={isMobile?undefined:2000}
+          autoPlaySpeed={isMobile ? undefined : 2000}
           shouldResetAutoplay
           showDots
           swipeable={isMobile || isTablet ? true : false}

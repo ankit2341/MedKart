@@ -179,7 +179,7 @@ const BookLabTest = () => {
           <Carousel
             responsive={responsive}
             autoPlay={!isMobile}
-            autoPlaySpeed={isMobile?undefined:2000}
+            autoPlaySpeed={isMobile ? undefined : 2000}
             itemClass="carousel-item-padding"
             swipeable={isMobile || isTablet ? true : false}
           >
