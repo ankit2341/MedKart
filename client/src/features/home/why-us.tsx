@@ -17,7 +17,7 @@ const WhyUs = () => {
   const { theme } = useTheme();
 
   return (
-    <VStack overflow="hidden" width="100%" py={10} pos="relative">
+    <VStack overflow="hidden" width="100%" h={"auto"} py={10} pos="relative">
       <Heading fontSize="x-large" py={isMobile ? 10 : 20}>
         Why Us?
       </Heading>

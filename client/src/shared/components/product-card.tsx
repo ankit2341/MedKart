@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import usePost from "../api/hooks/use-post";
 import { showToast } from "../shared-toast";
+import { useTheme } from "@/context/theme-context";
 
 const ProductCard = ({
   product,
@@ -26,6 +27,7 @@ const ProductCard = ({
   onClose?: () => void;
 }) => {
   const router = useRouter();
+  const {theme}=useTheme();
   const { post, loading } = usePost("/cart/post");
   if (!product) {
     return <Card></Card>;
@@ -78,7 +80,7 @@ const ProductCard = ({
           borderRadius="md"
           align="center"
           justify="center"
-          bg="brand.backgroundDark"
+          bg={theme==="dark"?"gray.300": "brand.backgroundDark"}
           color="brand.background"
           px={2}
         >
@@ -112,7 +114,7 @@ const ProductCard = ({
               borderRadius="md"
               align="center"
               justify="center"
-              bg="brand.backgroundDark"
+              bg={theme==="dark"?"brand.primary": "brand.backgroundDark"}
               color="brand.background"
               px={2}
             >
