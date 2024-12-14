@@ -15,13 +15,13 @@ const ThemeToggle = () => {
         colorScheme="cyan"
       />
       {theme === "light" && (
-        <Box pos="absolute" top={"3px"} right={1} color="brand.background">
+        <Box pos="absolute" top={"3px"} left={"6px"} color="brand.primary">
           <FontAwesomeIcon icon={faMoon} />
         </Box>
       )}
       {theme === "dark" && (
-        <Box pos="absolute" top={"3px"} left={"6px"}>
-          <FontAwesomeIcon icon={faSun} />
+        <Box pos="absolute" top={"3px"} right={"7px"} color={"brand.primary"}>
+          <FontAwesomeIcon icon={faMoon} />
         </Box>
       )}
     </Box>
