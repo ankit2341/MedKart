@@ -1,6 +1,6 @@
 import { useTheme } from "@/context/theme-context";
 import { Box, Switch } from "@chakra-ui/react";
-import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
+import { faMoon } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const ThemeToggle = () => {
