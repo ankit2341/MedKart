@@ -26,6 +26,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <title>MedKart</title>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <meta name="description" content="MedKart" />
+        <link rel="icon" href="/medkart-logo.png" />
       </Head>
       <GoogleOAuthProvider clientId={`${process.env.NEXT_PUBLIC_CLIENT_ID}`}>
         <UserProvider>{getLayout(<Component {...pageProps} />)}</UserProvider>
