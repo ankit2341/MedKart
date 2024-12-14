@@ -50,9 +50,9 @@ const HappyCustomers = () => {
       <Box px={isMobile ? "4" : "8"} width="100%" bg="brand.background">
         <Carousel
           responsive={responsive}
-          autoPlay
+          autoPlay={!isMobile}
           infinite
-          autoPlaySpeed={2000}
+          autoPlaySpeed={isMobile?undefined:2000}
           shouldResetAutoplay
           showDots
           swipeable={isMobile || isTablet ? true : false}
