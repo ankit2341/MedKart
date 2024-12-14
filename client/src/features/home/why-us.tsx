@@ -175,7 +175,7 @@ const WhyUs = () => {
       </Box>
       <Box
         width="100%"
-        height="10"
+        height="auto"
         bg="brand.background"
         border="none"
         display="flex"
@@ -189,7 +189,7 @@ const WhyUs = () => {
         <Heading fontSize={isMobile ? "small" : "x-large"}>
           Book Lab Tests
         </Heading>
-        {isMobile && (
+        {isMobile&&!isTablet && (
           <>
             <Heading fontSize={isMobile ? "small" : "x-large"}>
               On Time Delivery
