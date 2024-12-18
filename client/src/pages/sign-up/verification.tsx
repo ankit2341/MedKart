@@ -15,10 +15,12 @@ import { faM } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { ReactElement } from "react";
 import { motion } from "framer-motion";
+import { useTheme } from "@/context/theme-context";
 
 const Verification = () => {
   const isMobile = useIsMobile();
   const istablet = useIsTablet();
+  const { theme } = useTheme();
 
   return (
     <motion.div
@@ -38,7 +40,7 @@ const Verification = () => {
         spacing={8}
         width={isMobile || istablet ? "100%" : "80%"}
         border="1px solid"
-        borderColor="lightgray"
+        borderColor={theme === "dark" ? "gray.600" : "lightgray"}
         px={isMobile ? 4 : 10}
         py={10}
       >
@@ -60,32 +62,32 @@ const Verification = () => {
               <PinInputField
                 py={4}
                 borderRadius={"lg"}
-                borderColor="lightgray"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               />
               <PinInputField
                 py={4}
                 borderRadius={"lg"}
-                borderColor="lightgray"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               />
               <PinInputField
                 py={4}
                 borderRadius={"lg"}
-                borderColor="lightgray"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               />
               <PinInputField
                 py={4}
                 borderRadius={"lg"}
-                borderColor="lightgray"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               />
               <PinInputField
                 py={4}
                 borderRadius={"lg"}
-                borderColor="lightgray"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               />
               <PinInputField
                 py={4}
                 borderRadius={"lg"}
-                borderColor="lightgray"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               />
             </PinInput>
           </HStack>

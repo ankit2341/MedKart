@@ -24,6 +24,7 @@ import usePost from "@/shared/api/hooks/use-post";
 import { showToast } from "@/shared/shared-toast";
 import { GoogleLogin } from "@react-oauth/google";
 import { LoginResponseMessages } from "@/types";
+import { useTheme } from "@/context/theme-context";
 
 const SignIn = () => {
   const isMobile = useIsMobile();
@@ -32,6 +33,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const isError = email !== "" && !isValidEmail(email);
+  const { theme } = useTheme();
 
   const { loading, post } = usePost("/users/login");
   const { post: googleLoginPost } = usePost("/users/googlelogin");
@@ -87,7 +89,7 @@ const SignIn = () => {
         spacing={isMobile ? 4 : 8}
         width={isMobile || istablet ? "100%" : "80%"}
         border="1px solid"
-        borderColor="lightgray"
+        borderColor={theme === "dark" ? "gray.600" : "lightgray"}
         p={isMobile ? 4 : 10}
         py={10}
       >
@@ -108,7 +110,7 @@ const SignIn = () => {
             focusBorderColor="brand.primary"
             padding={6}
             border="1px solid"
-            borderColor="lightgray"
+            borderColor={theme === "dark" ? "gray.600" : "lightgray"}
             type="email"
             placeholder="Enter your email"
             value={email}
@@ -123,7 +125,7 @@ const SignIn = () => {
             focusBorderColor="brand.primary"
             padding={6}
             border="1px solid"
-            borderColor="lightgray"
+            borderColor={theme === "dark" ? "gray.600" : "lightgray"}
             placeholder="Enter your password"
             type="password"
             value={password}

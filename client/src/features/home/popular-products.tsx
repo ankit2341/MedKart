@@ -24,10 +24,12 @@ const PopularProducts = () => {
         >
           Popular Products
         </Heading>
-        {!isMobile&&<UnderLineAnimation
-          style={{ position: "absolute", top: 1, left: 130 }}
-          id="checkedcircleanimated"
-        />}
+        {!isMobile && (
+          <UnderLineAnimation
+            style={{ position: "absolute", top: 1, left: 130 }}
+            id="checkedcircleanimated"
+          />
+        )}
       </Box>
       <Box
         px={isMobile ? "4" : "8"}

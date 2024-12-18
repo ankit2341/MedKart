@@ -24,7 +24,9 @@ export default function LogoutModal({ isMenu }: { isMenu?: boolean }) {
   return (
     <>
       {isMenu ? (
-        <MenuItem bg={"brand.background"} onClick={onOpen}>Logout</MenuItem>
+        <MenuItem bg={"brand.background"} onClick={onOpen}>
+          Logout
+        </MenuItem>
       ) : (
         <Button
           onClick={onOpen}

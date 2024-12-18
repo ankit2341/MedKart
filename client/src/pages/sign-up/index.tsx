@@ -23,6 +23,7 @@ import { motion } from "framer-motion";
 import usePost from "@/shared/api/hooks/use-post";
 import { showToast } from "@/shared/shared-toast";
 import { useRouter } from "next/router";
+import { useTheme } from "@/context/theme-context";
 
 const SignUp = () => {
   const isMobile = useIsMobile();
@@ -34,6 +35,7 @@ const SignUp = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const router = useRouter();
+  const { theme } = useTheme();
   const { loading, post } = usePost("/users/register");
   const isSignupDisabled =
     !isError &&
@@ -79,7 +81,7 @@ const SignUp = () => {
         spacing={isMobile ? 4 : 8}
         width={isMobile || istablet ? "100%" : "80%"}
         border="1px solid"
-        borderColor="lightgray"
+        borderColor={theme === "dark" ? "gray.600" : "lightgray"}
         px={isMobile ? 4 : 10}
         py={10}
       >
@@ -101,7 +103,7 @@ const SignUp = () => {
               border="1px solid"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              borderColor="lightgray"
+              borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               placeholder="Enter first name"
               focusBorderColor="brand.primary"
               padding={6}
@@ -113,7 +115,7 @@ const SignUp = () => {
               border="1px solid"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
-              borderColor="lightgray"
+              borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               placeholder="Enter last name"
               focusBorderColor="brand.primary"
               padding={6}
@@ -132,7 +134,7 @@ const SignUp = () => {
             </InputLeftAddon>
             <Input
               border="1px solid"
-              borderColor="lightgray"
+              borderColor={theme === "dark" ? "gray.600" : "lightgray"}
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               placeholder="Enter phone number"
@@ -147,7 +149,7 @@ const SignUp = () => {
             focusBorderColor="brand.primary"
             padding={6}
             border="1px solid"
-            borderColor="lightgray"
+            borderColor={theme === "dark" ? "gray.600" : "lightgray"}
             type="email"
             placeholder="Enter your email"
             value={email}
@@ -160,7 +162,7 @@ const SignUp = () => {
         <FormControl>
           <Input
             border="1px solid"
-            borderColor="lightgray"
+            borderColor={theme === "dark" ? "gray.600" : "lightgray"}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"

@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/theme-context";
 import usePatch from "@/shared/api/hooks/use-patch";
 import { showToast } from "@/shared/shared-toast";
 import { UserData } from "@/shared/userdata-context";
@@ -46,6 +47,7 @@ const AdminEdit = ({
   setPage?: (value: number) => void;
 }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { theme } = useTheme();
 
   const [user, setUser] = useState<UserState>({
     username: UserData?.username,
@@ -121,7 +123,7 @@ const AdminEdit = ({
                     <Input
                       name={field}
                       border="1px solid"
-                      borderColor="lightgray"
+                      borderColor={theme === "dark" ? "gray.600" : "lightgray"}
                       value={user[field] as string | number | undefined}
                       onChange={(e) =>
                         setUser({ ...user, [field]: e.target.value })
@@ -192,7 +194,9 @@ const AdminEdit = ({
                         <Input
                           name={key}
                           border="1px solid"
-                          borderColor="lightgray"
+                          borderColor={
+                            theme === "dark" ? "gray.600" : "lightgray"
+                          }
                           value={product[key as keyof typeof product] as string}
                           onChange={(e) =>
                             setProduct({

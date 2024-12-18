@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { UserAddress } from "@/types";
 import AddNewAddress from "./add-new-address";
+import { useTheme } from "@/context/theme-context";
 
 const MyAddresses = ({
   addressData,
@@ -25,6 +26,7 @@ const MyAddresses = ({
   const isViewMobile = useIsMobile();
   const isTableView = useIsTablet();
   const isMobile = isViewMobile || isTableView;
+  const { theme } = useTheme();
   return (
     <motion.div
       style={{ width: "100%", zIndex: 9 }}
@@ -69,7 +71,7 @@ const MyAddresses = ({
                     key={index}
                     p={4}
                     border="1px solid"
-                    borderColor="lightgray"
+                    borderColor={theme === "dark" ? "gray.600" : "lightgray"}
                     borderRadius="md"
                     width="100%"
                     alignItems="center"

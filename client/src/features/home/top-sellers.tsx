@@ -24,10 +24,12 @@ const TopSellers = () => {
         >
           Top Sellers
         </Heading>
-        {!isMobile&&<UnderLineAnimation
-          style={{ position: "absolute", top: 1, left: 70 }}
-          id="checkedcircleanimated"
-        />}
+        {!isMobile && (
+          <UnderLineAnimation
+            style={{ position: "absolute", top: 1, left: 70 }}
+            id="checkedcircleanimated"
+          />
+        )}
       </Box>
       <Box
         px={isMobile ? "4" : "8"}

@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/theme-context";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import useIsTablet from "@/shared/hooks/use-is-tablet";
 import { UserData } from "@/shared/userdata-context";
@@ -37,6 +38,7 @@ const MyProfile = ({
   const isTableView = useIsTablet();
   const isMobile = isViewMobile || isTableView;
   const router = useRouter();
+  const { theme } = useTheme();
   const primaryAddress = addressData?.filter(
     (address: UserAddress) => address.type === "HOME",
   );
@@ -153,7 +155,7 @@ const MyProfile = ({
                 <Input
                   border="1px solid"
                   isReadOnly
-                  borderColor="lightgray"
+                  borderColor={theme === "dark" ? "gray.600" : "lightgray"}
                   value={userData?.username?.split(" ")?.[0]}
                   placeholder="Enter first name"
                   focusBorderColor="brand.primary"
@@ -167,7 +169,7 @@ const MyProfile = ({
                   border="1px solid"
                   isReadOnly
                   value={userData?.username?.split(" ")?.[1]}
-                  borderColor="lightgray"
+                  borderColor={theme === "dark" ? "gray.600" : "lightgray"}
                   placeholder="Enter last name"
                   focusBorderColor="brand.primary"
                   padding={6}
@@ -181,9 +183,9 @@ const MyProfile = ({
                 focusBorderColor="brand.primary"
                 padding={6}
                 border="1px solid"
+                borderColor={theme === "dark" ? "gray.600" : "lightgray"}
                 isReadOnly
                 value={userData?.phoneNumber}
-                borderColor="lightgray"
                 type="email"
                 placeholder="Enter your phone number"
               />
@@ -220,7 +222,7 @@ const MyProfile = ({
                 <VStack
                   p={4}
                   border="1px solid"
-                  borderColor="lightgray"
+                  borderColor={theme === "dark" ? "gray.600" : "lightgray"}
                   borderRadius="md"
                   width="100%"
                   pos="relative"

@@ -189,7 +189,7 @@ const WhyUs = () => {
         <Heading fontSize={isMobile ? "small" : "x-large"}>
           Book Lab Tests
         </Heading>
-        {isMobile&&!isTablet && (
+        {isMobile && !isTablet && (
           <>
             <Heading fontSize={isMobile ? "small" : "x-large"}>
               On Time Delivery
