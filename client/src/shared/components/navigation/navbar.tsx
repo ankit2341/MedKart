@@ -33,7 +33,6 @@ import ThemeToggle from "@/features/toggle-switch";
 import { AppStaticPath } from "@/types";
 import { useUser } from "@/shared/userdata-context";
 import LogoutModal from "@/features/profile/logut";
-import { useTheme } from "@/context/theme-context";
 // import useGet from "@/shared/api/hooks/use-get";
 
 const Navbar = () => {
@@ -42,7 +41,6 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
   const { userData } = useUser();
-  const {theme}=useTheme();
   // const { data: cartData } = useGet("/cart");
 
   useEffect(() => {
