@@ -17,11 +17,13 @@ import {
   faM,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
+import { useTheme } from "@/context/theme-context";
 
 const Chatbot = () => {
   const [conversation, setConversation] = useState<
     { user?: string; bot?: string; options?: boolean }[]
   >([]);
+  const {theme}=useTheme();
   const [userInput, setUserInput] = useState("");
   const [show, setShow] = useState(false);
 
@@ -85,12 +87,14 @@ const Chatbot = () => {
   }, []);
 
   return (
-    <VStack spacing={4} alignItems="flex-end" justifyContent="flex-end">
+    <VStack spacing={4} alignItems="flex-end" bg={"brand.background"} justifyContent="flex-end">
       {show && (
         <Box
           w="100%"
           maxW="400px"
-          bg="white"
+          bg={"brand.background"}
+          border={"1px solid"}
+          borderColor={theme==="dark"?"gray.600": "lightgray"}
           zIndex={11}
           p={4}
           borderRadius="lg"
@@ -110,6 +114,7 @@ const Chatbot = () => {
               align="start"
               maxHeight="350px"
               overflowY="auto"
+              bg={"brand.background"}
             >
               {conversation.map((message, index) => (
                 <Box
@@ -126,6 +131,7 @@ const Chatbot = () => {
                       <Text
                         px={4}
                         maxW="100%"
+                        
                         whiteSpace="normal"
                         py={1}
                         borderRadius="lg"
@@ -141,9 +147,9 @@ const Chatbot = () => {
                       w="100%"
                       whiteSpace="normal"
                       spacing={0}
+                      bg={"brand.background"}
                       p={1}
                       borderRadius="lg"
-                      bg="white"
                       color="brand.font"
                       mt={2}
                     >
@@ -168,7 +174,7 @@ const Chatbot = () => {
                           key={i}
                           px={4}
                           py={1}
-                          bg="gray.100"
+                          bg={theme==="dark"? "gray.600":"gray.200"}
                           borderRadius="md"
                           boxShadow="none"
                           fontSize={"sm"}
