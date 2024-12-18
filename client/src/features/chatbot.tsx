@@ -87,7 +87,7 @@ const Chatbot = () => {
   }, []);
 
   return (
-    <VStack spacing={4} alignItems="flex-end" bg={"brand.background"} justifyContent="flex-end">
+    <VStack spacing={4} alignItems="flex-end" borderRadius={"md"} bg={"transparent"} justifyContent="flex-end">
       {show && (
         <Box
           w="100%"
@@ -221,7 +221,7 @@ const Chatbot = () => {
         onClick={() => setShow(!show)}
         height="12"
         bg="brand.primary"
-        borderRadius="full"
+        borderRadius="md"
         color="white"
         cursor="pointer"
       >
