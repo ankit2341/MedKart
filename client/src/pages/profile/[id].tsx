@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/theme-context";
 import LogoutModal from "@/features/profile/logut";
 import MyAddresses from "@/features/profile/my-addresses";
 import MyCart from "@/features/profile/my-cart";
@@ -31,6 +32,7 @@ const Profile = () => {
   const router = useRouter();
   const { isPrifilled } = router.query;
   const [selectedState, setSelectedState] = useState<string>("");
+  const {theme}=useTheme();
   const { userData } = useUser();
   const {
     data: cartData,
@@ -77,7 +79,7 @@ const Profile = () => {
           spacing={0}
           bg="brand.background"
           border="1px solid"
-          borderColor="gray.200"
+          borderColor={theme==="dark"?"gray.600": "lightgray"}
           borderRadius="md"
         >
           <HStack
@@ -142,6 +144,7 @@ const Profile = () => {
                     }}
                     display="flex"
                     borderRadius={"md"}
+                    borderColor={theme==="dark"?"gray.600": "lightgray"}
                     alignItems="center"
                     justifyContent="space-between"
                     width="100%"

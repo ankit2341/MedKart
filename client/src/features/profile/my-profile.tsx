@@ -57,7 +57,7 @@ const MyProfile = ({
       >
         <Card
           border="1px solid"
-          borderColor={"gray.200"}
+          borderColor={theme==="dark"?"gray.600": "lightgray"}
           bg="brand.background"
           color="brand.font"
           width={"100%"}
@@ -131,7 +131,7 @@ const MyProfile = ({
       >
         <VStack
           border="1px solid"
-          borderColor={"gray.200"}
+          borderColor={theme==="dark"?"gray.600": "lightgray"}
           spacing={4}
           borderRadius={"lg"}
           width={"100%"}

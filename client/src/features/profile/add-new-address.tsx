@@ -19,10 +19,12 @@ import {
 } from "@chakra-ui/react";
 import usePost from "@/shared/api/hooks/use-post";
 import { showToast } from "@/shared/shared-toast";
+import { useTheme } from "@/context/theme-context";
 
 const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { post, loading } = usePost("/address/post");
+  const {theme}=useTheme();
   const [formData, setFormData] = useState({
     name: "",
     addressline1: "",
@@ -47,7 +49,7 @@ const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent bg={"brand.background"}>
           <ModalHeader>Fill in the Details</ModalHeader>
           <ModalCloseButton
             onClick={() => {
@@ -66,6 +68,8 @@ const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
             <FormControl mb={4}>
               <FormLabel>Name</FormLabel>
               <Input
+               border="1px solid"
+               borderColor={theme==="dark"?"gray.600": "lightgray"}
                 value={formData.name}
                 onChange={(e) => handleChange("name", e.target.value)}
                 focusBorderColor="brand.primary"
@@ -75,6 +79,8 @@ const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
             <FormControl mb={4}>
               <FormLabel>Address Line 1</FormLabel>
               <Input
+               border="1px solid"
+               borderColor={theme==="dark"?"gray.600": "lightgray"}
                 value={formData.addressline1}
                 onChange={(e) => handleChange("addressline1", e.target.value)}
                 focusBorderColor="brand.primary"
@@ -85,6 +91,8 @@ const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
                 <FormLabel>City</FormLabel>
                 <Input
                   value={formData.city}
+                  border="1px solid"
+                  borderColor={theme==="dark"?"gray.600": "lightgray"}
                   onChange={(e) => handleChange("city", e.target.value)}
                   focusBorderColor="brand.primary"
                 />
@@ -94,6 +102,8 @@ const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
                 <FormLabel>Pincode</FormLabel>
                 <Input
                   type="number"
+                  border="1px solid"
+                  borderColor={theme==="dark"?"gray.600": "lightgray"}
                   value={formData.pincode}
                   onChange={(e) => handleChange("pincode", e.target.value)}
                   focusBorderColor="brand.primary"
@@ -104,6 +114,8 @@ const AddNewAddress = ({ addressRefetch }: { addressRefetch: () => void }) => {
               <FormLabel>Phone Number</FormLabel>
               <Input
                 type="number"
+                border="1px solid"
+                borderColor={theme==="dark"?"gray.600": "lightgray"}
                 value={formData.phoneNumber}
                 onChange={(e) => handleChange("phoneNumber", e.target.value)}
                 focusBorderColor="brand.primary"

@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/theme-context";
 import useGet from "@/shared/api/hooks/use-get";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
 import {
@@ -27,6 +28,7 @@ export interface OrderData {
 const MyOrders = () => {
   const isMobile = useIsMobile();
   const { data: orders, loading: ordersLoading } = useGet("/order");
+  const {theme}=useTheme();
 
   return (
     <motion.div
@@ -37,7 +39,7 @@ const MyOrders = () => {
     >
       <VStack
         border="1px solid"
-        borderColor={"gray.200"}
+        borderColor={theme==="dark"?"gray.600": "lightgray"}
         spacing={4}
         borderRadius={"lg"}
         width={"100%"}
@@ -75,7 +77,7 @@ const MyOrders = () => {
                   flexDir={isMobile ? "column" : "row"}
                   key={el._id}
                   border="1px solid"
-                  borderColor="gray.200"
+                  borderColor={theme==="dark"?"gray.600": "lightgray"}
                   borderRadius="md"
                   p={3}
                   width="100%"

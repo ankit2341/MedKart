@@ -1,3 +1,4 @@
+import { useTheme } from "@/context/theme-context";
 import { LabTestData } from "@/pages/book-lab-test";
 import useGet from "@/shared/api/hooks/use-get";
 import useIsMobile from "@/shared/hooks/use-is-mobile";
@@ -18,6 +19,7 @@ import { motion } from "framer-motion";
 const MyLabTests = () => {
   const isMobile = useIsMobile();
   const { data: labtestData, loading: labtestLoading } = useGet("/labtest/");
+  const {theme}=useTheme();
 
   return (
     <motion.div
@@ -28,7 +30,7 @@ const MyLabTests = () => {
     >
       <VStack
         border="1px solid"
-        borderColor={"gray.200"}
+        borderColor={theme==="dark"?"gray.600": "lightgray"}
         spacing={4}
         borderRadius={"lg"}
         width={"100%"}
@@ -66,7 +68,7 @@ const MyLabTests = () => {
                   flexDir={isMobile ? "column" : "row"}
                   key={el._id}
                   border="1px solid"
-                  borderColor="gray.200"
+                  borderColor={theme==="dark"?"gray.600": "lightgray"}
                   borderRadius="md"
                   p={3}
                   width="100%"

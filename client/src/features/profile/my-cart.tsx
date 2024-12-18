@@ -28,6 +28,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import CheckoutFormModal from "./checkout-form";
+import { useTheme } from "@/context/theme-context";
 
 interface cartData {
   _id: string;
@@ -57,6 +58,7 @@ const MyCart = ({
   const [discount, setDiscount] = useState<number>(0);
   const [coupon, setCoupon] = useState("");
   const { remove: cartItemRemove, loading: cartDeleteLoading } = useDelete(``);
+  const {theme}=useTheme();
 
   useEffect(() => {
     if (discount === null || isNaN(discount)) {
@@ -101,7 +103,7 @@ const MyCart = ({
       >
         <Card
           border="1px solid"
-          borderColor={"gray.200"}
+          borderColor={theme==="dark"?"gray.600": "lightgray"}
           width={"100%"}
           bg="brand.background"
           display="flex"
@@ -115,6 +117,7 @@ const MyCart = ({
               <FormLabel fontWeight="bold">Enter Promo Code</FormLabel>
               <Input
                 placeholder="Enter promo code"
+                borderColor={theme==="dark"?"gray.600": "lightgray"}
                 focusBorderColor="brand.primary"
                 type="text"
                 value={coupon}
@@ -192,7 +195,7 @@ const MyCart = ({
       >
         <VStack
           border="1px solid"
-          borderColor={"gray.200"}
+          borderColor={theme==="dark"?"gray.600": "lightgray"}
           spacing={4}
           borderRadius={"lg"}
           width={"100%"}
@@ -226,7 +229,7 @@ const MyCart = ({
                     flexDir={isMobile ? "column" : "row"}
                     key={el._id}
                     border="1px solid"
-                    borderColor="gray.200"
+                    borderColor={theme==="dark"?"gray.600": "lightgray"}
                     borderRadius="md"
                     p={3}
                     width="100%"
