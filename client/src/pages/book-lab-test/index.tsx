@@ -276,6 +276,8 @@ const BookLabTest = () => {
           borderRadius="lg"
           height={10}
           size={"sm"}
+          as="a"
+          href="mailto:ankitpatil@gmail.com"
         >
           Contact Us
           <FontAwesomeIcon
