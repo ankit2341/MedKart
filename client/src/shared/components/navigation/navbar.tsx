@@ -33,6 +33,7 @@ import ThemeToggle from "@/features/toggle-switch";
 import { AppStaticPath } from "@/types";
 import { useUser } from "@/shared/userdata-context";
 import LogoutModal from "@/features/profile/logut";
+import { useTheme } from "@/context/theme-context";
 // import useGet from "@/shared/api/hooks/use-get";
 
 const Navbar = () => {
@@ -41,6 +42,7 @@ const Navbar = () => {
   const isMobile = useIsMobile();
   const router = useRouter();
   const { userData } = useUser();
+  const {theme}=useTheme();
   // const { data: cartData } = useGet("/cart");
 
   useEffect(() => {
@@ -221,7 +223,7 @@ const Navbar = () => {
                   </Center>
                 </MenuButton>
 
-                <MenuList>
+                <MenuList bg={"brand.background"}>
                   <HStack px={3} py={4}>
                     <Avatar
                       src={userData?.avatar}
@@ -234,6 +236,7 @@ const Navbar = () => {
 
                   <Divider />
                   <MenuItem
+                    bg={"brand.background"}
                     onClick={() => router.push(`/profile/${userData?._id}`)}
                   >
                     Profile
