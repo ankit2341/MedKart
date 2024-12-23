@@ -13,44 +13,39 @@
 
 
 ## About the project
-
-This is a website where you can do .
+E shopping web app for medicines and healthcare products. This is project is work in progress
 
 ## User features
 - Login and signup
 - Googlelogin
-- Explore camps
-- Book camps 
+- Explore products
+- Filter products
+- Search products
+- Book lab tests
+- Profile
 - Admin Panel
 - Chatbot
-- Filters
+
 
 ## Admin features
-- Add new users, camps or events
-- Update users, camps or events
-- Delete users, camps or events
+- Update and delete users
+- Update and delete products
+- View orders
+- View lab tests
 
 ## Screenshots
-
-[![ecamp1.jpg](https://i.postimg.cc/MHhgXJnp/ecamp1.jpg)](https://postimg.cc/30Ftb6js)
-[![ecamp2.jpg](https://i.postimg.cc/rF2k85xC/ecamp2.jpg)](https://postimg.cc/z37M7bdV)
-[![ecamp3.jpg](https://i.postimg.cc/Y01T4yYN/ecamp3.jpg)](https://postimg.cc/64pMgcHT)
-[![ecamp4.jpg](https://i.postimg.cc/nVvWGg9B/ecamp4.jpg)](https://postimg.cc/3Wx9KLBx)
-[![ecamp5.jpg](https://i.postimg.cc/vmf7dFsv/ecamp5.jpg)](https://postimg.cc/Z9YvrQ09)
-[![ecamp6.jpg](https://i.postimg.cc/xT8K1bQ8/ecamp6.jpg)](https://postimg.cc/N5hyNF5v)
 
 To be updated
 ## Demo
 
-deployed link for demo:- https://ecamp.vercel.app/
+deployed link for demo:- https://medkart.vercel.app/
 
 ## Tech-stack
 
 ## Frontend
-- React.Js
-- Redux
-- Redux-persist
-- React Bootstrap
+- Next Js
+- Typesript
+- Chakra UI
 - React-Oauth/google
 
 ## Backend
@@ -64,7 +59,7 @@ deployed link for demo:- https://ecamp.vercel.app/
 
 
 ## Status
-
+In progress...
 This project is completed. 
 ## Final Words
 
